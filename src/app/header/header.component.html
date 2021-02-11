@@ -1,0 +1,18 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Brand</a>
+      </div>
+  
+      <div class="navbar-collapse">
+        <ul class="nav navbar-nav" *ngFor="let servicio of servicios">
+          <li [appOverDirective] ><a href="#">{{servicio}}</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li [appOverDirective] ><a href="#">Registrarse</a></li>
+            <li [appOverDirective] ><a href="#">Iniciar Sesion</a></li>
+          </ul>
+      </div>
+    </div>
+  </nav>

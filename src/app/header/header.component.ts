@@ -11,10 +11,9 @@ export class HeaderComponent implements OnInit {
 
   servicios :string [] = [
     "Peluquerias",
-    "Tintes",
     "Barberias",
     "Uñas",
-    "Item"
+    "Estetica"
   ]
 
   ngOnInit(): void {

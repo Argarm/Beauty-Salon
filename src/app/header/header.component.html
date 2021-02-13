@@ -1,7 +1,7 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">Brand</a>
+        <a class="navbar-brand" routerLink="">Brand</a>
       </div>
   
       <div class="navbar-collapse">
@@ -9,8 +9,8 @@
           <li [appOverDirective] ><a href="#">{{servicio}}</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li [appOverDirective] ><a href="#">Registrarse</a></li>
-            <li [appOverDirective] ><a href="#">Iniciar Sesion</a></li>
+            <li [appOverDirective] ><a routerLink="signup">Registrarse</a></li>
+            <li [appOverDirective] ><a routerLink="login">Iniciar Sesion</a></li>
           </ul>
       </div>
     </div>

@@ -1,1 +1,36 @@
-<p>login works!</p>
+<div class="col-md-6 offset-md-3 mt-5 center">
+
+<form (ngSubmit)="onSubmit(f)">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        class="form-control"
+        name="email"
+        placeholder="Introduce tu correo"
+        ngModel
+        required
+        >
+    </div>
+    <div class="form-group">
+      <label for="contraseña">Contraseña</label>
+      <input
+        type="password"
+        id="password"
+        class="form-control"
+        name="password"
+        placeholder="Contraseña"
+        ngModel
+        required
+        >
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Entrar
+        </button>
+        <a routerLink="../signup" class="btn btn-link">Register</a>
+    </div>
+  </form>
+</div>

@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { MainViewComponent } from './main-view/main-view.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

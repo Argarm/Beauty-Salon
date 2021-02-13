@@ -1,1 +1,84 @@
-<p>signup works!</p>
+<div class="col-md-6 offset-md-3 mt-5 center">
+
+    <form (ngSubmit)="onSubmit(f)">
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input
+              type="text"
+              id="nombre"
+              class="form-control"
+              name="nombre"
+              placeholder="Nombre"
+              ngModel
+              required
+            >
+         </div>
+         <div class="form-group">
+            <label for="apellidos">Apellidos</label>
+            <input
+              type="text"
+              id="apellidos"
+              class="form-control"
+              name="apellidos"
+              placeholder="Apellidos"
+              ngModel
+              required
+              >
+          </div>
+          <div class="form-group">
+            <label for="Telefono">Telefono</label>
+            <input
+              type="text"
+              id="telefono"
+              class="form-control"
+              name="telefono"
+              placeholder="Telefono"
+              ngModel
+              required
+              >
+          </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            class="form-control"
+            name="email"
+            placeholder="Introduce tu correo"
+            ngModel
+            required
+            >
+        </div>
+        <div class="form-group">
+          <label for="contraseña">Contraseña</label>
+          <input
+            type="password"
+            id="password"
+            class="form-control"
+            name="password"
+            placeholder="Contraseña"
+            ngModel
+            required
+            >
+        </div>
+        <div class="form-group">
+            <label for="recontraseña">Repite la Contraseña</label>
+            <input
+              type="password"
+              id="recontraseña"
+              class="form-control"
+              name="recontraseña"
+              placeholder="Contraseña"
+              ngModel
+              required
+              >
+          </div>
+        <div class="form-group">
+            <button class="btn btn-primary">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Registrarse
+            </button>
+            <a routerLink="../login" class="btn btn-link">Atras</a>
+        </div>
+      </form>
+    </div>

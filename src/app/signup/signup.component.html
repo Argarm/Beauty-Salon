@@ -1,88 +1,3 @@
-<!-- <div class="col-md-6 offset-md-3 mt-5 center">
-
-    <form (ngSubmit)="onSubmit(f)">
-        <div class="form-group">
-            <label for="nombre">Nombre</label>
-            <input
-              type="text"
-              id="nombre"
-              class="form-control"
-              name="nombre"
-              placeholder="Nombre"
-              ngModel
-              required
-            >
-         </div>
-         <div class="form-group">
-            <label for="apellidos">Apellidos</label>
-            <input
-              type="text"
-              id="apellidos"
-              class="form-control"
-              name="apellidos"
-              placeholder="Apellidos"
-              ngModel
-              required
-              >
-          </div>
-          <div class="form-group">
-            <label for="Telefono">Telefono</label>
-            <input
-              type="text"
-              id="telefono"
-              class="form-control"
-              name="telefono"
-              placeholder="Telefono"
-              ngModel
-              required
-              >
-          </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            class="form-control"
-            name="email"
-            placeholder="Introduce tu correo"
-            ngModel
-            required
-            >
-        </div>
-        <div class="form-group">
-          <label for="contraseña">Contraseña</label>
-          <input
-            type="password"
-            id="password"
-            class="form-control"
-            name="password"
-            placeholder="Contraseña"
-            ngModel
-            required
-            >
-        </div>
-        <div class="form-group">
-            <label for="recontraseña">Repite la Contraseña</label>
-            <input
-              type="password"
-              id="recontraseña"
-              class="form-control"
-              name="recontraseña"
-              placeholder="Contraseña"
-              ngModel
-              required
-              >
-          </div>
-        <div class="form-group">
-            <button class="btn btn-primary">
-                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                Registrarse
-            </button>
-            <a routerLink="../login" class="btn btn-link">Atras</a>
-        </div>
-      </form>
-    </div> -->
-
 <div class="col-md-6 offset-md-3 mt-5 center">
   <h4>Registrarse</h4>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -93,8 +8,8 @@
         formControlName="name"
         class="form-control"
         [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
-      <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-        <div *ngIf="f.username.errors.required">Este campo está vacio</div>
+      <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+        <div *ngIf="f.name.errors.required">Este campo está vacio</div>
       </div>
     </div>
     <div class="form-group">
@@ -104,8 +19,8 @@
         formControlName="surname"
         class="form-control"
         [ngClass]="{ 'is-invalid': submitted && f.surname.errors }" />
-      <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-        <div *ngIf="f.username.errors.required">Este campo está vacio</div>
+      <div *ngIf="submitted && f.surname.errors" class="invalid-feedback">
+        <div *ngIf="f.surname.errors.required">Este campo está vacio</div>
       </div>
     </div>
     <div class="form-group">
@@ -114,17 +29,20 @@
         type="text"
         formControlName="tlf"
         class="form-control"
+        [pattern]="mobNumberPattern"
         [ngClass]="{ 'is-invalid': submitted && f.tlf.errors }" />
-      <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-        <div *ngIf="f.username.errors.required">Este campo está vacio</div>
+      <div *ngIf="submitted && f.tlf.errors" class="invalid-feedback">
+        <div *ngIf="f.tlf.errors.required">Este campo está vacio</div>
+        <div *ngIf="f.tlf.errors.pattern">Introduzca un telefono valido</div>
       </div>
     </div>
     <div class="form-group">
       <label for="email">Email</label>
       <input type="email" formControlName="email" class="form-control"
         [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-      <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-        <div *ngIf="f.username.errors.required">Proporcione un email valido</div>
+      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+        <div *ngIf="f.email.errors.required">Este campo está vacio</div>
+        <div *ngIf="f.errors.email">Introduzca un email valido</div>
       </div>
     </div>
     <div class="form-group">
@@ -135,7 +53,9 @@
         class="form-control"
         [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
       <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-        <div *ngIf="f.password.errors.required">La contraseña no es correcta</div>
+        <div *ngIf="f.password.errors.required">Este campo está vacio</div>
+        <div *ngIf="f.password.errors.minlength">La contraseña debe tener minimo 8 caracteres</div>
+        <div *ngIf="f.errors.notSame">Las contraseñas no coinciden</div>
       </div>
     </div>
     <div class="form-group">
@@ -145,8 +65,10 @@
         formControlName="repassword"
         class="form-control"
         [ngClass]="{ 'is-invalid': submitted && f.repassword.errors }" />
-      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-        <div *ngIf="f.password.errors.required">La contraseña no es correcta o no coinciden</div>
+      <div *ngIf="submitted && f.repassword.errors" class="invalid-feedback">
+        <div *ngIf="f.password.errors.required">Este campo está vacio</div>
+        <div *ngIf="f.password.errors.minlength">La contraseña debe tener minimo 8 caracteres</div>
+        <div *ngIf="f.errors.notSame">Las contraseñas no coinciden</div>
       </div>
     </div>
     <div class="form-group">

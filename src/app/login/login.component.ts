@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {  FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { first } from 'rxjs/operators';
+import { AccountService } from '../services/account.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,6 +16,7 @@ export class LoginComponent implements OnInit {
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
       private router: Router,
+      private accountService : AccountService
   ) { }
 
   ngOnInit() {
@@ -32,6 +35,15 @@ export class LoginComponent implements OnInit {
           return;
       }
 
-      
+      this.accountService.login(this.f.email.value,this.f.password.value)
+        .pipe(first())
+        .subscribe({
+            next: () => {
+                this.router.navigate(['../'], {queryParams : {'userLogged' : 1}})
+            },
+            error: error => {
+                console.log(error)
+            }
+        });
   }
 }

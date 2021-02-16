@@ -8,9 +8,5 @@ import { AccountService } from './services/account.service';
 })
 export class AppComponent {
   title = 'beauty-salon';
-  constructor(private accountService : AccountService){}
-  salir(){
-    this.accountService.logout()
-  }
 }
 

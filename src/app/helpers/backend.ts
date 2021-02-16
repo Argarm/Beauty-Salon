@@ -15,6 +15,7 @@ export class BackendInterceptor implements HttpInterceptor {
         return handleRoute();
         
         function handleRoute() {
+            console.log("ahora por aqui")
             switch (true) {
                 case url.endsWith('/login') && method === 'POST':
                     return authenticate();
@@ -67,6 +68,8 @@ export class BackendInterceptor implements HttpInterceptor {
             if (!isLoggedIn()) return unauthorized();
 
             const user = users.find(x => x.id === idFromUrl());
+            console.log("hola")
+            console.log(user)
             return ok(basicDetails(user));
         }
 
@@ -112,8 +115,7 @@ export class BackendInterceptor implements HttpInterceptor {
         }
 
         function basicDetails(user) {
-            const { id, username, firstName, lastName } = user;
-            return { id, username, firstName, lastName };
+            return user;
         }
 
         function isLoggedIn() {

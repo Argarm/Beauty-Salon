@@ -13,6 +13,11 @@ import { MainViewComponent } from './main-view/main-view.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { backendProvider } from './helpers/backend';
+import { ProfileComponent } from './profile/profile.component';
+import { CalendarComponent } from './profile/calendar/calendar.component';
+import { ReviewComponent } from './profile/review/review.component';
+import { PurchasesComponent } from './profile/purchases/purchases.component';
+import { FavoritesComponent } from './profile/favorites/favorites.component';
 
 
 @NgModule({
@@ -23,7 +28,12 @@ import { backendProvider } from './helpers/backend';
     FooterComponent,
     LoginComponent,
     SignupComponent,
-    MainViewComponent
+    MainViewComponent,
+    ProfileComponent,
+    CalendarComponent,
+    ReviewComponent,
+    PurchasesComponent,
+    FavoritesComponent
   ],
   imports: [
     BrowserModule,

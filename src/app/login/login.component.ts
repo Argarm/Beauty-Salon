@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
         .pipe(first())
         .subscribe({
             next: () => {
-                this.router.navigate(['../'], {queryParams : {'userLogged' : 1}})
+                this.router.navigate(['../'])
             },
             error: error => {
                 console.log(error)

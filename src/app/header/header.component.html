@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse">
+<nav class="navbar bg-info">
     <div class="container-fluid">
       <div class="navbar-header">
         <a class="navbar-brand" routerLink="" (click)="clearAll()">Brand</a>
@@ -13,8 +13,10 @@
             <li [appOverDirective] ><a routerLink="login">Iniciar Sesion</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right" *ngIf="userLogged">
-          <li [appOverDirective] ><a routerLink="signup">Estoy registrado</a></li>
-          <li [appOverDirective] ><a routerLink="login">Iniciar Sesion</a></li>
+          <li [appOverDirective] ><a routerLink=""><img [src]="cartImgUrl" alt=""></a></li>
+          <li [appOverDirective] ><a routerLink=""><img [src]="chatImgUrl" alt=""></a></li>
+          <li [appOverDirective] ><a routerLink=""><img [src]="starImgUrl" alt=""></a></li>
+          <li [appOverDirective] ><a routerLink=""><img [src]="userImgUrl" alt=""></a></li>
       </ul>
       </div>
     </div>

@@ -9,7 +9,7 @@ import { User } from '../models/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
-    private userSubject: BehaviorSubject<User>;
+    public userSubject: BehaviorSubject<User>;
     public user: Observable<User>;
 
     constructor(
@@ -38,7 +38,7 @@ export class AccountService {
         // remove user from local storage and set current user to null
         localStorage.removeItem('user');
         this.userSubject.next(null);
-        this.router.navigate(['/account/login']);
+        this.router.navigate(['']);
     }
 
     register(user: User) {

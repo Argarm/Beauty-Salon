@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AccountService } from './services/account.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'beauty-salon';
+  constructor(private accountService : AccountService){}
+  salir(){
+    this.accountService.logout()
+  }
 }
+

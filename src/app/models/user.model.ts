@@ -7,4 +7,13 @@ export class User{
     password: string;
     image: string;
     token: string;
+
+    constructor(name,surname,tlf,email,password,image) {
+        this.name = name;
+        this.surname = surname;
+        this.tlf = tlf;
+        this.email = email;
+        this.password = password;
+        this.image = image
+    }
 }

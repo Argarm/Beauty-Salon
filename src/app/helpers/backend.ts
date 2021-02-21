@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, materialize, dematerialize } from 'rxjs/operators';
+import { User } from '../models/user.model';
 
 
 const usersKey = 'beauty-salon-user-example';
@@ -46,13 +47,15 @@ export class BackendInterceptor implements HttpInterceptor {
         }
 
         function register() {
+            
             const user = body
+            const userFilled = fillUserInformation(body)
             if (users.find(x => x.email === user.email)) {
                 return error('Username "' + user.email + '" is already taken')
             }
             
             user.id = users.length ? Math.max(...users.map(x => x.id)) + 1 : 1;
-            users.push(user);
+            users.push(userFilled);
             localStorage.setItem(usersKey, JSON.stringify(users));
             return ok();
         }
@@ -122,7 +125,13 @@ export class BackendInterceptor implements HttpInterceptor {
             const urlParts = url.split('/');
             return parseInt(urlParts[urlParts.length - 1]);
         }
+
+        function fillUserInformation(body){
+            return new User(body.name,body.surname,body.tlf,body.tkf,body.email,body.password)
+    
+        }
     }
+    
 }
 
 export const backendProvider = {

@@ -20,7 +20,8 @@
         class="form-control"
         [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
       <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-        <div *ngIf="f.password.errors">La contraseña no es correcta</div>
+          <div *ngIf="f.password.errors.required">Este campo está vacio</div>
+          <div *ngIf="f.password.errors.minlength">La contraseña debe tener minimo 8 caracteres</div>
       </div>
     </div>
     <div class="form-group">

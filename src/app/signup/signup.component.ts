@@ -17,7 +17,6 @@ export class SignupComponent implements OnInit {
   submitted = false;
   loading = false;
   mobNumberPattern="^[0-9]{9}$"
-  notValidEmail="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
 
   constructor(
     private formBuilder : FormBuilder,

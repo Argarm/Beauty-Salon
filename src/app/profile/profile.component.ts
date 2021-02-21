@@ -18,8 +18,6 @@ export class ProfileComponent implements OnInit {
     {name: 'Favoritos', router: "/profile/favorites"}
   ]
   constructor(private accountService : AccountService) { 
-    console.log("hola")
-    console.log(this.accountService.userValue)
     this.user = this.accountService.userValue
   }
 
@@ -29,6 +27,7 @@ export class ProfileComponent implements OnInit {
   hola(){
     console.log(this.user.name)
   }
+  
   logout(){
     this.accountService.logout()
   }

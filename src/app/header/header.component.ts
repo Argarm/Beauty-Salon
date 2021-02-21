@@ -39,16 +39,9 @@ export class HeaderComponent implements OnInit {
     })
         
   }
-  showMode(){
-    if(this.accountService.userValue){
-      console.log("si")
-    }
-    console.log(this.userLogged)
-    console.log(this.accountService.userValue)
-  }
+  
   clearAll(){
-    console.log("aqui")
-    JSON.parse(localStorage.getItem(usersKey)).clearAll();
+    localStorage.clear();
   }
 
 }

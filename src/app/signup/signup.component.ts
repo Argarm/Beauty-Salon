@@ -17,6 +17,7 @@ export class SignupComponent implements OnInit {
   submitted = false;
   loading = false;
   mobNumberPattern="^[0-9]{9}$"
+  notValidEmail="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
 
   constructor(
     private formBuilder : FormBuilder,
@@ -44,12 +45,12 @@ export class SignupComponent implements OnInit {
   
   onSubmit(){
     this.submitted = true;
-
+    if(this.form.errors)alert("Las contraseñas deben coincidir")
     if(this.form.invalid)return;
     this.accountService.register(this.form.value)
     .pipe(first()).subscribe({
       next: () => {
-        this.router.navigate(['../'], {queryParams : {'userLogged' : 1}})
+        this.router.navigate(['../'])
       },
       error: error => {
         console.log(error)

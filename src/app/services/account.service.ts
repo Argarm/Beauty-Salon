@@ -42,7 +42,9 @@ export class AccountService {
     }
 
     register(user: User) {
-        return this.http.post(`${environment.apiUrl}/signup`, user);
+        var result = this.http.post(`${environment.apiUrl}/signup`, user);
+        this.userSubject.next(user)
+        return result
     }
     
     getById(id: string) {

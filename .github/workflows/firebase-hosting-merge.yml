@@ -10,8 +10,37 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@master
+        with:
+          node-version: '15.x'
+      - name: Install Dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
+      - name: Archive Production Artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: public
+          path: ./public
+  deploy:
+    name: Deploy to firebase
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
+        with:
+          node-version: '15.x'
+      - name: Install Dependencies
+        run: npm install
+      - name: Build the app artifact for prod
+        run: npm run build --prod
+      - name: Deploy angular app to Firebase
+        uses: w9jds/firebase-action@master
+>>>>>>> d5d9fb9803311144f630171412f4437358401dac
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_BEAUTY_SALON_TFG }}'

@@ -46,15 +46,7 @@ export class SignupComponent implements OnInit {
     this.submitted = true;
     if(this.form.errors)alert("Las contraseñas deben coincidir")
     if(this.form.invalid)return;
-    this.accountService.register(this.form.value)
-    .pipe(first()).subscribe({
-      next: () => {
-        this.router.navigate(['../'])
-      },
-      error: error => {
-        console.log(error)
-      }
-    })
+    this.accountService.registerUser(this.form.value)
   }
 
 }

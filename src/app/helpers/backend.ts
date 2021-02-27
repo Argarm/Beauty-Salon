@@ -19,8 +19,8 @@ export class BackendInterceptor implements HttpInterceptor {
             switch (true) {
                 case url.endsWith('/login') && method === 'POST':
                     return authenticate();
-                case url.endsWith('/signup') && method === 'POST':  
-                    return register();
+                /* case url.endsWith('/signup') && method === 'POST':  
+                    return register(); */
                 case url.endsWith('/users') && method === 'GET':
                     return getUsers();
                 case url.match(/\/users\/\d+$/) && method === 'GET':
@@ -46,19 +46,16 @@ export class BackendInterceptor implements HttpInterceptor {
             })
         }
 
-        function register() {
+        /* function register() {
             
             const user = body
-            const userFilled = fillUserInformation(body)
-            if (users.find(x => x.email === user.email)) {
-                return error('Username "' + user.email + '" is already taken')
-            }
+            
             
             user.id = users.length ? Math.max(...users.map(x => x.id)) + 1 : 1;
             users.push(userFilled);
             localStorage.setItem(usersKey, JSON.stringify(users));
             return ok();
-        }
+        } */
 
         function getUsers() {
             if (!isLoggedIn()) return unauthorized();
@@ -126,10 +123,6 @@ export class BackendInterceptor implements HttpInterceptor {
             return parseInt(urlParts[urlParts.length - 1]);
         }
 
-        function fillUserInformation(body){
-            return new User(body.name,body.surname,body.tlf,body.tkf,body.email,body.password)
-    
-        }
     }
     
 }

@@ -18,6 +18,9 @@ import { CalendarComponent } from './profile/calendar/calendar.component';
 import { ReviewComponent } from './profile/review/review.component';
 import { PurchasesComponent } from './profile/purchases/purchases.component';
 import { FavoritesComponent } from './profile/favorites/favorites.component';
+import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire';
+
 
 
 @NgModule({
@@ -39,7 +42,8 @@ import { FavoritesComponent } from './profile/favorites/favorites.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

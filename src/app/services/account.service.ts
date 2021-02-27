@@ -2,19 +2,24 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, retry } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 import { environment } from '../../environments/environment';
 import { User } from '../models/user.model';
+import { SelectMultipleControlValueAccessor } from '@angular/forms';
+
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
     public userSubject: BehaviorSubject<User>;
     public user: Observable<User>;
+    private validUser=0;
 
     constructor(
         private router: Router,
-        private http: HttpClient
+        private http: HttpClient,
+        private firestore : AngularFirestore
     ) {
         this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
         this.user = this.userSubject.asObservable();
@@ -29,7 +34,7 @@ export class AccountService {
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('user', JSON.stringify(user));
-                this.userSubject.next(user);
+                
                 return user;
             }));
     }
@@ -41,12 +46,76 @@ export class AccountService {
         this.router.navigate(['']);
     }
 
-    register(user: User) {
-        var result = this.http.post(`${environment.apiUrl}/signup`, user);
-        this.userSubject.next(user)
+/*     register(user: User) {
+        
+        var userStore = this.http.get('https://beauty-salon-tfg-default-rtdb.europe-west1.firebasedatabase.app/users.json').pipe(map((responseData) => {
+            const postsArray: User[] = [];
+            for(const key in responseData){
+                if(responseData.hasOwnProperty(key)){
+                    postsArray.push({... responseData[key], id : key})
+                }
+            }
+            return postsArray
+        })).subscribe()
+        console.log("hola")
+        console.log(userStore)
+        if (userFilled.find(x => x.email === user.email)) {
+            alert('Username "' + user.email + '" is already taken')
+            return;
+        }
+
+        var result = this.http.post(`https://beauty-salon-tfg-default-rtdb.europe-west1.firebasedatabase.app/users.json`,userFilled).subscribe(data => user.id = <string>data)
+        this.userSubject.next(userFilled)
         return result
     }
-    
+ */    
+    registerUser(user :User){
+        const userFilled = this.fillUserInformation(user)
+        this.IsValidUser(userFilled.email)
+        /* if(this.validUser){
+            this.firestore.collection('users').add(userFilled)
+            return true;
+
+        }else{
+            alert('El usuario "' + userFilled.email + '" ya está en uso')
+            this.router.navigate(['signup'])
+        }
+ */
+    }
+
+    private async IsValidUser(userEmail){
+        var aux = this.firestore.collection('users').snapshotChanges().subscribe((data) => {
+            data.forEach((users : any)=> {
+                var userData = users.payload.doc.data()
+                console.log(userData)
+                if(userData.email === userEmail){
+                    this.validUser = 1
+                }
+            });
+        });
+        console.log(this.validUser)
+    }
+
+    logingUser(userEmail , userPassword){
+        let flag = false;
+        this.firestore.collection('users').snapshotChanges().subscribe((data) => {
+            data.forEach((users : any)=> {
+                var userData = users.payload.doc.data()
+                if(userData.email === userEmail && userData.password === userPassword){
+                    this.userSubject.next(userData);
+                    this.router.navigate(['../'])
+                    flag = true;
+
+                }
+            });
+            
+            if(!flag){
+                alert("No se ha encontrado ningun usuario con esas credenciales")
+            }
+
+        })
+        return;
+    }
     getById(id: string) {
         return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
     }
@@ -76,5 +145,18 @@ export class AccountService {
                 }
                 return x;
             }));
+    }
+
+    private fillUserInformation(body){
+        let user = {
+            email: body.email,
+            image : "",
+            name : body.name,
+            password : body.password,
+            surname: body.surname,
+            tlf: body.tlf
+        }
+        return user;
+
     }
 }

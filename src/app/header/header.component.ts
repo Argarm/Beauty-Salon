@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from '../models/user.model';
-import { AccountService } from '../services/account.service';
+import { AccountService } from '../helpers/services/account.service';
 
 const usersKey = 'beauty-salon-user-example';
 let users = JSON.parse(localStorage.getItem(usersKey)) || [];
@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
   private starImgUrl = "../assets/star.png";
   private userImgUrl = "../assets/user.png";
   
-  constructor(private route : ActivatedRoute,private accountService : AccountService) { 
+  constructor(private router : Router,private accountService : AccountService) { 
     this.userLogged = false
   }
 
@@ -42,6 +42,11 @@ export class HeaderComponent implements OnInit {
   
   clearAll(){
     localStorage.clear();
+  }
+
+  goToService(servicio : string){
+    let id = this.servicios.indexOf(servicio)
+    this.router.navigate(['services',id])
   }
 
 }

@@ -5,8 +5,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map, retry } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 
-import { environment } from '../../environments/environment';
-import { User } from '../models/user.model';
+import { environment } from '../../../environments/environment';
+import { User } from '../../models/user.model';
 
 
 

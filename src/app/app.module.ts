@@ -20,6 +20,7 @@ import { PurchasesComponent } from './profile/purchases/purchases.component';
 import { FavoritesComponent } from './profile/favorites/favorites.component';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
+import { ServicesComponent } from './services/services.component';
 
 
 
@@ -36,7 +37,8 @@ import { AngularFireModule } from '@angular/fire';
     CalendarComponent,
     ReviewComponent,
     PurchasesComponent,
-    FavoritesComponent
+    FavoritesComponent,
+    ServicesComponent
   ],
   imports: [
     BrowserModule,

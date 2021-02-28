@@ -6,7 +6,7 @@
   
       <div class="navbar-collapse">
         <ul class="nav navbar-nav" *ngFor="let servicio of servicios">
-          <li [appOverDirective] ><a href="#" >{{servicio}}</a></li>
+          <li [appOverDirective] ><a (click)="goToService(servicio)" >{{servicio}}</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right" *ngIf="!userLogged">
             <li [appOverDirective] ><a routerLink="signup">Registrarse</a></li>

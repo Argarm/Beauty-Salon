@@ -1,11 +1,6 @@
-import { invalid } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, Form, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { rejects } from 'assert';
-import { Observable } from 'rxjs';
-import { first } from 'rxjs/operators';
-import { AccountService } from '../services/account.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AccountService } from '../helpers/services/account.service';
 
 @Component({
   selector: 'app-signup',
@@ -20,9 +15,7 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private formBuilder : FormBuilder,
-    private accountService : AccountService,
-    private router : Router,
-    private route : ActivatedRoute
+    private accountService : AccountService
   ) { }
 
   ngOnInit(): void {

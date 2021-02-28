@@ -8,6 +8,7 @@ import { FavoritesComponent } from './profile/favorites/favorites.component';
 import { ProfileComponent } from './profile/profile.component';
 import { PurchasesComponent } from './profile/purchases/purchases.component';
 import { ReviewComponent } from './profile/review/review.component';
+import { ServicesComponent } from './services/services.component';
 import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
     {path: "purchase", component: PurchasesComponent},
     {path: "favorites",component: FavoritesComponent}
   ]},
+  { path: "services/:id", component: ServicesComponent},
   {path: "", component: MainViewComponent}
 ];
 

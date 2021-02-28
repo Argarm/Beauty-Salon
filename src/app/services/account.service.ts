@@ -7,14 +7,14 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
 import { environment } from '../../environments/environment';
 import { User } from '../models/user.model';
-import { SelectMultipleControlValueAccessor } from '@angular/forms';
+
 
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
     public userSubject: BehaviorSubject<User>;
     public user: Observable<User>;
-    private validUser=0;
+    private validUser : boolean;
 
     constructor(
         private router: Router,
@@ -23,6 +23,7 @@ export class AccountService {
     ) {
         this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
         this.user = this.userSubject.asObservable();
+        this.validUser = true;
     }
 
     public get userValue(): User {
@@ -71,51 +72,34 @@ export class AccountService {
  */    
     registerUser(user :User){
         const userFilled = this.fillUserInformation(user)
-        this.IsValidUser(userFilled.email)
-        /* if(this.validUser){
-            this.firestore.collection('users').add(userFilled)
-            return true;
-
-        }else{
-            alert('El usuario "' + userFilled.email + '" ya está en uso')
-            this.router.navigate(['signup'])
-        }
- */
-    }
-
-    private async IsValidUser(userEmail){
-        var aux = this.firestore.collection('users').snapshotChanges().subscribe((data) => {
-            data.forEach((users : any)=> {
-                var userData = users.payload.doc.data()
-                console.log(userData)
-                if(userData.email === userEmail){
-                    this.validUser = 1
-                }
-            });
-        });
-        console.log(this.validUser)
-    }
-
-    logingUser(userEmail , userPassword){
-        let flag = false;
-        this.firestore.collection('users').snapshotChanges().subscribe((data) => {
-            data.forEach((users : any)=> {
-                var userData = users.payload.doc.data()
-                if(userData.email === userEmail && userData.password === userPassword){
-                    this.userSubject.next(userData);
-                    this.router.navigate(['../'])
-                    flag = true;
-
-                }
-            });
-            
-            if(!flag){
-                alert("No se ha encontrado ningun usuario con esas credenciales")
+        this.firestore.collection('users').doc(userFilled.email).get().subscribe(data =>{
+            if(!data.exists){
+                this.firestore.collection('users').doc(userFilled.email).set(userFilled)
+                this.userSubject.next(user);
+                this.router.navigate(['../'])
+            }else{
+                alert('El usuario "' + userFilled.email + '" ya está en uso')
             }
-
         })
-        return;
     }
+
+    
+    logingUser(userEmail , userPassword){
+        this.firestore.collection('users').doc(userEmail).get().subscribe(data => {
+            if(data.exists){
+                var user = data.data() as User
+                if(user.password === userPassword){
+                    this.userSubject.next(user);
+                    this.router.navigate(['../'])
+                }else{
+                    alert("La contraseña no es correcta")
+                }
+            }else{
+                alert("no se ha encontrado ningun usuario con ese correo")
+            }
+        })
+    }
+    
     getById(id: string) {
         return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
     }

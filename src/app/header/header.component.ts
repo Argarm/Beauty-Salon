@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from '../models/user.model';
 import { AccountService } from '../helpers/services/account.service';
+import { environment } from 'src/environments/environment';
 
 const usersKey = 'beauty-salon-user-example';
 let users = JSON.parse(localStorage.getItem(usersKey)) || [];
@@ -26,14 +27,10 @@ export class HeaderComponent implements OnInit {
     this.userLogged = false
   }
 
-  servicios :string [] = [
-    "Peluquerias",
-    "Barberias",
-    "Uñas",
-    "Estetica"
-  ]
+  servicios :string [];
 
   ngOnInit(): void {
+    this.servicios = environment.services
     this.user = this.accountService.userSubject.subscribe((user : User) => {
       this.userLogged = user ? true : false;
     })

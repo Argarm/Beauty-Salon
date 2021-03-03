@@ -15,7 +15,7 @@ export class AccountService {
     public userSubject: BehaviorSubject<User>;
     public user: Observable<User>;
     private validUser : boolean;
-
+    
     constructor(
         private router: Router,
         private http: HttpClient,
@@ -30,16 +30,6 @@ export class AccountService {
         return this.userSubject.value;
     }
 
-    login(email, password) {
-        return this.http.post<User>(`${environment.apiUrl}/login`, { email, password })
-            .pipe(map(user => {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('user', JSON.stringify(user));
-                
-                return user;
-            }));
-    }
-
     logout() {
         // remove user from local storage and set current user to null
         localStorage.removeItem('user');
@@ -47,29 +37,6 @@ export class AccountService {
         this.router.navigate(['']);
     }
 
-/*     register(user: User) {
-        
-        var userStore = this.http.get('https://beauty-salon-tfg-default-rtdb.europe-west1.firebasedatabase.app/users.json').pipe(map((responseData) => {
-            const postsArray: User[] = [];
-            for(const key in responseData){
-                if(responseData.hasOwnProperty(key)){
-                    postsArray.push({... responseData[key], id : key})
-                }
-            }
-            return postsArray
-        })).subscribe()
-        console.log("hola")
-        console.log(userStore)
-        if (userFilled.find(x => x.email === user.email)) {
-            alert('Username "' + user.email + '" is already taken')
-            return;
-        }
-
-        var result = this.http.post(`https://beauty-salon-tfg-default-rtdb.europe-west1.firebasedatabase.app/users.json`,userFilled).subscribe(data => user.id = <string>data)
-        this.userSubject.next(userFilled)
-        return result
-    }
- */    
     registerUser(user :User){
         const userFilled = this.fillUserInformation(user)
         this.firestore.collection('users').doc(userFilled.email).get().subscribe(data =>{
@@ -98,6 +65,12 @@ export class AccountService {
                 alert("no se ha encontrado ningun usuario con ese correo")
             }
         })
+    }
+
+    getServices(id : string){
+        var service = environment.services[id].toLowerCase()
+
+        return this.firestore.collection(service).snapshotChanges()
     }
     
     getById(id: string) {

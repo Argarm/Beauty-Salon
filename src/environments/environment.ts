@@ -14,7 +14,13 @@ export const environment = {
     messagingSenderId: "578322032857",
     appId: "1:578322032857:web:7af1563e5f223c2c5c76c8",
     measurementId: "G-12RK5P1MFS"
-  }
+  },
+  services : [
+    "Peluqueria",
+    "Barberia",
+    "Uñas",
+    "Estetica"
+  ]
 };
 
 /*

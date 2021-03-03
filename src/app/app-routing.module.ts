@@ -21,7 +21,7 @@ const routes: Routes = [
     {path: "favorites",component: FavoritesComponent}
   ]},
   { path: "services/:id", component: ServicesComponent},
-  {path: "", component: MainViewComponent}
+  {path: "", component: MainViewComponent} 
 ];
 
 @NgModule({

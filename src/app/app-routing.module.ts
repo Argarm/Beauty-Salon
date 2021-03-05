@@ -23,7 +23,7 @@ const routes: Routes = [
     {path: "favorites",component: FavoritesComponent}
   ]},
   { path: "services/:id", component: ServicesComponent},
-  {path: "services/:id/book", component: BookComponent, canActivate: [AuthGuardBookGuard]},
+  {path: "services/:id/book", component: BookComponent, canActivate: [AuthGuardBookGuard, AuthGuard]},
   {path: "", component: MainViewComponent} 
 ];
 

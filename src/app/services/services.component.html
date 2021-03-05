@@ -1,5 +1,5 @@
 <h3>{{serviceMainName}}</h3>
-<div *ngFor="let service of services">
+<div *ngFor="let service of services; let i = index">
     <div class="card border" > 
         <div class="card-header">
             {{service.name}}
@@ -7,7 +7,7 @@
         <div class="card-body">
             <h5 class="card-title">{{service.tlf}}</h5>
             <p class="card-text">{{service.schedule}}</p>
-            <a routerLink="./book" class="btn btn-primary services">Reservar</a>
+            <a routerLink="./book" (click)="hola(i)" class="btn btn-primary services">Reservar</a>
         </div>
     </div>
     <hr>

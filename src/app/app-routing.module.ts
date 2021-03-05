@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuardBookGuard } from './helpers/auth-guard-book.guard';
 import { AuthGuard } from './helpers/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { MainViewComponent } from './main-view/main-view.component';
@@ -22,7 +23,7 @@ const routes: Routes = [
     {path: "favorites",component: FavoritesComponent}
   ]},
   { path: "services/:id", component: ServicesComponent},
-  {path: "services/:id/book", component: BookComponent},
+  {path: "services/:id/book", component: BookComponent, canActivate: [AuthGuardBookGuard]},
   {path: "", component: MainViewComponent} 
 ];
 

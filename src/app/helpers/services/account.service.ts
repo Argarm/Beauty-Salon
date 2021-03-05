@@ -72,6 +72,14 @@ export class AccountService {
 
         return this.firestore.collection(service).snapshotChanges()
     }
+
+    getService(id,document){
+        console.log(id)
+        console.log(document)
+        var service = environment.services[id].toLowerCase()
+        console.log(service)
+        return this.firestore.collection(service).doc("0").get()
+    }
     
     getById(id: string) {
         return this.http.get<User>(`${environment.apiUrl}/users/${id}`);

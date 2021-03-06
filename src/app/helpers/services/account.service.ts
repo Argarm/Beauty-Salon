@@ -74,11 +74,8 @@ export class AccountService {
     }
 
     getService(id,document){
-        console.log(id)
-        console.log(document)
         var service = environment.services[id].toLowerCase()
-        console.log(service)
-        return this.firestore.collection(service).doc("0").get()
+        return this.firestore.collection(service).doc(`${document}`).get()
     }
     
     getById(id: string) {

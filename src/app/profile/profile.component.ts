@@ -23,10 +23,6 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  hola(){
-    console.log(this.user.name)
-  }
   
   logout(){
     this.accountService.logout()

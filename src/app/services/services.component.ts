@@ -31,7 +31,7 @@ export class ServicesComponent implements OnInit {
 
   }
 
-  hola(id: number) {
+  book(id: number) {
     this.shopService.setObject(this.route.snapshot.params.id,id)
   }
 

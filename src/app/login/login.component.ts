@@ -29,10 +29,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
       this.submitted = true;
-      console.log(this.form)
-      if (this.form.invalid) {
-          return;
-      }
+      if (this.form.invalid)return;
 
       this.accountService.logingUser(this.f.email.value,this.f.password.value)
   }

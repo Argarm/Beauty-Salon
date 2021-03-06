@@ -7,7 +7,7 @@ name: Deploy to Firebase Hosting on merge
     branches:
       - development
 jobs:
-  build_and_deploy:
+  build_and_deploy_to_firebase:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -20,3 +20,19 @@ jobs:
           projectId: beauty-salon-tfg
         env:
           FIREBASE_CLI_PREVIEWS: hostingchannels
+    
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: docker login
+        env:
+          DOCKER_USER: ${{secrets.DOCKER_USER}}
+          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+        run: |
+          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - name: Build docker image
+      - run: docker build . --file dockerfile --tag ${{secrets.DOCKER_USER}}/beauty-salon-tfg
+      - name: Docker push
+      - run: docker push ${{secrets.DOCKER_USER}}/beauty-salon-tfg
+       

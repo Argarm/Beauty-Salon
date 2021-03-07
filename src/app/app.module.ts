@@ -22,6 +22,7 @@ import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { ServicesComponent } from './services/services.component';
 import { BookComponent } from './services/book/book.component';
+import { ServiceProfileComponent } from './services/profile/profile.component';
 
 
 
@@ -40,7 +41,8 @@ import { BookComponent } from './services/book/book.component';
     PurchasesComponent,
     FavoritesComponent,
     ServicesComponent,
-    BookComponent
+    BookComponent,
+    ServiceProfileComponent
   ],
   imports: [
     BrowserModule,

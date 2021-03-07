@@ -23,6 +23,8 @@ import { AngularFireModule } from '@angular/fire';
 import { ServicesComponent } from './services/services.component';
 import { BookComponent } from './services/book/book.component';
 import { ServiceProfileComponent } from './services/profile/profile.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 
 
@@ -49,7 +51,8 @@ import { ServiceProfileComponent } from './services/profile/profile.component';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig)
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

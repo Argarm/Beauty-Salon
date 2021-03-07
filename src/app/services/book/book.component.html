@@ -1,1 +1,27 @@
-<app-header-book-calendar></app-header-book-calendar>
+<app-header-book-calendar
+  [(view)]="view"
+  [(viewDate)]="viewDate"
+  (viewChange)="viewChanged()"
+>
+</app-header-book-calendar>
+
+<div [ngSwitch]="view" class="scroll-container" #scrollContainer>
+  <mwl-calendar-month-view
+    *ngSwitchCase="'month'"
+    [viewDate]="viewDate"
+    [events]="events"
+  >
+  </mwl-calendar-month-view>
+  <mwl-calendar-week-view
+    *ngSwitchCase="'week'"
+    [viewDate]="viewDate"
+    [events]="events"
+  >
+  </mwl-calendar-week-view>
+  <mwl-calendar-day-view
+    *ngSwitchCase="'day'"
+    [viewDate]="viewDate"
+    [events]="events"
+  >
+  </mwl-calendar-day-view>
+</div>

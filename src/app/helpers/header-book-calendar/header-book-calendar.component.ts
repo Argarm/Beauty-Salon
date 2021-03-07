@@ -12,7 +12,7 @@ export class HeaderBookCalendarComponent {
 
   @Input() viewDate: Date;
 
-  @Input() locale: string = 'en';
+  @Input() locale: string = 'es';
 
   @Output() viewChange = new EventEmitter<CalendarView>();
 

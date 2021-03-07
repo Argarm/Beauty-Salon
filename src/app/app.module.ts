@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,6 +30,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { HeaderBookCalendarComponent } from './helpers/header-book-calendar/header-book-calendar.component';
 
 
+registerLocaleData(localeEs);
 
 @NgModule({
   declarations: [

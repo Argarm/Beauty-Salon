@@ -16,12 +16,15 @@
     *ngSwitchCase="'week'"
     [viewDate]="viewDate"
     [events]="events"
+    [weekStartsOn]="weekStartsOn"
   >
   </mwl-calendar-week-view>
   <mwl-calendar-day-view
     *ngSwitchCase="'day'"
     [viewDate]="viewDate"
     [events]="events"
+    [dayStartHour]="todaySchedule.dayStart"
+    [dayEndHour]="todaySchedule.dayEnd"
   >
   </mwl-calendar-day-view>
 </div>

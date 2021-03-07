@@ -6,6 +6,7 @@
           mwlCalendarPreviousView
           [view]="view"
           [(viewDate)]="viewDate"
+          (click)="viewChange.emit(view)"
           (viewDateChange)="viewDateChange.next(viewDate)"
         >
           Previous
@@ -14,6 +15,7 @@
           class="btn btn-outline-secondary"
           mwlCalendarToday
           [(viewDate)]="viewDate"
+          (click)="viewChange.emit(view)"
           (viewDateChange)="viewDateChange.next(viewDate)"
         >
           Today
@@ -23,6 +25,7 @@
           mwlCalendarNextView
           [view]="view"
           [(viewDate)]="viewDate"
+          (click)="viewChange.emit(view)"
           (viewDateChange)="viewDateChange.next(viewDate)"
         >
           Next

@@ -5,26 +5,34 @@
 >
 </app-header-book-calendar>
 
-<div [ngSwitch]="view" class="scroll-container" #scrollContainer>
-  <mwl-calendar-month-view
-    *ngSwitchCase="'month'"
-    [viewDate]="viewDate"
-    [events]="events"
-  >
-  </mwl-calendar-month-view>
-  <mwl-calendar-week-view
-    *ngSwitchCase="'week'"
-    [viewDate]="viewDate"
-    [events]="events"
-    [weekStartsOn]="weekStartsOn"
-  >
-  </mwl-calendar-week-view>
-  <mwl-calendar-day-view
-    *ngSwitchCase="'day'"
-    [viewDate]="viewDate"
-    [events]="events"
-    [dayStartHour]="todaySchedule.dayStart"
-    [dayEndHour]="todaySchedule.dayEnd"
-  >
-  </mwl-calendar-day-view>
+<div *ngIf="todaySchedule.isOpen">
+  <div [ngSwitch]="view" class="scroll-container" #scrollContainer>
+    <mwl-calendar-month-view
+      *ngSwitchCase="'month'"
+      [viewDate]="viewDate"
+      [events]="events"
+    >
+    </mwl-calendar-month-view>
+    <mwl-calendar-week-view
+      *ngSwitchCase="'week'"
+      [viewDate]="viewDate"
+      [events]="events"
+      [weekStartsOn]="weekStartsOn"
+    >
+    </mwl-calendar-week-view>
+    <mwl-calendar-day-view
+      *ngSwitchCase="'day'"
+      [viewDate]="viewDate"
+      [events]="events"
+      [dayStartHour]="todaySchedule.dayStart"
+      [dayEndHour]="todaySchedule.dayEnd"
+    >
+    </mwl-calendar-day-view>
+  </div>
+  
+</div>
+
+<div *ngIf="!todaySchedule.isOpen" class="text-center">
+  <img [src]="restImgUrl" class="imageSize">
+  <h3 #scrollContainer>Estamos descansando</h3>
 </div>

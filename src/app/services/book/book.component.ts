@@ -23,6 +23,8 @@ export class BookComponent {
 
   weekStartsOn = DAYS_OF_WEEK.MONDAY
 
+  restImgUrl="../../../assets/rest.png"
+
   todaySchedule = {
     isOpen : false,
     dayStart : 0,
@@ -74,7 +76,6 @@ export class BookComponent {
   viewChanged() {  
     this.cdr.detectChanges();
     this.fillInformation(this.actualService)
-    console.log(this.todaySchedule)
     this.scrollToCurrentView();
   }
 

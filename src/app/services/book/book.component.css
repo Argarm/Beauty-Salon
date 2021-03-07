@@ -1,4 +1,9 @@
 .scroll-container {
     height: calc(100vh - 320px);
     overflow-y: auto;
-  }
+}
+
+.imageSize{
+  width: 300px;
+  height: 300px;
+}

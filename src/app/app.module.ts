@@ -25,6 +25,7 @@ import { BookComponent } from './services/book/book.component';
 import { ServiceProfileComponent } from './services/profile/profile.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { HeaderBookCalendarComponent } from './helpers/header-book-calendar/header-book-calendar.component';
 
 
 
@@ -44,7 +45,8 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     FavoritesComponent,
     ServicesComponent,
     BookComponent,
-    ServiceProfileComponent
+    ServiceProfileComponent,
+    HeaderBookCalendarComponent
   ],
   imports: [
     BrowserModule,

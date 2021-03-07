@@ -25,7 +25,7 @@ const routes: Routes = [
   ]},
   { path: "services/:id", component: ServicesComponent},
   { path: "services/:id/profile", component: ServiceProfileComponent, canActivate: [AuthGuardBookGuard]},
-  {path: "services/:id/profile/book", component: BookComponent, canActivate: [AuthGuardBookGuard, AuthGuard]},
+  {path: "services/:id/profile/book", component: BookComponent, canActivate: [AuthGuardBookGuard/*, AuthGuard*/]},
   {path: "", component: MainViewComponent} 
 ];
 

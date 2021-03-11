@@ -79,6 +79,10 @@ export class BookComponent {
     this.scrollToCurrentView();
   }
 
+  eventClicked(event){
+    console.log(event)
+  }
+
   private scrollToCurrentView() {
     if (this.view === CalendarView.Week || CalendarView.Day) {
       // each hour is 60px high, so to get the pixels to scroll it's just the amount of minutes since midnight

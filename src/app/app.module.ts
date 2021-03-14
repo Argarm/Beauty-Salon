@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -56,6 +58,8 @@ registerLocaleData(localeEs);
     ModalConfirmationOfBookComponent
   ],
   imports: [
+    BsDropdownModule.forRoot(),
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,

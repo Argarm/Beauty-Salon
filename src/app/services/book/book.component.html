@@ -30,7 +30,7 @@
       [dayStartHour]="todaySchedule.dayStart"
       [dayEndHour]="todaySchedule.dayEnd"
       (hourSegmentClicked)="eventClicked($event)"
-      
+      (eventTimesChanged)="eventTimesChanged($event)"
     >
     </mwl-calendar-day-view>
   </div>
@@ -41,3 +41,5 @@
   <img [src]="restImgUrl" class="imageSize">
   <h3 #scrollContainer>Estamos descansando</h3>
 </div>
+
+<button class="btn btn-primary center" [disabled]="!eventCreated">Confirmar Cita</button>

@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
-import { CalendarView, CalendarEvent, DAYS_OF_WEEK } from 'angular-calendar';
-import { differenceInMinutes, startOfDay, startOfHour } from 'date-fns';
+import { CalendarView, CalendarEvent, DAYS_OF_WEEK, CalendarEventTimesChangedEvent } from 'angular-calendar';
+import { differenceInMinutes, startOfDay, startOfHour, subDays,addDays, endOfDay, addMinutes } from 'date-fns';
 import { concatMap } from 'rxjs/operators';
 import { AccountService } from 'src/app/helpers/services/account.service';
 import { ShopService } from 'src/app/helpers/services/shop.service';
@@ -19,7 +19,9 @@ export class BookComponent {
 
   viewDate = new Date();
 
-  events: CalendarEvent[] = [];
+  events: CalendarEvent[] = [  ];
+
+  eventCreated : boolean = false;
 
   weekStartsOn = DAYS_OF_WEEK.MONDAY
 
@@ -80,12 +82,46 @@ export class BookComponent {
   }
 
   eventClicked(event){
-    console.log(event)
+    if(!this.eventCreated){
+      var event_start = event.date
+      var event_finished = addMinutes(event_start,30)
+
+      this.events = [
+        ...this.events,
+        {
+          title: 'New event',
+          start: event_start,
+          end: event_finished,
+          color: {
+            primary: '#ad2121',
+            secondary: '#FAE3E3',
+          },
+          draggable: true,
+        },
+      ];
+      this.eventCreated = true;
+    } 
+  }
+
+  eventTimesChanged({
+    event,
+    newStart,
+    newEnd,
+  }: CalendarEventTimesChangedEvent): void {
+    this.events = this.events.map((iEvent) => {
+      if (iEvent === event) {
+        return {
+          ...event,
+          start: newStart,
+          end: newEnd,
+        };
+      }
+      return iEvent;
+    });
   }
 
   private scrollToCurrentView() {
     if (this.view === CalendarView.Week || CalendarView.Day) {
-      // each hour is 60px high, so to get the pixels to scroll it's just the amount of minutes since midnight
       const minutesSinceStartOfDay = differenceInMinutes(
         startOfHour(new Date()),
         startOfDay(new Date())
@@ -95,6 +131,5 @@ export class BookComponent {
         minutesSinceStartOfDay + headerHeight;
     }
   }
-
 
 }

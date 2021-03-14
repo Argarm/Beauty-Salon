@@ -28,6 +28,8 @@ import { ServiceProfileComponent } from './services/profile/profile.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { HeaderBookCalendarComponent } from './helpers/header-book-calendar/header-book-calendar.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+
 
 
 registerLocaleData(localeEs);
@@ -57,7 +59,8 @@ registerLocaleData(localeEs);
     ReactiveFormsModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+    ModalModule.forRoot()
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

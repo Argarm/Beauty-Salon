@@ -1,7 +1,7 @@
-import { ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, TemplateRef, ViewChild } from '@angular/core';
 import { CalendarView, CalendarEvent, DAYS_OF_WEEK, CalendarEventTimesChangedEvent } from 'angular-calendar';
-import { differenceInMinutes, startOfDay, startOfHour, subDays,addDays, endOfDay, addMinutes } from 'date-fns';
-import { concatMap } from 'rxjs/operators';
+import { differenceInMinutes, startOfDay, startOfHour, addMinutes } from 'date-fns';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal'
 import { AccountService } from 'src/app/helpers/services/account.service';
 import { ShopService } from 'src/app/helpers/services/shop.service';
 import { Service } from 'src/app/models/service.model';
@@ -12,6 +12,8 @@ import { Service } from 'src/app/models/service.model';
   styleUrls: ['./book.component.css']
 })
 export class BookComponent {
+
+  modalRef: BsModalRef;
   
   @ViewChild('scrollContainer') scrollContainer: ElementRef<HTMLElement>;
 
@@ -34,7 +36,7 @@ export class BookComponent {
   };
   actualService: Service;
   
-  constructor(private cdr: ChangeDetectorRef, private accountService: AccountService, private shopService : ShopService) {
+  constructor(private cdr: ChangeDetectorRef, private accountService: AccountService, private shopService : ShopService, private modalService: BsModalService) {
   }
 
   ngAfterViewInit() {
@@ -118,6 +120,10 @@ export class BookComponent {
       }
       return iEvent;
     });
+  }
+  
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
   }
 
   private scrollToCurrentView() {

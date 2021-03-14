@@ -2,14 +2,14 @@
 <div *ngFor="let service of services; let i = index">
     <div class="card border" > 
         <div class="card-header">
-            <a routerLink="./profile" (click)="book(i)">
+            <a (click)="navigate(service.name)">
                 {{service.name}}
             </a>
         </div>
         <div class="card-body">
             <h5 class="card-title">{{service.tlf}}</h5>
             <p class="card-text">{{service.schedule}}</p>
-            <a routerLink="./profile/book" (click)="book(i)" class="btn btn-primary services">Reservar</a>
+            <a (click)="book(i)" class="btn btn-primary services">Reservar</a>
         </div>
     </div>
     <hr>

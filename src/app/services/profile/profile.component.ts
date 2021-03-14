@@ -31,6 +31,7 @@ export class ServiceProfileComponent implements OnInit {
 
 
   ngOnInit(): void {
+    
   }
 
 }

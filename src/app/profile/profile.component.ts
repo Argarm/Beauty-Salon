@@ -12,10 +12,10 @@ export class ProfileComponent implements OnInit {
   userProfilePicture = "../assets/user.png"
 
   options = [
-    {name : 'Calendario', router: "/profile"},
-    {name: 'Reseñas', router: "/profile/review"},
-    {name:'Compras', router: "/profile/purchase"},
-    {name: 'Favoritos', router: "/profile/favorites"}
+    {name : 'Calendario', router: "/perfil"},
+    {name: 'Reseñas', router: "/perfil/reseñas"},
+    {name:'Compras', router: "/perfil/compras"},
+    {name: 'Favoritos', router: "/perfil/favoritos"}
   ]
   constructor(private accountService : AccountService) { 
     this.user = this.accountService.userValue

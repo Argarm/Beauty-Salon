@@ -42,8 +42,7 @@ export class HeaderComponent implements OnInit {
   }
 
   goToService(servicio : string){
-    let id = this.servicios.indexOf(servicio)
-    this.router.navigate(['services',id])
+    this.router.navigate(['servicios',servicio.toLowerCase()])
   }
 
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map, retry } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 import { environment } from '../../../environments/environment';
@@ -14,7 +14,6 @@ import { User } from '../../models/user.model';
 export class AccountService {
     public userSubject: BehaviorSubject<User>;
     public user: Observable<User>;
-    private validUser : boolean;
     
     constructor(
         private router: Router,
@@ -23,7 +22,6 @@ export class AccountService {
     ) {
         this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
         this.user = this.userSubject.asObservable();
-        this.validUser = true;
     }
 
     public get userValue(): User {
@@ -68,13 +66,13 @@ export class AccountService {
     }
 
     getServices(id : string){
-        var service = environment.services[id].toLowerCase()
+        var service = id.toLowerCase()
 
         return this.firestore.collection(service).snapshotChanges()
     }
 
     getService(id,document){
-        var service = environment.services[id].toLowerCase()
+        var service = id.toLowerCase()
         return this.firestore.collection(service).doc(`${document}`).get()
     }
     

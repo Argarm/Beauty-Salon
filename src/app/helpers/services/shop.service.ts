@@ -10,10 +10,6 @@ export class ShopService {
   private actualDocument : number;
   private actualCollection : number;
 
-
-
-
-
   setObject(collection : number, document : number){
     this.actualCollection = collection;
     this.actualDocument = document;

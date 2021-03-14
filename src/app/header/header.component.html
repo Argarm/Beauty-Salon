@@ -9,14 +9,14 @@
           <li [appOverDirective] ><a (click)="goToService(servicio)" >{{servicio}}</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right" *ngIf="!userLogged">
-            <li [appOverDirective] ><a routerLink="signup">Registrarse</a></li>
-            <li [appOverDirective] ><a routerLink="login">Iniciar Sesion</a></li>
+            <li [appOverDirective] ><a routerLink="registro">Registrarse</a></li>
+            <li [appOverDirective] ><a routerLink="iniciar_sesion">Iniciar Sesion</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right" *ngIf="userLogged">
           <li [appOverDirective] ><a routerLink=""><img [src]="cartImgUrl" alt=""></a></li>
           <li [appOverDirective] ><a routerLink=""><img [src]="chatImgUrl" alt=""></a></li>
           <li [appOverDirective] ><a routerLink=""><img [src]="starImgUrl" alt=""></a></li>
-          <li [appOverDirective] ><a routerLink="profile"><img [src]="userImgUrl" alt=""></a></li>
+          <li [appOverDirective] ><a routerLink="perfil"><img [src]="userImgUrl" alt=""></a></li>
       </ul>
       </div>
     </div>

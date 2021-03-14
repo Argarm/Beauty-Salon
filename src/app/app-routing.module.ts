@@ -15,17 +15,17 @@ import { ServicesComponent } from './services/services.component';
 import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
-  {path: "login", component: LoginComponent},
-  {path: "signup", component: SignupComponent},
-  {path: "profile", component: ProfileComponent, canActivate: [AuthGuard],children: [
+  {path: "iniciar_sesion", component: LoginComponent},
+  {path: "registro", component: SignupComponent},
+  {path: "perfil", component: ProfileComponent, canActivate: [AuthGuard],children: [
     {path: "", component: CalendarComponent},
-    {path: "review", component: ReviewComponent},
-    {path: "purchase", component: PurchasesComponent},
-    {path: "favorites",component: FavoritesComponent}
+    {path: "reseñas", component: ReviewComponent},
+    {path: "compras", component: PurchasesComponent},
+    {path: "favoritos",component: FavoritesComponent}
   ]},
-  { path: "services/:id", component: ServicesComponent},
-  { path: "services/:id/profile", component: ServiceProfileComponent, canActivate: [AuthGuardBookGuard]},
-  {path: "services/:id/profile/book", component: BookComponent, canActivate: [AuthGuardBookGuard /*, AuthGuard*/]},
+  { path: "servicios/:servicio", component: ServicesComponent},
+  { path: "servicios/:servicio/:nombre_servicio", component: ServiceProfileComponent, canActivate: [AuthGuardBookGuard]},
+  {path: "servicios/:servicio/:nombre_servicio/reservar", component: BookComponent, canActivate: [AuthGuardBookGuard /*, AuthGuard*/]},
   {path: "", component: MainViewComponent} 
 ];
 

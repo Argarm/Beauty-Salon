@@ -13,5 +13,8 @@
     padding: 10px;
 }
 
+.cal-day-view .cal-hour-segment.cal-after-hour-start .cal-time {
+    display: block;
+  }
 
 

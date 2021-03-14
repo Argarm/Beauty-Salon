@@ -1,7 +1,9 @@
 import { ChangeDetectorRef, Component, ElementRef, TemplateRef, ViewChild } from '@angular/core';
-import { CalendarView, CalendarEvent, DAYS_OF_WEEK, CalendarEventTimesChangedEvent } from 'angular-calendar';
+import { CalendarView, CalendarEvent, DAYS_OF_WEEK, CalendarEventTimesChangedEvent, CalendarDateFormatter } from 'angular-calendar';
 import { differenceInMinutes, startOfDay, startOfHour, addMinutes } from 'date-fns';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal'
+import { CustomDateFormatter } from 'src/app/helpers/cutomDateFormatter';
+import { ModalConfirmationOfBookComponent } from 'src/app/helpers/modal-confirmation-of-book/modal-confirmation-of-book.component';
 import { AccountService } from 'src/app/helpers/services/account.service';
 import { ShopService } from 'src/app/helpers/services/shop.service';
 import { Service } from 'src/app/models/service.model';
@@ -9,12 +11,18 @@ import { Service } from 'src/app/models/service.model';
 @Component({
   selector: 'app-book',
   templateUrl: './book.component.html',
-  styleUrls: ['./book.component.css']
+  styleUrls: ['./book.component.css'],
+  providers: [
+    {
+      provide: CalendarDateFormatter,
+      useClass: CustomDateFormatter,
+    }
+  ]
 })
 export class BookComponent {
-
-  modalRef: BsModalRef;
   
+  modalRef: BsModalRef;
+
   @ViewChild('scrollContainer') scrollContainer: ElementRef<HTMLElement>;
 
   view: CalendarView = CalendarView.Day;
@@ -36,8 +44,7 @@ export class BookComponent {
   };
   actualService: Service;
   
-  constructor(private cdr: ChangeDetectorRef, private accountService: AccountService, private shopService : ShopService, private modalService: BsModalService) {
-  }
+  constructor(private cdr: ChangeDetectorRef, private accountService: AccountService, private shopService : ShopService,private modalService: BsModalService) {   }
 
   ngAfterViewInit() {
     this.scrollToCurrentView();
@@ -46,31 +53,6 @@ export class BookComponent {
     this.accountService.getService(collection,document).subscribe((serviceSnapshot) => {
       this.actualService = <Service>serviceSnapshot.data()
     });
-  }
-
-  private fillInformation( service: Service) {
-    var schedule = service.schedule.split('/').map(function(item){
-      item = item.trim()
-      var day = {
-        isOpen : true,
-        dayStart: 0,
-        dayEnd: 0 
-      }
-
-      if(item.indexOf("-")===-1){
-        day.isOpen=false
-      }else{
-        var todaySchedule = item.split(" ")[1].split("-")
-        var todayStart = todaySchedule[0].split(":")[0]
-        var todayEnd = todaySchedule[1].split(":")[0]
-        day.dayStart = Number(todayStart)
-        day.dayEnd = Number(todayEnd)
-        day.isOpen = true
-      }
-      return day
-    })
-    var today = (this.viewDate.getDay()+6)% 7
-    this.setTodaySchedule(schedule, today) 
   }
 
   setTodaySchedule(schedule: { isOpen: boolean; dayStart: number; dayEnd: number; }[], today: number) {
@@ -121,9 +103,16 @@ export class BookComponent {
       return iEvent;
     });
   }
-  
-  openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
+
+  openModal(){
+    const initialState = {
+      titulo: "titulo",
+      origen: "origen",
+      th1: "Número",
+      th2: "Nombres",
+      modalFor: "Locales"
+    }
+    this.modalRef = this.modalService.show(ModalConfirmationOfBookComponent,{initialState: {initialState}, backdrop: "static",keyboard: false});
   }
 
   private scrollToCurrentView() {
@@ -138,4 +127,28 @@ export class BookComponent {
     }
   }
 
+  private fillInformation( service: Service) {
+    var schedule = service.schedule.split('/').map(function(item){
+      item = item.trim()
+      var day = {
+        isOpen : true,
+        dayStart: 0,
+        dayEnd: 0 
+      }
+
+      if(item.indexOf("-")===-1){
+        day.isOpen=false
+      }else{
+        var todaySchedule = item.split(" ")[1].split("-")
+        var todayStart = todaySchedule[0].split(":")[0]
+        var todayEnd = todaySchedule[1].split(":")[0]
+        day.dayStart = Number(todayStart)
+        day.dayEnd = Number(todayEnd)-1
+        day.isOpen = true
+      }
+      return day
+    })
+    var today = (this.viewDate.getDay()+6)% 7
+    this.setTodaySchedule(schedule, today) 
+  }
 }

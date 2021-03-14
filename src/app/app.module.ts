@@ -29,6 +29,7 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { HeaderBookCalendarComponent } from './helpers/header-book-calendar/header-book-calendar.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { ModalConfirmationOfBookComponent } from './helpers/modal-confirmation-of-book/modal-confirmation-of-book.component';
 
 
 
@@ -51,7 +52,8 @@ registerLocaleData(localeEs);
     ServicesComponent,
     BookComponent,
     ServiceProfileComponent,
-    HeaderBookCalendarComponent
+    HeaderBookCalendarComponent,
+    ModalConfirmationOfBookComponent
   ],
   imports: [
     BrowserModule,

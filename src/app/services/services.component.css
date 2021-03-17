@@ -8,6 +8,26 @@
 }
 
 .space{
-    margin-right: 10px;
-    margin-left: 80%;
+    margin-left: 5%;
+    margin-right: 1%;
 }
+
+.form-control{
+    width: 70%;
+}
+
+input[type=text], select {
+    width: 75%;
+    padding: 5px;
+    margin: 8px 0;
+    margin-left: 10;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button{
+    padding: 5px;
+}
+

@@ -1,21 +1,25 @@
 <h3>{{serviceMainName}}</h3>
-<label class="space">Filtrar: </label>
+<span>
+    <input type="text">
+    <label class="space">Filtrar: </label>
+    <div class="btn-group" dropdown>
+        <button
+            [style.width]="'160px'"
+            id="button-basic"
+            dropdownToggle
+            type="button"
+            class="btn btn-primary dropdown-toggle"
+            aria-controls="dropdown-basic">
+            {{actualFilter}} <span class="caret"></span>
+        </button>
+        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+            role="menu" aria-labelledby="button-basic">
+            <li role="menuitem"><a class="dropdown-item" (click)="setFilter(i)" *ngFor="let filter of filters; let i = index">{{filter}}</a></li>
+        </ul>
+    </div>
 
-<div class="btn-group" dropdown>
-    <button
-        [style.width]="'160px'"
-        id="button-basic"
-        dropdownToggle
-        type="button"
-        class="btn btn-primary dropdown-toggle"
-        aria-controls="dropdown-basic">
-        {{actualFilter}} <span class="caret"></span>
-    </button>
-    <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
-        role="menu" aria-labelledby="button-basic">
-      <li role="menuitem"><a class="dropdown-item" (click)="setFilter(i)" *ngFor="let filter of filters; let i = index">{{filter}}</a></li>
-    </ul>
-  </div>
+</span>
+
 <p></p>
 <div *ngFor="let service of services">
     <div class="card border" > 

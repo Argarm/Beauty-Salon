@@ -32,7 +32,7 @@ export class ServicesComponent implements OnInit {
         servicesSnapshot.forEach((service: any) => {
           this.services.push(service.payload.doc.data())
         })
-        //this.services.sort((a,b) => (b.rating>a.rating)? 1: -1)
+        this.services.sort((a,b) => (b.rating>a.rating)? 1: -1)
       })
     })
     
@@ -62,6 +62,7 @@ export class ServicesComponent implements OnInit {
   private openNow(){
 
   }
+
   private gender(){
 
   }

@@ -12,6 +12,7 @@ import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 })
 export class ServicesComponent implements OnInit {
   serviceMainName: string;
+  searchText
   services = []
   filters = [
     "Mejor valorados",

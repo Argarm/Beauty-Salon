@@ -14,7 +14,7 @@ import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { MainViewComponent } from './main-view/main-view.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { backendProvider } from './helpers/backend';
 import { ProfileComponent } from './profile/profile.component';
@@ -32,6 +32,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { HeaderBookCalendarComponent } from './helpers/header-book-calendar/header-book-calendar.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ModalConfirmationOfBookComponent } from './helpers/modal-confirmation-of-book/modal-confirmation-of-book.component';
+import { FilterPipe } from './helpers/filterPipe';
 
 
 
@@ -39,6 +40,7 @@ registerLocaleData(localeEs);
 
 @NgModule({
   declarations: [
+    FilterPipe,
     AppComponent,
     HeaderComponent,
     OverDirectiveDirective,
@@ -64,6 +66,7 @@ registerLocaleData(localeEs);
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    FormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
     ModalModule.forRoot()

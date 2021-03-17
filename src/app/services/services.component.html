@@ -1,6 +1,6 @@
 <h3>{{serviceMainName}}</h3>
 <span>
-    <input type="text">
+    <input type="text" placeholder="Nombre" [(ngModel)]="searchText">
     <label class="space">Filtrar: </label>
     <div class="btn-group" dropdown>
         <button
@@ -21,7 +21,7 @@
 </span>
 
 <p></p>
-<div *ngFor="let service of services">
+<div *ngFor="let service of services | myfilter: searchText">
     <div class="card border" > 
         <div class="card-header">
             <a (click)="navigate(service.name)">

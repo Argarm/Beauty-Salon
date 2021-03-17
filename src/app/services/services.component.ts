@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
 import { AccountService } from '../helpers/services/account.service';
 import { ShopService } from '../helpers/services/shop.service';
 import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
-import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-services',
@@ -34,7 +32,7 @@ export class ServicesComponent implements OnInit {
         servicesSnapshot.forEach((service: any) => {
           this.services.push(service.payload.doc.data())
         })
-        this.services.sort((a,b) => (b.rating>a.rating)? 1: -1)
+        //this.services.sort((a,b) => (b.rating>a.rating)? 1: -1)
       })
     })
     
@@ -50,10 +48,10 @@ export class ServicesComponent implements OnInit {
         this.openNow();
         break;
       case 2:
-        this.gender('f');
+        this.gender();
         break;        
       case 3:
-        this.gender('m');
+        this.gender();
         break;
       case 4:
         this.services.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
@@ -64,7 +62,7 @@ export class ServicesComponent implements OnInit {
   private openNow(){
 
   }
-  private gender(gender : string){
+  private gender(){
 
   }
   
@@ -73,15 +71,15 @@ export class ServicesComponent implements OnInit {
   }
 
   book(id: number) {
-    this.shopService.setObject(this.route.snapshot.params.servicio,id)
     var name = this.normaliceName(this.services[id].name)
+    this.shopService.setObject(this.route.snapshot.params.servicio,name)
     this.router.navigate([`${name}/reservar`],{relativeTo: this.route})
   }
 
   navigate(name : string){
     var id = this.services.map(e => e.name).indexOf(name);
     name = this.normaliceName(name)
-    this.shopService.setObject(this.route.snapshot.params.servicio,id)
+    this.shopService.setObject(this.route.snapshot.params.servicio,name)
     this.router.navigate([`${name}`],{relativeTo: this.route})
   }
 

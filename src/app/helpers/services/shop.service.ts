@@ -7,10 +7,10 @@ import { Observable, Subject } from 'rxjs';
 export class ShopService {
 
   constructor() { }
-  private actualDocument : number;
+  private actualDocument : string;
   private actualCollection : number;
 
-  setObject(collection : number, document : number){
+  setObject(collection : number, document : string){
     this.actualCollection = collection;
     this.actualDocument = document;
   }

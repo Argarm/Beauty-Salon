@@ -17,7 +17,7 @@
     </ul>
   </div>
 <p></p>
-<div *ngFor="let service of services; let i = index">
+<div *ngFor="let service of services">
     <div class="card border" > 
         <div class="card-header">
             <a (click)="navigate(service.name)">
@@ -27,7 +27,7 @@
         <div class="card-body">
             <h5 class="card-title">{{service.tlf}}</h5>
             <p class="card-text">{{service.schedule}}</p>
-            <a (click)="book(i)" class="btn btn-primary services">Reservar</a>
+            <a (click)="book(service.name)" class="btn btn-primary services">Reservar</a>
         </div>
     </div>
     <hr>

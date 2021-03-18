@@ -1,4 +1,15 @@
 
-.text-white {
-    color: whitesmoke;
+.text-white{
+    color: white;
 }
+.footer{
+   position: fixed; 
+}
+#page-content {
+    flex: 1 0 auto;
+}
+  
+#sticky-footer {
+    flex-shrink: none;
+}
+  

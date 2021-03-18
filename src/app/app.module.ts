@@ -33,6 +33,7 @@ import { HeaderBookCalendarComponent } from './helpers/header-book-calendar/head
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ModalConfirmationOfBookComponent } from './helpers/modal-confirmation-of-book/modal-confirmation-of-book.component';
 import { FilterPipe } from './helpers/filterPipe';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 
 
@@ -60,6 +61,7 @@ registerLocaleData(localeEs);
     ModalConfirmationOfBookComponent
   ],
   imports: [
+    CarouselModule.forRoot(),
     BsDropdownModule.forRoot(),
     BrowserAnimationsModule,
     BrowserModule,

@@ -38,7 +38,7 @@ export class BookComponent {
   restImgUrl="../../../assets/rest.png"
 
   todaySchedule = {
-    isOpen : false,
+    isOpen : true,
     dayStart : 0,
     dayEnd : 0
   };
@@ -52,7 +52,9 @@ export class BookComponent {
     var document = this.shopService.getDocument();
     this.accountService.getService(collection,document).subscribe((serviceSnapshot) => {
       this.actualService = <Service>serviceSnapshot.data()
+      this.fillInformation(this.actualService)
     });
+
   }
 
   setTodaySchedule(schedule: { isOpen: boolean; dayStart: number; dayEnd: number; }[], today: number) {

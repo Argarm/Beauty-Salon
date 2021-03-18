@@ -72,8 +72,8 @@ export class ServicesComponent implements OnInit {
 
   }
 
-  book(id: number) {
-    var name = this.normaliceName(this.services[id].name)
+  book(id: string) {
+    var name = this.normaliceName(id)
     this.shopService.setObject(this.route.snapshot.params.servicio,name)
     this.router.navigate([`${name}/reservar`],{relativeTo: this.route})
   }

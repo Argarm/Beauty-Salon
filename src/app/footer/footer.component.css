@@ -2,14 +2,17 @@
 .text-white{
     color: white;
 }
+
 .footer{
    position: fixed; 
 }
-#page-content {
-    flex: 1 0 auto;
+p{
+    text-align: center;
 }
-  
-#sticky-footer {
-    flex-shrink: none;
+
+
+.card-footer{
+    height: 50px;
 }
+
   

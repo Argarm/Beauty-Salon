@@ -1,23 +1,25 @@
-<nav class="navbar bg-info">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" routerLink="" (click)="clearAll()">Brand</a>
-      </div>
-  
-      <div class="navbar-collapse">
-        <ul class="nav navbar-nav" *ngFor="let servicio of servicios">
-          <li [appOverDirective] ><a (click)="goToService(servicio)" >{{servicio}}</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right" *ngIf="!userLogged">
-            <li [appOverDirective] ><a routerLink="registro">Registrarse</a></li>
-            <li [appOverDirective] ><a routerLink="iniciar_sesion">Iniciar Sesion</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right" *ngIf="userLogged">
-          <li [appOverDirective] ><a routerLink=""><img [src]="cartImgUrl" alt=""></a></li>
-          <li [appOverDirective] ><a routerLink=""><img [src]="chatImgUrl" alt=""></a></li>
-          <li [appOverDirective] ><a routerLink=""><img [src]="starImgUrl" alt=""></a></li>
-          <li [appOverDirective] ><a routerLink="perfil"><img [src]="userImgUrl" alt=""></a></li>
-      </ul>
-      </div>
-    </div>
-  </nav>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" routerLink="" (click)="clearAll()">Brand</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" *ngFor="let servicio of servicios">
+        <a class="nav-link" (click)="goToService(servicio)">{{servicio}}</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav" *ngIf="!userLogged">
+      <li class="nav-item" [appOverDirective]><a class="nav-link" routerLink="registro">Registrarse</a></li>
+      <li class="nav-item" [appOverDirective]><a class="nav-link" routerLink="iniciar_sesion">Iniciar Sesion</a></li>
+    </ul>
+    <ul class="navbar-nav" *ngIf="userLogged">
+      <li [appOverDirective]><a class="nav-link" routerLink=""><img [src]="cartImgUrl" alt=""></a></li>
+      <li [appOverDirective]><a class="nav-link" routerLink=""><img [src]="chatImgUrl" alt=""></a></li>
+      <li [appOverDirective]><a class="nav-link" routerLink=""><img [src]="starImgUrl" alt=""></a></li>
+      <li [appOverDirective]><a class="nav-link" routerLink="perfil"><img [src]="userImgUrl" alt=""></a></li>
+    </ul>
+  </div>
+
+</nav>

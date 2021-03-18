@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService } from 'src/app/helpers/services/account.service';
 import { ShopService } from 'src/app/helpers/services/shop.service';
 import { Service } from 'src/app/models/service.model';
@@ -18,7 +18,7 @@ export class ServiceProfileComponent implements OnInit {
     street: "",
     tlf: ""
   };
-  constructor(private route : ActivatedRoute, private shopService : ShopService, private accountService : AccountService) { 
+  constructor(private route : ActivatedRoute, private shopService : ShopService, private accountService : AccountService, private router: Router) { 
     this.route.params.subscribe(_ => {
       var doc = this.shopService.getDocument()
       var collection = this.shopService.getCollection()
@@ -29,9 +29,19 @@ export class ServiceProfileComponent implements OnInit {
     })
   }
 
+  book(id :string){
+    var name = this.normaliceName(id)
+    this.shopService.setObject(this.route.snapshot.params.servicio,name)
+    this.router.navigate([`reservar`],{relativeTo: this.route})
+  }
 
+  
   ngOnInit(): void {
     
   }
-
+  
+  private normaliceName(name : string){
+    var result = name.toLowerCase()
+    return result.replace(/\s/g, '_').trim()
+  }
 }

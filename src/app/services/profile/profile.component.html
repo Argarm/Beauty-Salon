@@ -8,5 +8,5 @@
         <p class="card-text">{{actualService.rating}}</p>
         <p class="card-text">{{actualService.street}}</p>
     </div>
-    <button routerLink="./book" class="btn btn-primary">Reservar hora</button>
+    <button (click)="book(actualService.name)" class="btn btn-primary">Reservar hora</button>
 </div>

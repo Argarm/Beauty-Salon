@@ -20,6 +20,10 @@ import { Service } from 'src/app/models/service.model';
   ]
 })
 export class BookComponent {
+  fillDate() {
+    console.log(new Date())
+    return new Date()
+  }
   
   modalRef: BsModalRef;
 
@@ -27,7 +31,7 @@ export class BookComponent {
 
   view: CalendarView = CalendarView.Day;
 
-  viewDate = new Date();
+  viewDate = this.fillDate();
 
   events: CalendarEvent[] = [  ];
 

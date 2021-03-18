@@ -8,8 +8,11 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'beauty-salon';
-  constructor(public router : Router){
-    console.log(router.url)
-  }
+  images = [
+    '../../assets/carousel/barberia.jpg',
+    '../../assets/carousel/peluqueria.jpg',
+    '../../assets/carousel/uñas.jpg'
+  ]
+  constructor(public router : Router){}
 }
 

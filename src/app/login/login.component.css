@@ -1,3 +1,9 @@
 .is-invalid {
     border: 1px solid red;
 }
+
+.container{
+    border: 1px solid rgb(9, 34, 71);
+    margin-top: 20px;
+    width: 60%;
+}

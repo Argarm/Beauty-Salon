@@ -10,11 +10,11 @@
         <a class="nav-link" (click)="goToService(servicio)">{{servicio}}</a>
       </li>
     </ul>
-    <ul class="navbar-nav" *ngIf="!userLogged">
+    <ul class="navbar-nav navbar-right" *ngIf="!userLogged">
       <li class="nav-item" [appOverDirective]><a class="nav-link" routerLink="registro">Registrarse</a></li>
       <li class="nav-item" [appOverDirective]><a class="nav-link" routerLink="iniciar_sesion">Iniciar Sesion</a></li>
     </ul>
-    <ul class="navbar-nav" *ngIf="userLogged">
+    <ul class="navbar-nav navbar-right" *ngIf="userLogged">
       <li [appOverDirective]><a class="nav-link" routerLink=""><img [src]="cartImgUrl" alt=""></a></li>
       <li [appOverDirective]><a class="nav-link" routerLink=""><img [src]="chatImgUrl" alt=""></a></li>
       <li [appOverDirective]><a class="nav-link" routerLink=""><img [src]="starImgUrl" alt=""></a></li>

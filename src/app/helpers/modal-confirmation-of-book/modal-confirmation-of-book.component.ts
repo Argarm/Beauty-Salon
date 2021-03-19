@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-modal-confirmation-of-book',
@@ -9,11 +10,12 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 export class ModalConfirmationOfBookComponent implements OnInit {
   @Input() initialState
   modalRef: BsModalRef;
-  
-  constructor(public modalService: BsModalService) { }
+  user : User;
+  constructor(public modalService: BsModalService) {
+    
+   }
 
   ngOnInit(): void {
-    console.log(this.initialState.titulo);
+    //this.user= this.initialState.origen
   }
-
 }

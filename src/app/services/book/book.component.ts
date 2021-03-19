@@ -113,7 +113,7 @@ export class BookComponent {
   openModal(){
     const initialState = {
       titulo: "titulo",
-      origen: "origen",
+      //origen: this.accountService.userValue,
       th1: "Número",
       th2: "Nombres",
       modalFor: "Locales"

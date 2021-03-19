@@ -1,47 +1,31 @@
+<div class="space">
 
+  <app-header-book-calendar [(view)]="view" [(viewDate)]="viewDate" (viewChange)="viewChanged()">
+  </app-header-book-calendar>
 
-<app-header-book-calendar
-  [(view)]="view"
-  [(viewDate)]="viewDate"
-  (viewChange)="viewChanged()"
->
-</app-header-book-calendar>
+  <div *ngIf="todaySchedule.isOpen">
+    <div [ngSwitch]="view" class="scroll-container" #scrollContainer>
+      <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events">
+      </mwl-calendar-month-view>
+      <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events"
+        [weekStartsOn]="weekStartsOn" (hourSegmentClicked)="eventClicked($event)">
+      </mwl-calendar-week-view>
+      <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events"
+        [dayStartHour]="todaySchedule.dayStart" [dayEndHour]="todaySchedule.dayEnd"
+        (hourSegmentClicked)="eventClicked($event)" (eventTimesChanged)="eventTimesChanged($event)">
+      </mwl-calendar-day-view>
+    </div>
 
-<div *ngIf="todaySchedule.isOpen">
-  <div [ngSwitch]="view" class="scroll-container" #scrollContainer>
-    <mwl-calendar-month-view
-      *ngSwitchCase="'month'"
-      [viewDate]="viewDate"
-      [events]="events"
-    >
-    </mwl-calendar-month-view>
-    <mwl-calendar-week-view
-      *ngSwitchCase="'week'"
-      [viewDate]="viewDate"
-      [events]="events"
-      [weekStartsOn]="weekStartsOn"
-      (hourSegmentClicked)="eventClicked($event)"
-    >
-    </mwl-calendar-week-view>
-    <mwl-calendar-day-view
-      *ngSwitchCase="'day'"
-      [viewDate]="viewDate"
-      [events]="events"
-      [dayStartHour]="todaySchedule.dayStart"
-      [dayEndHour]="todaySchedule.dayEnd"
-      (hourSegmentClicked)="eventClicked($event)"
-      (eventTimesChanged)="eventTimesChanged($event)"
-    >
-    </mwl-calendar-day-view>
   </div>
-  
+
+  <div *ngIf="!todaySchedule.isOpen" class="text-center ">
+    <img [src]="restImgUrl" class="imageSize">
+    <h3 #scrollContainer>Estamos descansando</h3>
+  </div>
+  <div class="space d-flex justify-content-center">
+    <button class="btn btn-primary center" (click)="openModal()" [disabled]="!eventCreated">Confirmar Cita</button>
+  </div>
+
+
+
 </div>
-
-<div *ngIf="!todaySchedule.isOpen" class="text-center">
-  <img [src]="restImgUrl" class="imageSize">
-  <h3 #scrollContainer>Estamos descansando</h3>
-</div>
-
-<button class="btn btn-primary center" (click)="openModal()" [disabled]="!eventCreated">Confirmar Cita</button>
-
-

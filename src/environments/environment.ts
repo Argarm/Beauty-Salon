@@ -16,10 +16,10 @@ export const environment = {
     measurementId: "G-12RK5P1MFS"
   },
   services : [
-    "Peluqueria",
-    "Barberia",
+    "Peluquería",
+    "Barbería",
     "Uñas",
-    "Estetica"
+    "Estética"
   ]
 };
 

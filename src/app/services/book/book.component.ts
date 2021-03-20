@@ -20,18 +20,13 @@ import { Service } from 'src/app/models/service.model';
   ]
 })
 export class BookComponent {
-  fillDate() {
-    console.log(new Date())
-    return new Date()
-  }
-  
   modalRef: BsModalRef;
 
   @ViewChild('scrollContainer') scrollContainer: ElementRef<HTMLElement>;
 
   view: CalendarView = CalendarView.Day;
 
-  viewDate = this.fillDate();
+  viewDate = new Date()
 
   events: CalendarEvent[] = [  ];
 

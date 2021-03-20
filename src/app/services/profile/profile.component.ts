@@ -28,10 +28,16 @@ export class ServiceProfileComponent implements OnInit {
       })
     })
   }
+  
+  removeAccents(cadena){
+    const acentos = {'á':'a','é':'e','í':'i','ó':'o','ú':'u','Á':'A','É':'E','Í':'I','Ó':'O','Ú':'U'};
+    return cadena.split('').map( letra => acentos[letra] || letra).join('').toString();	
+  }
 
   book(id :string){
     var name = this.normaliceName(id)
-    this.shopService.setObject(this.route.snapshot.params.servicio,name)
+    var serviceNormalized= this.removeAccents(this.route.snapshot.params.servicio)
+    this.shopService.setObject(serviceNormalized,name)
     this.router.navigate([`reservar`],{relativeTo: this.route})
   }
 

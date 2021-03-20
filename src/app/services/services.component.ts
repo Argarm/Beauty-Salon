@@ -27,7 +27,7 @@ export class ServicesComponent implements OnInit {
     this.route.params.subscribe(_ => {
       this.serviceMainName = this.route.snapshot.params.servicio
       this.serviceMainName = this.serviceMainName.charAt(0).toUpperCase() + this.serviceMainName.substr(1).toLowerCase()
-      var servicio = this.route.snapshot.params.servicio
+      var servicio = this.removeAccents(this.route.snapshot.params.servicio)
       this.accountService.getServices(servicio).subscribe((servicesSnapshot) => {
         this.services = []
         servicesSnapshot.forEach((service: any) => {
@@ -37,6 +37,11 @@ export class ServicesComponent implements OnInit {
       })
     })
     
+  }
+
+  removeAccents(cadena){
+    const acentos = {'á':'a','é':'e','í':'i','ó':'o','ú':'u','Á':'A','É':'E','Í':'I','Ó':'O','Ú':'U'};
+    return cadena.split('').map( letra => acentos[letra] || letra).join('').toString();	
   }
 
   setFilter(index : number){
@@ -74,14 +79,16 @@ export class ServicesComponent implements OnInit {
 
   book(id: string) {
     var name = this.normaliceName(id)
-    this.shopService.setObject(this.route.snapshot.params.servicio,name)
+    var serviceNormalized = this.removeAccents(this.route.snapshot.params.servicio)
+    this.shopService.setObject(serviceNormalized,name)
     this.router.navigate([`${name}/reservar`],{relativeTo: this.route})
   }
 
   navigate(name : string){
     var id = this.services.map(e => e.name).indexOf(name);
     name = this.normaliceName(name)
-    this.shopService.setObject(this.route.snapshot.params.servicio,name)
+    var serviceNormalized = this.removeAccents(this.route.snapshot.params.servicio)
+    this.shopService.setObject(serviceNormalized,name)
     this.router.navigate([`${name}`],{relativeTo: this.route})
   }
 

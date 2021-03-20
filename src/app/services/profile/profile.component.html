@@ -1,12 +1,14 @@
-<div class="card border" > 
-    <div class="card-header">
-        {{actualService.name}} 
+<div class="profile">
+    <div class="card border" > 
+        <div class="card-header">
+            {{actualService.name}} 
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{actualService.tlf}}</h5>
+            <p class="card-text">{{actualService.schedule}}</p>
+            <p class="card-text">{{actualService.rating}}</p>
+            <p class="card-text">{{actualService.street}}</p>
+        </div>
+        <button (click)="book(actualService.name)" class="btn btn-primary">Reservar hora</button>
     </div>
-    <div class="card-body">
-        <h5 class="card-title">{{actualService.tlf}}</h5>
-        <p class="card-text">{{actualService.schedule}}</p>
-        <p class="card-text">{{actualService.rating}}</p>
-        <p class="card-text">{{actualService.street}}</p>
-    </div>
-    <button (click)="book(actualService.name)" class="btn btn-primary">Reservar hora</button>
 </div>

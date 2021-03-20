@@ -1,15 +1,14 @@
-export class Service{
+export class Establishments{
     name: string;
     tlf: string;
     schedule: string;
     rating: string;
     street: string;
+    services : Service []
+}
 
-    constructor(name,tlf,schedule,rating,street) {
-        this.name = name;
-        this.schedule = schedule;
-        this.tlf = tlf;
-        this.rating = rating;
-        this.street = street;
-    }
+export class Service{
+    name : string;
+    price : string;
+    time : string
 }

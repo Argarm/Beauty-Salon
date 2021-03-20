@@ -6,7 +6,7 @@ import { CustomDateFormatter } from 'src/app/helpers/cutomDateFormatter';
 import { ModalConfirmationOfBookComponent } from 'src/app/helpers/modal-confirmation-of-book/modal-confirmation-of-book.component';
 import { AccountService } from 'src/app/helpers/services/account.service';
 import { ShopService } from 'src/app/helpers/services/shop.service';
-import { Service } from 'src/app/models/service.model';
+import { Establishments } from 'src/app/models/service.model';
 
 @Component({
   selector: 'app-book',
@@ -41,7 +41,7 @@ export class BookComponent {
     dayStart : 0,
     dayEnd : 0
   };
-  actualService: Service;
+  actualService: Establishments;
   
   constructor(private cdr: ChangeDetectorRef, private accountService: AccountService, private shopService : ShopService,private modalService: BsModalService) {   }
 
@@ -49,8 +49,8 @@ export class BookComponent {
     this.scrollToCurrentView();
     var collection = this.shopService.getCollection();
     var document = this.shopService.getDocument();
-    this.accountService.getService(collection,document).subscribe((serviceSnapshot) => {
-      this.actualService = <Service>serviceSnapshot.data()
+    this.accountService.getEstablishment(collection,document).subscribe((serviceSnapshot) => {
+      this.actualService = <Establishments>serviceSnapshot.data()
       this.fillInformation(this.actualService)
     });
 
@@ -128,7 +128,7 @@ export class BookComponent {
     }
   }
 
-  private fillInformation( service: Service) {
+  private fillInformation( service: Establishments) {
     var schedule = service.schedule.split('/').map(function(item){
       item = item.trim()
       var day = {

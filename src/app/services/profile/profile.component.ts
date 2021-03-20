@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService } from 'src/app/helpers/services/account.service';
 import { ShopService } from 'src/app/helpers/services/shop.service';
-import { Service } from 'src/app/models/service.model';
+import { Establishments } from 'src/app/models/service.model';
 
 @Component({
   selector: 'app-profile',
@@ -11,24 +11,27 @@ import { Service } from 'src/app/models/service.model';
 })
 export class ServiceProfileComponent implements OnInit {
 
-  actualService : Service = {
+  actualService : Establishments = {
     name: "",
     rating: "",
     schedule: "",
     street: "",
-    tlf: ""
+    tlf: "",
+    services : []
   };
   constructor(private route : ActivatedRoute, private shopService : ShopService, private accountService : AccountService, private router: Router) { 
     this.route.params.subscribe(_ => {
       var doc = this.shopService.getDocument()
       var collection = this.shopService.getCollection()
-      this.accountService.getService(collection,doc).subscribe((serviceSnapshot) => {
-        this.actualService = <Service>serviceSnapshot.data()
-        
+      console.log(doc)
+      console.log("aqui")
+      console.log(collection)
+      this.accountService.getEstablishment(collection,doc).subscribe((serviceSnapshot) => {
+        this.actualService = <Establishments>serviceSnapshot.data()
       })
     })
   }
-  
+
   removeAccents(cadena){
     const acentos = {'á':'a','é':'e','í':'i','ó':'o','ú':'u','Á':'A','É':'E','Í':'I','Ó':'O','Ú':'U'};
     return cadena.split('').map( letra => acentos[letra] || letra).join('').toString();	

@@ -65,13 +65,17 @@ export class AccountService {
         })
     }
 
-    getServices(id : string){
+    getEstablishments(id : string){
         var service = id.toLowerCase()
 
         return this.firestore.collection(service).snapshotChanges()
     }
 
-    getService(id,document){
+    getServices(id,document){
+        var service = id.toLowerCase()        
+        return this.firestore.collection(service).doc(`${document}`).collection('servicios').snapshotChanges()
+    }
+    getEstablishment(id,document){
         var service = id.toLowerCase()
         return this.firestore.collection(service).doc(`${document}`).get()
     }

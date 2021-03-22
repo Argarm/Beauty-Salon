@@ -32,8 +32,3 @@ button{
 ul {
     list-style-type: none;
 }
-
-div.col-4{
-    width: min-content;
-    background-color: lawngreen;
-}

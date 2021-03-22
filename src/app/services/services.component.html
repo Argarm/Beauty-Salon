@@ -3,27 +3,51 @@
     <h3>{{serviceMainName}}</h3>
     <input type="text" placeholder="Nombre" [(ngModel)]="searchText">
     <label class="space">Filtrar: </label>
-    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false">
+    <button class="btn btn-primary dropdown-toggle short-button" type="button" id="dropdownMenuButton"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         {{actualFilter}}
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <a class="dropdown-item" (click)="setFilter(i)" *ngFor="let filter of filters; let i = index">{{filter}}</a>
     </div>
-
-
     <p></p>
-    <div *ngFor="let service of services | myfilter: searchText">
+    <div *ngFor="let establishment of establishments | myfilter: searchText">
         <div class="card border">
             <div class="card-header">
-                <a (click)="navigate(service.name)">
-                    {{service.name}}
-                </a>
+                <h4>
+                    <a (click)="navigate(establishment.name)">
+                        {{establishment.name}}
+                    </a>
+                </h4>
             </div>
             <div class="card-body">
-                <h5 class="card-title">{{service.tlf}}</h5>
-                <p class="card-text">{{service.schedule}}</p>
-                <a (click)="book(service.name)" class="btn btn-primary services">Reservar</a>
+                <div class="row">
+                    <div class="col-10">
+                        <p>{{establishment.street}}</p>
+                        <p class="card-text">{{establishment.tlf}}</p>
+                        <br>
+                        <div class="container">
+                                <div class="row align-items-end">
+                                    <div *ngFor="let service of establishment.services; let i = index">
+                                        <div *ngIf="i<3" class="col-sm">
+                                                <label>{{service.name}}</label>
+                                                <div class="w-100"></div>
+                                                <label>{{service.time}}</label>
+                                                <div class="w-100"></div>
+                                                <label>{{service.price}}</label>
+                                                <div class="w-100"></div>
+                                                <button class="btn btn-primary">Reservar</button>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="float-right">
+                        <ul *ngFor="let daySchedule of establishment.schedule">
+                            <li>{{daySchedule}}</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
         <hr>

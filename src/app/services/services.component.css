@@ -28,3 +28,12 @@ input[type=text], select {
 button{
     width: 149px;
 }
+
+ul {
+    list-style-type: none;
+}
+
+div.col-4{
+    width: min-content;
+    background-color: lawngreen;
+}

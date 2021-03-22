@@ -14,7 +14,7 @@ export class ServiceProfileComponent implements OnInit {
   actualService : Establishments = {
     name: "",
     rating: "",
-    schedule: "",
+    schedule: [],
     street: "",
     tlf: "",
     services : []

@@ -1,7 +1,7 @@
 export class Establishments{
     name: string;
     tlf: string;
-    schedule: string;
+    schedule: string[];
     rating: string;
     street: string;
     services : Service []

@@ -14,7 +14,7 @@ import { Establishments, Service } from '../models/service.model';
 export class ServicesComponent implements OnInit {
   serviceMainName: string;
   searchText
-  services: Establishments[] = []
+  establishments: Establishments[] = []
   filters = [
     "Mejor valorados",
     "Abierto ahora",
@@ -30,21 +30,27 @@ export class ServicesComponent implements OnInit {
       this.serviceMainName = this.serviceMainName.charAt(0).toUpperCase() + this.serviceMainName.substr(1).toLowerCase()
       var servicio = this.removeAccents(this.route.snapshot.params.servicio)
       this.accountService.getEstablishments(servicio).subscribe((establismentSnapshot) => {
-        this.services = []
+        this.establishments = []
         establismentSnapshot.forEach((service: any) => {
-          var actualEstablisment: Establishments = service.payload.doc.data()
+          var actualEstablisment: Establishments = this.preprocessData(service.payload.doc.data())
           this.accountService.getServices(servicio, service.payload.doc.id).subscribe((establishmentServices) => {
             actualEstablisment.services = establishmentServices.map(data => <Service>data.payload.doc.data())
 
-            this.services.push(actualEstablisment)
+            this.establishments.push(actualEstablisment)
             console.log(actualEstablisment)
           })
-          this.services.sort((a, b) => (b.rating > a.rating) ? 1 : -1)
+          this.establishments.sort((a, b) => (b.rating > a.rating) ? 1 : -1)
         })
       })
 
     })
   }
+  preprocessData(rawData: any): Establishments {
+    var processedData = rawData;
+    processedData.schedule = processedData.schedule.split('/')
+    return processedData;
+  }
+  
 
   removeAccents(cadena) {
     const acentos = { 'á': 'a', 'é': 'e', 'í': 'i', 'ó': 'o', 'ú': 'u', 'Á': 'A', 'É': 'E', 'Í': 'I', 'Ó': 'O', 'Ú': 'U' };
@@ -55,7 +61,7 @@ export class ServicesComponent implements OnInit {
     this.actualFilter = this.filters[index]
     switch (index) {
       case 0:
-        this.services.sort((a, b) => (b.rating > a.rating) ? 1 : -1)
+        this.establishments.sort((a, b) => (b.rating > a.rating) ? 1 : -1)
         break;
       case 1:
         this.openNow();
@@ -67,7 +73,7 @@ export class ServicesComponent implements OnInit {
         this.gender();
         break;
       case 4:
-        this.services.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
+        this.establishments.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
         break;
     }
   }
@@ -92,7 +98,7 @@ export class ServicesComponent implements OnInit {
   }
 
   navigate(name: string) {
-    var id = this.services.map(e => e.name).indexOf(name);
+    var id = this.establishments.map(e => e.name).indexOf(name);
     name = this.normaliceName(name)
     var serviceNormalized = this.removeAccents(this.route.snapshot.params.servicio)
     this.shopService.setObject(serviceNormalized, name)

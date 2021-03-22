@@ -129,7 +129,8 @@ export class BookComponent {
   }
 
   private fillInformation( service: Establishments) {
-    var schedule = service.schedule.split('/').map(function(item){
+    var dataProcessed = this.preprocessData(service)
+    var schedule = dataProcessed.schedule.map(function(item){
       item = item.trim()
       var day = {
         isOpen : true,
@@ -151,5 +152,11 @@ export class BookComponent {
     })
     var today = (this.viewDate.getDay()+6)% 7
     this.setTodaySchedule(schedule, today) 
+  }
+
+  preprocessData(rawData: any): Establishments {
+    var processedData = rawData;
+    processedData.schedule.split('/')
+    return processedData;
   }
 }

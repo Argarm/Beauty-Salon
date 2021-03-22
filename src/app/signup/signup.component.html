@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="tlf">Telefono</label>
+      <label for="tlf">Teléfono</label>
       <input
         type="text"
         formControlName="tlf"
@@ -33,7 +33,7 @@
         [ngClass]="{ 'is-invalid': submitted && f.tlf.errors }" />
       <div *ngIf="submitted && f.tlf.errors" class="invalid-feedback">
         <div *ngIf="f.tlf.errors.required">Este campo está vacio</div>
-        <div *ngIf="f.tlf.errors.pattern">Introduzca un telefono valido</div>
+        <div *ngIf="f.tlf.errors.pattern">Introduzca un teléfono valido</div>
       </div>
     </div>
     <div class="form-group">
@@ -44,7 +44,7 @@
         class="form-control"
         [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
       <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-        <div *ngIf="f.email.errors">Introduzca un email valido</div>
+        <div *ngIf="f.email.errors">Introduzca un email válido</div>
       </div>
     </div>
     <div class="form-group">
@@ -56,7 +56,7 @@
         [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
       <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
         <div *ngIf="f.password.errors.required">Este campo está vacio</div>
-        <div *ngIf="f.password.errors.minlength">La contraseña debe tener minimo 8 caracteres</div>
+        <div *ngIf="f.password.errors.minlength">La contraseña debe tener mínimo 8 caracteres</div>
         <div *ngIf="f.errors.notSame">Las contraseñas no coinciden</div>
       </div>
     </div>
@@ -69,7 +69,7 @@
         [ngClass]="{ 'is-invalid': submitted && f.repassword.errors }" />
       <div *ngIf="submitted && f.repassword.errors" class="invalid-feedback">
         <div *ngIf="f.repassword.errors.required">Este campo está vacio</div>
-        <div *ngIf="f.repassword.errors.minlength">La contraseña debe tener minimo 8 caracteres</div>
+        <div *ngIf="f.repassword.errors.minlength">La contraseña debe tener mínimo 8 caracteres</div>
         <div *ngIf="f.errors.notSame">Las contraseñas no coinciden</div>
       </div>
     </div>

@@ -130,11 +130,8 @@ export class BookComponent {
 
   openModal(){
     const initialState = {
-      titulo: "titulo",
-      //origen: this.accountService.userValue,
-      th1: "Número",
-      th2: "Nombres",
-      modalFor: "Locales"
+      service : this.shopService.getService(),
+      user : "Default User"
     }
     this.modalRef = this.modalService.show(ModalConfirmationOfBookComponent,{initialState: {initialState}, backdrop: "static",keyboard: false});
   }

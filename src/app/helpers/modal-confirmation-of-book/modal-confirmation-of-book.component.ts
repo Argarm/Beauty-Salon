@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Service } from 'src/app/models/service.model';
 import { User } from 'src/app/models/user.model';
 
 @Component({
@@ -11,11 +13,18 @@ export class ModalConfirmationOfBookComponent implements OnInit {
   @Input() initialState
   modalRef: BsModalRef;
   user : User;
-  constructor(public modalService: BsModalService) {
+  service :Service;
+  constructor(public modalService: BsModalService,private router : Router) {
     
    }
 
   ngOnInit(): void {
-    //this.user= this.initialState.origen
+    this.service = this.initialState.service
+  }
+
+  confirmar(){
+    
+    this.modalService.hide()
+    this.router.navigate([""])
   }
 }

@@ -17,6 +17,7 @@ export class ServiceProfileComponent implements OnInit {
     schedule: [],
     street: "",
     tlf: "",
+    image: "",
     services : []
   };
   constructor(private route : ActivatedRoute, private shopService : ShopService, private accountService : AccountService, private router: Router) { 

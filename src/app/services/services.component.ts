@@ -24,11 +24,8 @@ export class ServicesComponent implements OnInit {
     "Nombre"
   ]
   actualFilter = this.filters[0];
-  imagen : string
+
   constructor(private route: ActivatedRoute, private router: Router, private accountService: AccountService, private shopService: ShopService,private firebaseStorage : FirebaseStorageService) {
-    firebaseStorage.getUrlPath("michi.jpg").subscribe(image => {
-      this.imagen = image
-    })
     this.route.params.subscribe(_ => {
       this.serviceMainName = this.route.snapshot.params.servicio
       this.serviceMainName = this.serviceMainName.charAt(0).toUpperCase() + this.serviceMainName.substr(1).toLowerCase()
@@ -37,11 +34,13 @@ export class ServicesComponent implements OnInit {
         this.establishments = []
         establismentSnapshot.forEach((service: any) => {
           var actualEstablisment: Establishments = this.preprocessData(service.payload.doc.data())
+          firebaseStorage.getUrlPath(`${servicio}/${service.payload.doc.id}/showcase.jpg`).subscribe(image => {
+            actualEstablisment.image = image
+          })
           this.accountService.getServices(servicio, service.payload.doc.id).subscribe((establishmentServices) => {
             actualEstablisment.services = establishmentServices.map(data => <Service>data.payload.doc.data())
 
             this.establishments.push(actualEstablisment)
-            console.log(actualEstablisment)
           })
           this.establishments.sort((a, b) => (b.rating > a.rating) ? 1 : -1)
         })

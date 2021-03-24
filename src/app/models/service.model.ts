@@ -4,6 +4,7 @@ export class Establishments{
     schedule: string[];
     rating: string;
     street: string;
+    image : string;
     services : Service []
 }
 

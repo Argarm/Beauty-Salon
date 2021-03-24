@@ -24,36 +24,36 @@
                 <div class="row">
                     <div class="col-10">
                         <div class="col-10">
-                            <img [src]="imagen">
+                            <img [src]="establishment.image">
                             <div class="float-right">
                                 <p>{{establishment.street}}</p>
                                 <p class="card-text">{{establishment.tlf}}</p>
                             </div>
                         </div>
-                        
+
                         <br>
-                                <div class="row justify-content-center">
-                                    <div *ngFor="let service of establishment.services; let i = index">
-                                        <div *ngIf="i<3" class="col-sm">
-                                                <div class="w-100 center">
-                                                    <label>{{service.name}}</label>
-                                                </div>
-                                                <div class="w-100 center">
-                                                    <label>{{service.time}}</label>
-                                                </div>
-                                                <div class="w-100 center">
-                                                    <label>{{service.price}}</label>
-                                                </div>
-                                                <div class="w-100 center">
-                                                    <button class="btn btn-primary">Reservar</button>
-                                                </div>
-                                        </div>
+                        <div class="row justify-content-center">
+                            <div *ngFor="let service of establishment.services; let i = index">
+                                <div *ngIf="i<3" class="col-sm">
+                                    <div class="w-100 center">
+                                        <label>{{service.name}}</label>
                                     </div>
+                                    <div class="w-100 center">
+                                        <label>{{service.time}}</label>
+                                    </div>
+                                    <div class="w-100 center">
+                                        <label>{{service.price}}</label>
+                                    </div>
+                                    <div class="w-100 center">
+                                        <button class="btn btn-primary">Reservar</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="float-right ">
                         <ul class="">
-                            <li *ngFor="let daySchedule of establishment.schedule" >{{daySchedule}}</li>
+                            <li *ngFor="let daySchedule of establishment.schedule">{{daySchedule}}</li>
                         </ul>
                     </div>
                 </div>

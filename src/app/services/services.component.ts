@@ -4,6 +4,7 @@ import { AccountService } from '../helpers/services/account.service';
 import { ShopService } from '../helpers/services/shop.service';
 import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 import { Establishments, Service } from '../models/service.model';
+import { FirebaseStorageService } from '../helpers/services/firebase-storage.service';
 
 @Component({
   selector: 'app-services',
@@ -23,8 +24,11 @@ export class ServicesComponent implements OnInit {
     "Nombre"
   ]
   actualFilter = this.filters[0];
-
-  constructor(private route: ActivatedRoute, private router: Router, private accountService: AccountService, private shopService: ShopService) {
+  imagen : string
+  constructor(private route: ActivatedRoute, private router: Router, private accountService: AccountService, private shopService: ShopService,private firebaseStorage : FirebaseStorageService) {
+    firebaseStorage.getUrlPath("michi.jpg").subscribe(image => {
+      this.imagen = image
+    })
     this.route.params.subscribe(_ => {
       this.serviceMainName = this.route.snapshot.params.servicio
       this.serviceMainName = this.serviceMainName.charAt(0).toUpperCase() + this.serviceMainName.substr(1).toLowerCase()

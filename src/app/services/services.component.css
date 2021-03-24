@@ -31,4 +31,24 @@ button{
 
 ul {
     list-style-type: none;
+    margin-top: 15px;
+}
+li{
+    margin-bottom: 12px;
+}
+img{
+    width: 100px;
+    height: 100px;
+}
+
+.center {
+    text-align: center;
+}
+
+label{
+    max-width: 200px;
+}
+
+.middle{
+    
 }

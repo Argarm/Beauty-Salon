@@ -24,6 +24,7 @@ import { PurchasesComponent } from './profile/purchases/purchases.component';
 import { FavoritesComponent } from './profile/favorites/favorites.component';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { ServicesComponent } from './services/services.component';
 import { BookComponent } from './services/book/book.component';
 import { ServiceProfileComponent } from './services/profile/profile.component';
@@ -70,6 +71,7 @@ registerLocaleData(localeEs);
     HttpClientModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
     ModalModule.forRoot()
   ],

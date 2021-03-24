@@ -13,6 +13,9 @@ export class AppComponent {
     '../../assets/carousel/peluqueria.jpg',
     '../../assets/carousel/uñas.jpg'
   ]
-  constructor(public router : Router){}
+  imagen : string;
+  constructor(public router : Router){
+
+  }
 }
 

@@ -50,7 +50,7 @@ export class BookComponent {
     var collection = this.shopService.getCollection();
     var document = this.shopService.getDocument();
     this.accountService.getEstablishment(collection,document).subscribe((serviceSnapshot) => {
-      this.actualService = <Establishments>serviceSnapshot.data()
+      this.actualService = this.preprocessData(serviceSnapshot.data())
       this.fillInformation(this.actualService)
     });
 
@@ -67,25 +67,48 @@ export class BookComponent {
   }
 
   eventClicked(event){
-    if(!this.eventCreated){
-      var event_start = event.date
-      var event_finished = addMinutes(event_start,30)
-
-      this.events = [
-        ...this.events,
-        {
-          title: 'New event',
-          start: event_start,
-          end: event_finished,
-          color: {
-            primary: '#ad2121',
-            secondary: '#FAE3E3',
+    if(this.checkValidEvet(event)){
+      var service = this.shopService.getService()
+      var duration = this.getTimeInMinutes(service.time)
+      var eventTittle = service.name
+      if(!this.eventCreated){
+        var event_start = event.date
+        var event_finished = addMinutes(event_start,duration)
+  
+        this.events = [
+          ...this.events,
+          {
+            title: eventTittle,
+            start: event_start,
+            end: event_finished,
+            color: {
+              primary: '#ad2121',
+              secondary: '#FAE3E3',
+            },
+            draggable: true,
           },
-          draggable: true,
-        },
-      ];
-      this.eventCreated = true;
-    } 
+        ];
+        this.eventCreated = true;
+      } 
+    }
+  }
+
+  checkValidEvet(event: any) {
+    if(event.date<new Date()){
+      alert("No vamos a poder atenderle a esa hora")
+      return false
+    }
+    return true;
+  }
+
+  getTimeInMinutes(time: string) {
+    if(time.split(" ").length > 2){
+      var hours = +time.split(" ")[0]
+      var minutes = +time.split(" ")[2]
+      return hours*60 + minutes
+    }else{
+      return +time.split(" ")[0]
+    }
   }
 
   eventTimesChanged({
@@ -128,9 +151,8 @@ export class BookComponent {
     }
   }
 
-  private fillInformation( service: Establishments) {
-    var dataProcessed = this.preprocessData(service)
-    var schedule = dataProcessed.schedule.map(function(item){
+  private fillInformation( establishment: Establishments) {
+    var schedule = establishment.schedule.map(function(item){
       item = item.trim()
       var day = {
         isOpen : true,
@@ -156,7 +178,7 @@ export class BookComponent {
 
   preprocessData(rawData: any): Establishments {
     var processedData = rawData;
-    processedData.schedule.split('/')
+    processedData.schedule = processedData.schedule.split('/')
     return processedData;
   }
 }

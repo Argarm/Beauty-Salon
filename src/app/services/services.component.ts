@@ -93,18 +93,18 @@ export class ServicesComponent implements OnInit {
 
   }
 
-  book(id: string) {
-    var name = this.normaliceName(id)
+  book(establisment :string,service: Service) {
+    var establishmentName = this.normaliceName(establisment)
     var serviceNormalized = this.removeAccents(this.route.snapshot.params.servicio)
-    this.shopService.setObject(serviceNormalized, name)
-    this.router.navigate([`${name}/reservar`], { relativeTo: this.route })
+    this.shopService.setServiceOnEstablisment(serviceNormalized, establishmentName,service)
+    this.router.navigate([`${establishmentName}/reservar`], { relativeTo: this.route })
   }
 
   navigate(name: string) {
     var id = this.establishments.map(e => e.name).indexOf(name);
     name = this.normaliceName(name)
     var serviceNormalized = this.removeAccents(this.route.snapshot.params.servicio)
-    this.shopService.setObject(serviceNormalized, name)
+    this.shopService.setActualEstablisment(serviceNormalized, name)
     this.router.navigate([`${name}`], { relativeTo: this.route })
   }
 

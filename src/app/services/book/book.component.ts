@@ -6,7 +6,7 @@ import { CustomDateFormatter } from 'src/app/helpers/cutomDateFormatter';
 import { ModalConfirmationOfBookComponent } from 'src/app/helpers/modal-confirmation-of-book/modal-confirmation-of-book.component';
 import { AccountService } from 'src/app/helpers/services/account.service';
 import { ShopService } from 'src/app/helpers/services/shop.service';
-import { Establishments } from 'src/app/models/service.model';
+import { Establishments } from 'src/app/helpers/models/service.model';
 
 @Component({
   selector: 'app-book',

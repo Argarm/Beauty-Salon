@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService } from 'src/app/helpers/services/account.service';
 import { ShopService } from 'src/app/helpers/services/shop.service';
-import { Establishments } from 'src/app/models/service.model';
+import { Establishments } from 'src/app/helpers/models/service.model';
 
 @Component({
   selector: 'app-profile',

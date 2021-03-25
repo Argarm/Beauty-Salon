@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { Service } from 'src/app/models/service.model';
-import { User } from 'src/app/models/user.model';
+import { Service } from 'src/app/helpers/models/service.model';
+import { User } from 'src/app/helpers/models/user.model';
 
 @Component({
   selector: 'app-modal-confirmation-of-book',

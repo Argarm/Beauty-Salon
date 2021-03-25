@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService } from '../helpers/services/account.service';
 import { ShopService } from '../helpers/services/shop.service';
 import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
-import { Establishments, Service } from '../models/service.model';
+import { Establishments, Service } from '../helpers/models/service.model';
 import { FirebaseStorageService } from '../helpers/services/firebase-storage.service';
 
 @Component({

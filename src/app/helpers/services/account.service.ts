@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 import { environment } from '../../../environments/environment';
-import { User } from '../../models/user.model';
+import { User } from '../models/user.model';
 
 
 

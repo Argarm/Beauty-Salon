@@ -67,9 +67,9 @@ export class BookComponent {
   }
 
   eventClicked(event){
-    if(this.checkValidEvet(event)){
-      var service = this.shopService.getService()
-      var duration = this.getTimeInMinutes(service.time)
+    var service = this.shopService.getService()
+    var duration = this.getTimeInMinutes(service.time)
+    if(this.checkValidEvet(event,duration)){
       var eventTittle = service.name
       if(!this.eventCreated){
         var event_start = event.date
@@ -93,8 +93,10 @@ export class BookComponent {
     }
   }
 
-  checkValidEvet(event: any) {
-    if(event.date<new Date()){
+  checkValidEvet(event: any, duration : number) {
+    var estimateEndOfEvent = addMinutes(event.date,duration)
+
+    if(event.date<new Date() || estimateEndOfEvent.getHours() > this.todaySchedule.dayEnd ){
       alert("No vamos a poder atenderle a esa hora")
       return false
     }

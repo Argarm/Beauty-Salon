@@ -15,8 +15,6 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { MainViewComponent } from './main-view/main-view.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { JwtInterceptor } from './helpers/jwt.interceptor';
-import { backendProvider } from './helpers/backend';
 import { ProfileComponent } from './profile/profile.component';
 import { CalendarComponent } from './profile/calendar/calendar.component';
 import { ReviewComponent } from './profile/review/review.component';
@@ -75,10 +73,7 @@ registerLocaleData(localeEs);
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
     ModalModule.forRoot()
   ],
-  providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
-    backendProvider
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

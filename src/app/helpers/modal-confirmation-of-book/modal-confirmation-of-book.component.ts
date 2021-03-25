@@ -12,14 +12,16 @@ import { User } from 'src/app/helpers/models/user.model';
 export class ModalConfirmationOfBookComponent implements OnInit {
   @Input() initialState
   modalRef: BsModalRef;
-  user : User;
+  userName : String;
   service :Service;
+  establismentName : String = "Establecimiento de prueba"
   constructor(public modalService: BsModalService,private router : Router) {
     
    }
 
   ngOnInit(): void {
     this.service = this.initialState.service
+    this.userName = this.initialState.name
   }
 
   confirmar(){

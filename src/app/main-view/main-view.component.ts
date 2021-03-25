@@ -22,12 +22,11 @@ export class MainViewComponent implements OnInit {
       price : "10 €",
       time : "2 horas"
     };
-    var userName : "usuario de prueba"
+    var userName = "usuario de prueba"
     var initialState = {
       name : userName,
       service : service
     }
-
     this.modalRef = this.modalService.show(ModalConfirmationOfBookComponent,{initialState: {initialState}, backdrop: "static",keyboard: false});
   }
 

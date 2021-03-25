@@ -24,9 +24,6 @@ export class ServiceProfileComponent implements OnInit {
     this.route.params.subscribe(_ => {
       var doc = this.shopService.getDocument()
       var collection = this.shopService.getCollection()
-      console.log(doc)
-      console.log("aqui")
-      console.log(collection)
       this.accountService.getEstablishment(collection,doc).subscribe((serviceSnapshot) => {
         this.actualService = <Establishments>serviceSnapshot.data()
       })
@@ -41,7 +38,7 @@ export class ServiceProfileComponent implements OnInit {
   book(id :string){
     var name = this.normaliceName(id)
     var serviceNormalized= this.removeAccents(this.route.snapshot.params.servicio)
-    this.shopService.setObject(serviceNormalized,name)
+    this.shopService.setActualEstablisment(serviceNormalized,name)
     this.router.navigate([`reservar`],{relativeTo: this.route})
   }
 

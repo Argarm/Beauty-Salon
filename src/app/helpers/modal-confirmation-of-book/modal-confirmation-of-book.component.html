@@ -8,11 +8,13 @@
       </button>
     </div>
     <div class="modal-body">
-      ayuda
-      
+      <p>{{service.name}}</p>
+      <p>{{service.price}}</p>
+      <p>{{service.time}}</p>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-default" (click)="modalService.hide()">Close</button>
+      <button type="button" class="btn btn-primary mr-auto" (click)="confirmar()" >Confirmar Cita</button>
+      <button type="button" class="btn btn-danger" (click)="modalService.hide()">Close</button>
     </div>
   </div>
 </div>

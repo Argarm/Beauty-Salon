@@ -34,20 +34,25 @@ export class ModalConfirmationOfBookComponent implements OnInit {
 
 
   getHour(date: Date): string {
-    let hour = date.getHours()
-    let minutes = date.getMinutes()
+    let hour = this.checkTime(date.getHours())
+    let minutes = this.checkTime(date.getMinutes())
+    console.log(date.getMinutes())
     var fullHour =`${hour}:${minutes}`
     return fullHour; 
   }
   
+  
   getDay(date: Date): string {
-    let day = date.getDate()
-    let month = date.getMonth() + 1
+    let day = this.checkTime(date.getDate())
+    let month = this.checkTime(date.getMonth() + 1)
     let year = date.getFullYear()
-    var fullDate =`${day}-0${month}-${year}` 
+    var fullDate =`${day}-${month}-${year}` 
     return fullDate
   }
 
+  checkTime(i: number) {
+    return (i < 10) ? "0" + i : i;
+  }
   confirmar(){
     this.reservationService.storeNewReservation(this.user,this.globalService,this.establismentName,this.reservationDay,this.reservationHour,this.service)
     this.modalService.hide()

@@ -6,7 +6,8 @@ import { CustomDateFormatter } from 'src/app/helpers/cutomDateFormatter';
 import { ModalConfirmationOfBookComponent } from 'src/app/helpers/modal-confirmation-of-book/modal-confirmation-of-book.component';
 import { AccountService } from 'src/app/helpers/services/account.service';
 import { ShopService } from 'src/app/helpers/services/shop.service';
-import { Establishments } from 'src/app/helpers/models/service.model';
+import { Establishments, Service } from 'src/app/helpers/models/service.model';
+import { User } from 'src/app/helpers/models/user.model';
 
 @Component({
   selector: 'app-book',
@@ -41,7 +42,8 @@ export class BookComponent {
     dayStart : 0,
     dayEnd : 0
   };
-  actualService: Establishments;
+  actualEstablisment: Establishments;
+  serviceStart: Date;
   
   constructor(private cdr: ChangeDetectorRef, private accountService: AccountService, private shopService : ShopService,private modalService: BsModalService) {   }
 
@@ -50,8 +52,8 @@ export class BookComponent {
     var collection = this.shopService.getCollection();
     var document = this.shopService.getDocument();
     this.accountService.getEstablishment(collection,document).subscribe((serviceSnapshot) => {
-      this.actualService = this.preprocessData(serviceSnapshot.data())
-      this.fillInformation(this.actualService)
+      this.actualEstablisment = this.preprocessData(serviceSnapshot.data())
+      this.fillInformation(this.actualEstablisment)
     });
 
   }
@@ -62,7 +64,7 @@ export class BookComponent {
 
   viewChanged() {  
     this.cdr.detectChanges();
-    this.fillInformation(this.actualService)
+    this.fillInformation(this.actualEstablisment)
     this.scrollToCurrentView();
   }
 
@@ -70,6 +72,7 @@ export class BookComponent {
     var service = this.shopService.getService()
     var duration = this.getTimeInMinutes(service.time)
     if(this.checkValidEvet(event,duration)){
+      this.serviceStart= event.date
       var eventTittle = service.name
       if(!this.eventCreated){
         var event_start = event.date
@@ -119,7 +122,9 @@ export class BookComponent {
     newEnd,
   }: CalendarEventTimesChangedEvent): void {
     this.events = this.events.map((iEvent) => {
+      this.serviceStart = newStart
       if (iEvent === event) {
+        
         return {
           ...event,
           start: newStart,
@@ -131,9 +136,16 @@ export class BookComponent {
   }
 
   openModal(){
-    const initialState = {
-      service : this.shopService.getService(),
-      user : "Default User"
+    var service : Service = this.shopService.getService();
+    var globalService = this.shopService.getCollection();
+    var establismentName = this.actualEstablisment.name
+    var user : User = this.accountService.userValue
+    var initialState = {
+      user : user,
+      service : service,
+      globalService : globalService,
+      date : this.serviceStart,
+      establismentName : establismentName
     }
     this.modalRef = this.modalService.show(ModalConfirmationOfBookComponent,{initialState: {initialState}, backdrop: "static",keyboard: false});
   }

@@ -28,7 +28,7 @@ export class ReservationService {
       duration : service.time
     }
     establisment = this.normaliceName(establisment)
-    this.firestore.collection("users").doc(user.id).collection("reservas").doc(`${establisment}-${reservationDay}-${reservationHour}`).set(reservationInfo)
+    this.firestore.collection("users").doc(user.email).collection("reservas").doc(`${establisment}-${reservationDay}-${reservationHour}`).set(reservationInfo)
   }
 
   private storeReservationOnEstablismentProfile(user : User, globalService : string, establisment : string, reservationDay : string ,reservationHour : string, service : Service){

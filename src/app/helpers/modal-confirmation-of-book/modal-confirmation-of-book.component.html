@@ -19,10 +19,12 @@
         </div>
       </div>
       <!-- Info de usuario y establecimiento -->
-      <p style="margin-top: 20px;">{{userName}} ¿Quiere confirmar su cita?</p>
-      <p>Para {{establismentName}}</p>
+      <p style="margin-top: 20px;">{{user.name}} ¿Quiere confirmar su cita?</p>
+      <p>En {{establismentName}}</p>
+      <p>Para el dia: {{reservationDay}} a las {{reservationHour}}</p>
       <hr>
       <p>Precio por el servicio: {{service.price}}</p>
+
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-primary mr-auto" (click)="confirmar()" >Confirmar Cita</button>

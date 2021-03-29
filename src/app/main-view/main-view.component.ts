@@ -18,14 +18,27 @@ export class MainViewComponent implements OnInit {
 
   openModal(){
     var service : Service = {
-      name : "prueba",
-      price : "10 €",
-      time : "2 horas"
+      name : "Hombre - Corte en seco",
+      price : "7 €",
+      time : "30 minutos"
     };
-    var userName = "usuario de prueba"
+    var user : User = {
+      email : "aa@aa.com",
+      image : "",
+      name : "aa",
+      password : "12341234",
+      surname : "bb",
+      tlf : "123412341",
+      id : "aa@aa.com",
+      token : ""
+
+    }
     var initialState = {
-      name : userName,
-      service : service
+      user : user,
+      service : service,
+      globalService : "peluqueria",
+      date : new Date(),
+      establismentName : "EVA Peluqueros"
     }
     this.modalRef = this.modalService.show(ModalConfirmationOfBookComponent,{initialState: {initialState}, backdrop: "static",keyboard: false});
   }

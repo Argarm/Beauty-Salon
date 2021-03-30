@@ -9,6 +9,7 @@ import { ShopService } from 'src/app/helpers/services/shop.service';
 import { Establishments, Service } from 'src/app/helpers/models/service.model';
 import { User } from 'src/app/helpers/models/user.model';
 import { environment } from 'src/environments/environment';
+import { tr } from 'date-fns/locale';
 
 @Component({
   selector: 'app-book',
@@ -112,7 +113,7 @@ export class BookComponent {
   eventClicked(event) {
     var service = this.shopService.getService()
     var duration = this.getTimeInMinutes(service.time)
-    if (this.checkValidEvet(event, duration)) {
+    if (this.checkValidEvent(event, duration)) {
       this.serviceStart = event.date
       var eventTittle = service.name
       if (!this.eventCreated) {
@@ -134,7 +135,7 @@ export class BookComponent {
     }
   }
 
-  checkValidEvet(event: any, duration: number) {
+  checkValidEvent(event: any, duration: number) {
     var estimateEndOfEvent = addMinutes(event.date, duration)
 
     if (event.date < new Date() || estimateEndOfEvent.getHours() > this.todaySchedule.dayEnd) {
@@ -159,18 +160,29 @@ export class BookComponent {
     newStart,
     newEnd,
   }: CalendarEventTimesChangedEvent): void {
-    this.events = this.events.map((iEvent) => {
-      this.serviceStart = newStart
-      if (iEvent === event) {
 
-        return {
-          ...event,
-          start: newStart,
-          end: newEnd,
-        };
-      }
-      return iEvent;
-    });
+    if (this.canMoveEvent(newStart,newEnd)) {
+      this.events = this.events.map((iEvent) => {
+        this.serviceStart = newStart
+        if (iEvent === event) {
+
+          return {
+            ...event,
+            start: newStart,
+            end: newEnd,
+          };
+        }
+        return iEvent;
+      });
+    }else{
+      alert("No vamos a poder atenderle a esa hora")
+    }
+  }
+
+  private canMoveEvent(newStart: Date, newEnd: Date) {
+    return this.events.every((event) => {
+      newStart < event.start && newEnd > event.start
+    })
   }
 
   openModal() {

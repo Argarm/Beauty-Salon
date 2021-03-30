@@ -17,11 +17,11 @@ export class ServicesComponent implements OnInit {
   searchText
   establishments: Establishments[] = []
   filters = [
+    "Nombre",
     "Mejor valorados",
     "Abierto ahora",
     "Para ella",
     "Para él",
-    "Nombre"
   ]
   actualFilter = this.filters[0];
 
@@ -42,8 +42,8 @@ export class ServicesComponent implements OnInit {
 
             this.establishments.push(actualEstablisment)
           })
-          this.establishments.sort((a, b) => (b.rating > a.rating) ? 1 : -1)
         })
+        this.establishments.sort((a, b) => (b.rating > a.rating) ? 1 : -1)
       })
 
     })
@@ -64,19 +64,19 @@ export class ServicesComponent implements OnInit {
     this.actualFilter = this.filters[index]
     switch (index) {
       case 0:
+        this.establishments.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
+        break;
+        case 1:
         this.establishments.sort((a, b) => (b.rating > a.rating) ? 1 : -1)
         break;
-      case 1:
+        case 2:
         this.openNow();
         break;
-      case 2:
+        case 3:
         this.gender();
         break;
-      case 3:
+        case 4:
         this.gender();
-        break;
-      case 4:
-        this.establishments.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
         break;
     }
   }

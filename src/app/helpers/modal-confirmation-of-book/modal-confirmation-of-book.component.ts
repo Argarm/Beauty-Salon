@@ -36,7 +36,6 @@ export class ModalConfirmationOfBookComponent implements OnInit {
   getHour(date: Date): string {
     let hour = this.checkTime(date.getHours())
     let minutes = this.checkTime(date.getMinutes())
-    console.log(date.getMinutes())
     var fullHour =`${hour}:${minutes}`
     return fullHour; 
   }

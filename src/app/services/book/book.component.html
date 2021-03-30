@@ -1,5 +1,6 @@
 <div class="space">
-
+  <h2 class="text-center">Reservar Cita Previa</h2>
+  <br>
   <app-header-book-calendar [(view)]="view" [(viewDate)]="viewDate" (viewChange)="viewChanged()">
   </app-header-book-calendar>
 
@@ -8,7 +9,8 @@
       <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events">
       </mwl-calendar-month-view>
       <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events"
-        [weekStartsOn]="weekStartsOn" (hourSegmentClicked)="eventClicked($event)">
+        [weekStartsOn]="weekStartsOn" (hourSegmentClicked)="eventClicked($event)" (eventTimesChanged)="eventTimesChanged($event)">
+        
       </mwl-calendar-week-view>
       <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events"
         [dayStartHour]="todaySchedule.dayStart" [dayEndHour]="todaySchedule.dayEnd"

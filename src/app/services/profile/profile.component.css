@@ -1,3 +1,38 @@
 .profile{
-    margin-top: 20px;
+  margin-top: 20px;
+}
+
+.star {
+  position: relative;
+  display: inline-block;
+  font-size: 2rem;
+  color: #d3d3d3;
+}
+.full {
+  color: rgb(214, 214, 106);
+}
+
+.half {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  color: rgb(214, 214, 106);
+}
+
+.space{
+  margin-left: 3%;
+  margin-right: 11px;
+}
+
+ul {
+  list-style-type: none;
+  margin-top: 15px;
+}
+li{
+  margin-bottom: 12px;
+}
+
+img{
+  width: 150px;
+  height: 150px;
 }

@@ -25,7 +25,6 @@ export class BookingsComponent implements OnInit {
   }
   
   private preProcessData(data: any) {
-    console.log(data)
     var date = this.parseDateFromString(data.reservationDate)
     if(date < new Date()){
       this.pastBookings.push(data)

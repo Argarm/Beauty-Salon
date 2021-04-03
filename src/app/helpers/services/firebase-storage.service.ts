@@ -11,4 +11,9 @@ export class FirebaseStorageService {
   getUrlPath(name : string){
     return this.angularFireStore.ref(name).getDownloadURL()
   }
+
+  aux(name : string){
+    return this.angularFireStore.ref(name).listAll()
+  }
+
 }

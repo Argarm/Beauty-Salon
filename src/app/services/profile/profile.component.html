@@ -1,14 +1,80 @@
-<div class="profile">
+<!-- 
     <div class="card border" > 
         <div class="card-header">
-            {{actualService.name}} 
+            <h4>
+                {{actualEstablisment.name}} 
+            </h4>
         </div>
         <div class="card-body">
-            <h5 class="card-title">{{actualService.tlf}}</h5>
-            <p class="card-text">{{actualService.schedule}}</p>
-            <p class="card-text">{{actualService.rating}}</p>
-            <p class="card-text">{{actualService.street}}</p>
+            <h5 class="card-title">{{actualEstablisment.tlf}}</h5>
+            <p class="card-text">{{actualEstablisment.schedule}}</p>
+            <p class="card-text">{{actualEstablisment.rating}}</p>
+            <p class="card-text">{{actualEstablisment.street}}</p>
         </div>
-        <button (click)="book(actualService.name)" class="btn btn-primary">Reservar hora</button>
+        <button (click)="book(actualEstablisment.name)" class="btn btn-primary">Reservar hora</button>
+    </div>
+</div> -->
+<div class="profile">
+
+    <div class="card border">
+        <div class="card-header">
+            <h4>
+                {{actualEstablisment.name}}
+            </h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-10">
+                    <div class="row">
+                        <carousel [isAnimated]="true" [showIndicators]="false" class="space">
+                            <slide class="images" *ngFor="let image of images" >
+                              <img [src]="image" alt="image">
+                            </slide>
+                        </carousel>
+                        <div class="float-right space">
+                            <p>{{actualEstablisment.street}}</p>
+                            <p class="card-text">{{actualEstablisment.tlf}}</p>
+                            <ng-template #t let-fill="fill">
+                                <span class="star" [class.full]="fill === 100">
+                                    <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+                                </span>
+                            </ng-template>
+                            <ngb-rating [(rate)]="actualEstablisment.rating" [starTemplate]="t" [readonly]="true"
+                                [max]="5"></ngb-rating>
+
+                        </div>
+                    </div>
+
+                    <br>
+                    <div class="row justify-content-left">
+                        <tabset>
+                            <tab [heading]="category.key" *ngFor="let category of categorys | keyvalue;">
+                                <div *ngFor="let service of category.value" class="card-border">
+                                    <div class="row">
+                                        <div class="col-10">
+                                            <div class="card-header">
+                                                <p>{{service.name}}</p>
+                                            </div>
+                                            <div class="card-body">
+                                                <p>{{service.price}}</p>
+                                                <p>{{service.time}}</p>
+                                                <button class="btn btn-primary" (click)="book(service)">Reservar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </tab>
+                        </tabset>
+                        <div *ngFor="let service of actualEstablisment.services">
+                        </div>
+                    </div>
+                </div>
+                <div class="float-right ">
+                    <ul class="">
+                        <li *ngFor="let daySchedule of actualEstablisment.schedule">{{daySchedule}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

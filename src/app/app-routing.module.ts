@@ -25,7 +25,7 @@ const routes: Routes = [
   ]},
   { path: "servicios/:servicio", component: ServicesComponent},
   { path: "servicios/:servicio/:nombre_servicio", component: ServiceProfileComponent, canActivate: [AuthGuardBookGuard]},
-  {path: "servicios/:servicio/:nombre_servicio/reservar", component: BookComponent, canActivate: [AuthGuardBookGuard /*, AuthGuard*/]},
+  {path: "servicios/:servicio/:nombre_servicio/reservar", component: BookComponent, canActivate: [AuthGuardBookGuard , AuthGuard]},
   {path: "", component: MainViewComponent} 
 ];
 

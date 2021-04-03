@@ -37,8 +37,8 @@ li{
     margin-bottom: 12px;
 }
 img{
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
 }
 
 .center {
@@ -52,3 +52,19 @@ label{
 p{
     max-width: 400px;   
 }
+
+.star {
+    position: relative;
+    display: inline-block;
+    font-size: 2rem;
+    color: #d3d3d3;
+  }
+  .full {
+    color: rgb(214, 214, 106);
+  }
+  .half {
+    position: absolute;
+    display: inline-block;
+    overflow: hidden;
+    color: rgb(214, 214, 106);
+  }

@@ -23,11 +23,19 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-10">
-                        <div class="col-10">
-                            <img [src]="establishment.image">
-                            <div class="float-right">
+                        <div class="row">
+                            <img [src]="establishment.image" class="space">
+                            <div class="float-right space">
                                 <p>{{establishment.street}}</p>
                                 <p class="card-text">{{establishment.tlf}}</p>
+                                
+                                <ng-template #t let-fill="fill">
+                                    <span class="star" [class.full]="fill === 100">
+                                      <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+                                    </span>
+                                </ng-template>
+                                <ngb-rating [(rate)]="establishment.rating" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+                                  
                             </div>
                         </div>
 

@@ -24,6 +24,7 @@ export class ServicesComponent implements OnInit {
     "Para él",
   ]
   actualFilter = this.filters[0];
+  rate = 2
 
   constructor(private route: ActivatedRoute, private router: Router, private accountService: AccountService, private shopService: ShopService,private firebaseStorage : FirebaseStorageService) {
     this.route.params.subscribe(_ => {

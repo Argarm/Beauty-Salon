@@ -32,6 +32,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { ModalConfirmationOfBookComponent } from './helpers/modal-confirmation-of-book/modal-confirmation-of-book.component';
 import { FilterPipe } from './helpers/filterPipe';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { RatingModule } from 'ngx-bootstrap/rating';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -61,6 +63,7 @@ registerLocaleData(localeEs);
   imports: [
     CarouselModule.forRoot(),
     BsDropdownModule.forRoot(),
+    RatingModule.forRoot(),
     BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
@@ -70,7 +73,8 @@ registerLocaleData(localeEs);
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

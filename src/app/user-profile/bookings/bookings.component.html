@@ -1,0 +1,33 @@
+<div>
+    <tabset>
+        <tab heading="Proximas citas" id="tab1">
+            <div *ngFor="let booking of nextBookings">
+                <br>
+                <div class="card border">
+                    <div class="card-header">
+                        <h4>{{booking.serviceName}}</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>En : {{booking.establisment}}</p>
+                        <p>El dia: {{booking.reservationDate}}</p>
+                    </div>
+                </div>
+            </div>
+
+        </tab>
+        <tab heading="Citas Pasadas">
+            <div *ngFor="let booking of pastBookings">
+                <br>
+                <div class="card border">
+                    <div class="card-header">
+                        <h4>{{booking.serviceName}}</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>En : {{booking.establisment}}</p>
+                        <p>El dia: {{booking.reservationDate}}</p>
+                    </div>
+                </div>
+            </div>
+        </tab>
+    </tabset>
+</div>

@@ -14,11 +14,10 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { MainViewComponent } from './main-view/main-view.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ProfileComponent } from './profile/profile.component';
-import { CalendarComponent } from './profile/calendar/calendar.component';
-import { ReviewComponent } from './profile/review/review.component';
-import { PurchasesComponent } from './profile/purchases/purchases.component';
-import { FavoritesComponent } from './profile/favorites/favorites.component';
+import { ProfileComponent } from './user-profile/profile.component';
+import { ReviewComponent } from './user-profile/review/review.component';
+import { PurchasesComponent } from './user-profile/purchases/purchases.component';
+import { FavoritesComponent } from './user-profile/favorites/favorites.component';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
@@ -34,7 +33,8 @@ import { FilterPipe } from './helpers/filterPipe';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { RatingModule } from 'ngx-bootstrap/rating';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { BookingsComponent } from './user-profile/bookings/bookings.component';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 
 registerLocaleData(localeEs);
@@ -50,7 +50,6 @@ registerLocaleData(localeEs);
     SignupComponent,
     MainViewComponent,
     ProfileComponent,
-    CalendarComponent,
     ReviewComponent,
     PurchasesComponent,
     FavoritesComponent,
@@ -58,12 +57,14 @@ registerLocaleData(localeEs);
     BookComponent,
     ServiceProfileComponent,
     HeaderBookCalendarComponent,
-    ModalConfirmationOfBookComponent
+    ModalConfirmationOfBookComponent,
+    BookingsComponent
   ],
   imports: [
     CarouselModule.forRoot(),
     BsDropdownModule.forRoot(),
     RatingModule.forRoot(),
+    TabsModule.forRoot(),
     BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,

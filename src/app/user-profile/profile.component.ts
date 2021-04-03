@@ -12,7 +12,7 @@ export class ProfileComponent implements OnInit {
   userProfilePicture = "../assets/user.png"
 
   options = [
-    {name : 'Calendario', router: "/perfil"},
+    {name : 'Reservas', router: "/perfil"},
     {name: 'Reseñas', router: "/perfil/reseñas"},
     {name:'Compras', router: "/perfil/compras"},
     {name: 'Favoritos', router: "/perfil/favoritos"}

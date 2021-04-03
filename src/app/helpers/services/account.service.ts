@@ -12,6 +12,7 @@ import { User } from '../models/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
+
     public userSubject: BehaviorSubject<User>;
     public user: Observable<User>;
     
@@ -29,8 +30,6 @@ export class AccountService {
     }
 
     logout() {
-        // remove user from local storage and set current user to null
-        localStorage.removeItem('user');
         this.userSubject.next(null);
         this.router.navigate(['']);
     }
@@ -84,36 +83,9 @@ export class AccountService {
         var service = collection.toLowerCase()
         return this.firestore.collection(service).doc(`${document}`).collection("reservas").get()
     }
-    
-    getById(id: string) {
-        return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
-    }
 
-    update(id, params) {
-        return this.http.put(`${environment.apiUrl}/users/${id}`, params)
-            .pipe(map(x => {
-                // update stored user if the logged in user updated their own record
-                if (id == this.userValue.id) {
-                    // update local storage
-                    const user = { ...this.userValue, ...params };
-                    localStorage.setItem('user', JSON.stringify(user));
-
-                    // publish updated user to subscribers
-                    this.userSubject.next(user);
-                }
-                return x;
-            }));
-    }
-
-    delete(id: string) {
-        return this.http.delete(`${environment.apiUrl}/users/${id}`)
-            .pipe(map(x => {
-                // auto logout if the logged in user deleted their own record
-                if (id == this.userValue.id) {
-                    this.logout();
-                }
-                return x;
-            }));
+    getUserBookings() {
+        return this.firestore.collection("users").doc(this.userValue.email).collection("reservas").get()
     }
 
     private fillUserInformation(body){

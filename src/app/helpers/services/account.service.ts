@@ -7,6 +7,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
 import { environment } from '../../../environments/environment';
 import { User } from '../models/user.model';
+import { FirebaseStorageService } from './firebase-storage.service';
 
 
 
@@ -19,7 +20,8 @@ export class AccountService {
     constructor(
         private router: Router,
         private http: HttpClient,
-        private firestore : AngularFirestore
+        private firestore : AngularFirestore,
+        private firebaseStorage : FirebaseStorageService
     ) {
         this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
         this.user = this.userSubject.asObservable();
@@ -34,11 +36,12 @@ export class AccountService {
         this.router.navigate(['']);
     }
 
-    registerUser(user :User){
+    registerUser(user :User, image : File){
         const userFilled = this.fillUserInformation(user)
         this.firestore.collection('users').doc(userFilled.email).get().subscribe(data =>{
             if(!data.exists){
                 this.firestore.collection('users').doc(userFilled.email).set(userFilled)
+                this.firebaseStorage.uploadImage(image,user.email)
                 this.userSubject.next(user);
                 this.router.navigate(['../'])
             }else{

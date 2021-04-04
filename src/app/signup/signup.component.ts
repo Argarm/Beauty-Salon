@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from '../helpers/services/account.service';
+import { FirebaseStorageService } from '../helpers/services/firebase-storage.service';
 
 @Component({
   selector: 'app-signup',
@@ -12,10 +13,12 @@ export class SignupComponent implements OnInit {
   submitted = false;
   loading = false;
   mobNumberPattern="^[0-9]{9}$"
+  selectedFile= null;
 
   constructor(
     private formBuilder : FormBuilder,
-    private accountService : AccountService
+    private accountService : AccountService,
+    private firebaseStorage : FirebaseStorageService
   ) { }
 
   ngOnInit(): void {
@@ -39,7 +42,11 @@ export class SignupComponent implements OnInit {
     this.submitted = true;
     if(this.form.errors)alert("Las contraseñas deben coincidir")
     if(this.form.invalid)return;
-    this.accountService.registerUser(this.form.value)
+    this.accountService.registerUser(this.form.value, this.selectedFile)
+  }
+
+  onFileSelected(event){
+    this.selectedFile = event.target.files[0]
   }
 
 }

@@ -34,7 +34,7 @@ export class ServiceProfileComponent implements OnInit {
         })
         this.actualEstablisment = this.preprocessData(serviceSnapshot.data())
       })
-      this.firebaseStorage.aux(`${collection}/${doc}`).subscribe(list => {
+      this.firebaseStorage.getAllUrlPaths(`${collection}/${doc}`).subscribe(list => {
         list.items.forEach(url =>{
           this.firebaseStorage.getUrlPath(url.fullPath).subscribe((image) =>{
             this.images.push(image)

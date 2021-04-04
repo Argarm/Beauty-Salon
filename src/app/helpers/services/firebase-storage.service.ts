@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { AccountService } from './account.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +16,8 @@ export class FirebaseStorageService {
     return this.angularFireStore.ref(name).listAll()
   }
 
-  uploadImage(image : File,userName : string){
-    this.angularFireStore.upload(`users/${userName}`,image)
+  uploadUserImage(image : File,userName : string){
+    return this.angularFireStore.upload(`users/${userName}`,image).snapshotChanges()
   }
 
 }

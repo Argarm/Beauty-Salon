@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 import { environment } from '../../../environments/environment';
 import { User } from '../models/user.model';
 import { FirebaseStorageService } from './firebase-storage.service';
+import { HeaderComponent } from 'src/app/common/header/header.component';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 
 
@@ -16,12 +18,13 @@ export class AccountService {
 
     public userSubject: BehaviorSubject<User>;
     public user: Observable<User>;
-    
+    public userImage = "../assets/user.png";
     constructor(
         private router: Router,
         private http: HttpClient,
         private firestore : AngularFirestore,
-        private firebaseStorage : FirebaseStorageService
+        private firebaseStorage : FirebaseStorageService,
+        private angularFireStore : AngularFireStorage
     ) {
         this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
         this.user = this.userSubject.asObservable();
@@ -41,7 +44,15 @@ export class AccountService {
         this.firestore.collection('users').doc(userFilled.email).get().subscribe(data =>{
             if(!data.exists){
                 this.firestore.collection('users').doc(userFilled.email).set(userFilled)
-                this.firebaseStorage.uploadImage(image,user.email)
+                var imageRef = this.angularFireStore.ref(`users/${user.email}`)
+                this.firebaseStorage.uploadUserImage(image,user.email).pipe(
+                    finalize(()=>{
+                      imageRef.getDownloadURL().subscribe((url) =>{
+                        this.userImage = url
+                      })
+                    })
+                  ).subscribe()
+                
                 this.userSubject.next(user);
                 this.router.navigate(['../'])
             }else{
@@ -56,6 +67,9 @@ export class AccountService {
             if(data.exists){
                 var user = data.data() as User
                 if(user.password === userPassword){
+                    this.firebaseStorage.getUrlPath(`users/${userEmail}`).subscribe(image => {
+                        this.userImage = image
+                      })
                     this.userSubject.next(user);
                     this.router.navigate(['../'])
                 }else{

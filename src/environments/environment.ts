@@ -34,7 +34,7 @@ export const environment = {
       primary: '#e3bc08',
       secondary: '#FDF1BA',
     },
-  }
+  },
 };
 
 /*

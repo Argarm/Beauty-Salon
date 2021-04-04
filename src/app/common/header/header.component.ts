@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from '../../helpers/models/user.model';
@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
   private cartImgUrl = "../assets/shopping-cart.png";
   private chatImgUrl = "../assets/chat-bubble.png";
   private starImgUrl = "../assets/star.png";
-  private userImgUrl = "../assets/user.png";
+  private userImgUrl = this.accountService.userImage;
   
   constructor(private router : Router,private accountService : AccountService) { 
     this.userLogged = false
@@ -34,11 +34,16 @@ export class HeaderComponent implements OnInit {
     this.user = this.accountService.userSubject.subscribe((user : User) => {
       this.userLogged = user ? true : false;
     })
+
         
   }
-  
+
+  ngOnChanges(changes: SimpleChanges) {
+   console.log("aqui")
+  }
+
   clearAll(){
-    localStorage.clear();
+    console.log(this.accountService.userImage)
   }
 
   goToService(servicio : string){

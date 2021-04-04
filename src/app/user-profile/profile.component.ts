@@ -9,7 +9,7 @@ import { AccountService } from '../helpers/services/account.service';
 })
 export class ProfileComponent implements OnInit {
   user: User
-  userProfilePicture = "../assets/user.png"
+  userProfilePicture ;
 
   options = [
     {name : 'Reservas', router: "/perfil"},
@@ -19,6 +19,7 @@ export class ProfileComponent implements OnInit {
   ]
   constructor(private accountService : AccountService) { 
     this.user = this.accountService.userValue
+    this.userProfilePicture = this.accountService.userImage
   }
 
   ngOnInit(): void {

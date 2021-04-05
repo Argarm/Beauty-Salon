@@ -17,6 +17,11 @@ export class ReservationService {
     
   }
 
+  removeReservation(reservation : any) {
+    console.log("hola")
+    console.log(reservation)
+  }
+
 
 
   private storeReservationOnUserProfile(user : User, globalService : string, establisment : string, reservationDay : string ,reservationHour : string, service : Service){

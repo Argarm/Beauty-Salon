@@ -38,12 +38,8 @@ export class HeaderComponent implements OnInit {
         
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-   console.log("aqui")
-  }
-
   clearAll(){
-    console.log(this.accountService.userImage)
+  
   }
 
   goToService(servicio : string){

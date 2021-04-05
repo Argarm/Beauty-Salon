@@ -1,7 +1,8 @@
+<h3>Mis citas</h3>
 <div>
     <tabset>
         <tab heading="Proximas citas" id="tab1">
-            <div *ngFor="let booking of nextBookings">
+            <div *ngFor="let booking of nextBookings; let i = index">
                 <br>
                 <div class="card border">
                     <div class="card-header">
@@ -10,7 +11,9 @@
                     <div class="card-body">
                         <p>En : {{booking.establisment}}</p>
                         <p>El dia: {{booking.reservationDate}}</p>
+
                     </div>
+                    <button class="btn btn-danger" (click)="removeReservation(i)">Eliminar cita</button>
                 </div>
             </div>
 

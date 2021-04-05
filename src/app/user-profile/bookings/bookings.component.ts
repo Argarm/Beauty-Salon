@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import firebase from 'firebase';
 import { Establishments, Service } from 'src/app/helpers/models/service.model';
 import { AccountService } from 'src/app/helpers/services/account.service';
+import { ReservationService } from 'src/app/helpers/services/reservation.service';
 
 @Component({
   selector: 'app-bookings',
@@ -12,13 +13,18 @@ export class BookingsComponent implements OnInit {
 
   pastBookings = [] ;
   nextBookings = [] ;
+  trashCanImgUrl = "../../../assets/trash-can.png"
 
-  constructor(private accounntService : AccountService) { 
+  constructor(private accounntService : AccountService, private reservationService : ReservationService) { 
     this.accounntService.getUserBookings().subscribe((userBookings) =>{
       userBookings.docs.forEach(userBookingData =>{
         this.preProcessData(userBookingData.data())
       })
     })
+  }
+
+  removeReservation(index : number){
+    this.reservationService.removeReservation(this.nextBookings[index]);
   }
 
   ngOnInit(): void {

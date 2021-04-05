@@ -17,9 +17,24 @@ export class ReservationService {
     
   }
 
-  removeReservation(reservation : any) {
-    console.log("hola")
+  removeReservation(reservation : any, userEmail : string) {
     console.log(reservation)
+    this.removeReservationOnProfileUser(reservation,userEmail)
+    this.removeReservationOnEstablismentProfile(reservation,userEmail)
+  }
+
+  removeReservationOnEstablismentProfile(reservation: any,userEmail) {
+    var docName = this.normaliceName(reservation.establisment)
+    var collectionDate = this.normaliceDate(reservation.reservationDate)
+    var collection = `${userEmail}-${collectionDate}`
+    this.firestore.collection(reservation.globalService).doc(docName).collection("reservas").doc(collection).delete()
+  }
+
+  removeReservationOnProfileUser(reservation: any, userEmail : string) {
+    var collectionName = this.normaliceName(reservation.establisment)
+    var collectionDate = this.normaliceDate(reservation.reservationDate)
+    var collection = `${collectionName}-${collectionDate}`
+    this.firestore.collection("users").doc(userEmail).collection("reservas").doc(collection).delete()
   }
 
 
@@ -46,6 +61,10 @@ export class ReservationService {
     }
     establisment = this.normaliceName(establisment)
     this.firestore.collection(globalService).doc(establisment).collection("reservas").doc(`${user.email}-${reservationDay}-${reservationHour}`).set(reservationInfo)
+  }
+
+  private normaliceDate(date : string){
+    return date.replace(/\s/g,'-')
   }
 
   private normaliceName(name: string) {

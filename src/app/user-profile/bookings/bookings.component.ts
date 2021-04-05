@@ -24,7 +24,10 @@ export class BookingsComponent implements OnInit {
   }
 
   removeReservation(index : number){
-    this.reservationService.removeReservation(this.nextBookings[index]);
+    this.reservationService.removeReservation(this.nextBookings[index], this.accounntService.userValue.email);
+    console.log(this.nextBookings)
+    this.nextBookings = this.nextBookings.splice(0,index)
+    console.log(this.nextBookings)
   }
 
   ngOnInit(): void {

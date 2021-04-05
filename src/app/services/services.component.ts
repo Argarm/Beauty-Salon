@@ -63,7 +63,8 @@ export class ServicesComponent implements OnInit {
     if(this.accountService.userValue){
       var userFavorites = this.accountService.userValue.favorites
       if(!establishment.isUserFavorite){
-        if(userFavorites.length == 0)userFavorites = `/n ${this.serviceMainName}-${establishment.name}`
+        var service = this.removeAccents(this.route.snapshot.params.servicio)
+        if(userFavorites.length == 0)userFavorites = `/n ${service}-${establishment.name}`
         else userFavorites+=`/n ${this.serviceMainName}-${establishment.name}`
       }else{
         userFavorites = userFavorites.replace(`/n ${this.serviceMainName}-${establishment.name}`,"").trim()

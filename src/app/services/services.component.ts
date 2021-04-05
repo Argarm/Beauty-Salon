@@ -51,20 +51,28 @@ export class ServicesComponent implements OnInit {
   preprocessData(rawData: any): Establishments {
     var processedData = rawData;
     if(this.accountService.userValue){
-      this.accountService.userValue.favorites
+      if(this.accountService.userValue.favorites.indexOf(processedData.name)!= -1)processedData.isUserFavorite = true;
     }else{
       processedData.isUserFavorite = false;
     }
-    console.log(processedData)
     processedData.schedule = processedData.schedule.split('/')
     return processedData;
   }
 
-  toggle(establisment){
-    if(!this.accountService.userValue){
+  toggle(establishment){
+    if(this.accountService.userValue){
+      var userFavorites = this.accountService.userValue.favorites
+      if(!establishment.isUserFavorite){
+        if(userFavorites.length == 0)userFavorites = establishment.name
+        else userFavorites+=`/n ${establishment.name}`
+      }else{
+        userFavorites = userFavorites.replace(`/n ${establishment.name}`,"").trim()
+      }
+      this.accountService.setUserFavorites(userFavorites)
+      establishment.isUserFavorite = !establishment.isUserFavorite
+    }else{
       this.router.navigate(['iniciar_sesion'])
     }
-    establisment.isUserFavorite = !establisment.isUserFavorite
   }
   
 

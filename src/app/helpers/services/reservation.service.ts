@@ -18,7 +18,6 @@ export class ReservationService {
   }
 
   removeReservation(reservation : any, userEmail : string) {
-    console.log(reservation)
     this.removeReservationOnProfileUser(reservation,userEmail)
     this.removeReservationOnEstablismentProfile(reservation,userEmail)
   }

@@ -34,6 +34,11 @@ export class AccountService {
         return this.userSubject.value;
     }
 
+    setUserFavorites(userFavorites: string) {
+        this.userValue.favorites = userFavorites
+        this.firestore.collection('users').doc(this.userValue.email).set(this.userValue)
+    }
+
     logout() {
         this.userSubject.next(null);
         this.router.navigate(['']);

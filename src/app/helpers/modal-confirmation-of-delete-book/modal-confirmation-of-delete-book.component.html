@@ -8,11 +8,14 @@
         </button>
       </div>
       <div class="modal-body text-center">
-        <p>hola</p>
+        <h3>Eliminar cita</h3>
+        <p>¿Está seguro de que quiere eliminar su cita?</p>
+        <p>En : {{actualBook.establisment}}</p>
+        <p>El dia: {{actualBook.reservationDate}}</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary mr-auto" (click)="confirm()" >Confirmar Cita</button>
-        <button type="button" class="btn btn-danger" (click)="modalService.hide()">Close</button>
+        <button type="button" class="btn btn-danger mr-auto" (click)="confirm()" >Eliminar cita</button>
+        <button type="button" class="btn btn-secondary" (click)="modalService.hide()">Cerrar</button>
       </div>
     </div>
   </div>

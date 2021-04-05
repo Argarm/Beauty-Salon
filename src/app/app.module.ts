@@ -35,6 +35,7 @@ import { RatingModule } from 'ngx-bootstrap/rating';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BookingsComponent } from './user-profile/bookings/bookings.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { ModalConfirmationOfDeleteBookComponent } from './helpers/modal-confirmation-of-delete-book/modal-confirmation-of-delete-book.component';
 
 
 registerLocaleData(localeEs);
@@ -58,7 +59,8 @@ registerLocaleData(localeEs);
     ServiceProfileComponent,
     HeaderBookCalendarComponent,
     ModalConfirmationOfBookComponent,
-    BookingsComponent
+    BookingsComponent,
+    ModalConfirmationOfDeleteBookComponent
   ],
   imports: [
     CarouselModule.forRoot(),

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import firebase from 'firebase';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ModalConfirmationOfDeleteBookComponent } from 'src/app/helpers/modal-confirmation-of-delete-book/modal-confirmation-of-delete-book.component';
 import { Establishments, Service } from 'src/app/helpers/models/service.model';
 import { AccountService } from 'src/app/helpers/services/account.service';
 import { ReservationService } from 'src/app/helpers/services/reservation.service';
@@ -10,12 +12,13 @@ import { ReservationService } from 'src/app/helpers/services/reservation.service
   styleUrls: ['./bookings.component.css']
 })
 export class BookingsComponent implements OnInit {
-
+  
   pastBookings = [] ;
   nextBookings = [] ;
-  trashCanImgUrl = "../../../assets/trash-can.png"
+  modalRef: BsModalRef;
+  
 
-  constructor(private accounntService : AccountService, private reservationService : ReservationService) { 
+  constructor(private accounntService : AccountService, private reservationService : ReservationService, private modalService: BsModalService) { 
     this.accounntService.getUserBookings().subscribe((userBookings) =>{
       userBookings.docs.forEach(userBookingData =>{
         this.preProcessData(userBookingData.data())
@@ -23,16 +26,20 @@ export class BookingsComponent implements OnInit {
     })
   }
 
-  removeReservation(index : number){
-    this.reservationService.removeReservation(this.nextBookings[index], this.accounntService.userValue.email);
-    console.log(this.nextBookings)
-    this.nextBookings = this.nextBookings.splice(0,index)
-    console.log(this.nextBookings)
-  }
-
   ngOnInit(): void {
   }
-  
+
+  openModal(index : number) {
+    var initialState = {
+      actualBook : this.nextBookings[index]
+    }
+    this.modalRef = this.modalService.show(ModalConfirmationOfDeleteBookComponent, { initialState: { initialState }, backdrop: "static", keyboard: false });
+    this.modalRef.content.onClose.subscribe(result =>{
+      if(result){
+        this.nextBookings.splice(index,1)
+      }
+    })
+  }
   private preProcessData(data: any) {
     var date = this.parseDateFromString(data.reservationDate)
     if(date < new Date()){

@@ -4,6 +4,7 @@ import { AccountService } from 'src/app/helpers/services/account.service';
 import { ShopService } from 'src/app/helpers/services/shop.service';
 import { Establishments, Service } from 'src/app/helpers/models/service.model';
 import { FirebaseStorageService } from 'src/app/helpers/services/firebase-storage.service';
+import { flattenDiagnosticMessageText } from 'typescript';
 
 @Component({
   selector: 'app-profile',
@@ -19,6 +20,7 @@ export class ServiceProfileComponent implements OnInit {
     street: "",
     tlf: "",
     image: "",
+    isUserFavorite: false,
     services: []
   };
   categorys : [];

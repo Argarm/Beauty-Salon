@@ -5,6 +5,7 @@ export class Establishments{
     rating: string;
     street: string;
     image : string;
+    isUserFavorite: boolean;
     services : Service []
 }
 

@@ -24,7 +24,7 @@ export class ServicesComponent implements OnInit {
     "Para él",
   ]
   actualFilter = this.filters[0];
-  rate = 2
+  notFavIcon = "../../assets/rest.png"
 
   constructor(private route: ActivatedRoute, private router: Router, private accountService: AccountService, private shopService: ShopService,private firebaseStorage : FirebaseStorageService) {
     this.route.params.subscribe(_ => {
@@ -40,7 +40,6 @@ export class ServicesComponent implements OnInit {
           })
           this.accountService.getServices(servicio, service.payload.doc.id).subscribe((establishmentServices) => {
             actualEstablisment.services = establishmentServices.map(data => <Service>data.payload.doc.data())
-
             this.establishments.push(actualEstablisment)
           })
         })
@@ -51,8 +50,21 @@ export class ServicesComponent implements OnInit {
   }
   preprocessData(rawData: any): Establishments {
     var processedData = rawData;
+    if(this.accountService.userValue){
+      this.accountService.userValue.favorites
+    }else{
+      processedData.isUserFavorite = false;
+    }
+    console.log(processedData)
     processedData.schedule = processedData.schedule.split('/')
     return processedData;
+  }
+
+  toggle(establisment){
+    if(!this.accountService.userValue){
+      this.router.navigate(['iniciar_sesion'])
+    }
+    establisment.isUserFavorite = !establisment.isUserFavorite
   }
   
 

@@ -68,3 +68,8 @@ p{
     overflow: hidden;
     color: rgb(214, 214, 106);
   }
+
+p.icon{
+    font-size: 2rem;
+    color: rgb(214, 214, 106);
+}

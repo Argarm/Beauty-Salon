@@ -6,7 +6,7 @@ export class User{
     email: string;
     password: string;
     image: string;
-    token: string;
+    favorites: string;
 
     constructor(name,surname,tlf,email,password,image) {
         this.name = name;

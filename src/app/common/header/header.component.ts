@@ -20,8 +20,8 @@ export class HeaderComponent implements OnInit {
   
   private cartImgUrl = "../assets/shopping-cart.png";
   private chatImgUrl = "../assets/chat-bubble.png";
-  private starImgUrl = "../assets/star.png";
-  private userImgUrl = this.accountService.userImage;
+  private heartImgUrl = "../assets/heart.png";
+  private userImgUrl = "../assets/user.png";
   
   constructor(private router : Router,private accountService : AccountService) { 
     this.userLogged = false

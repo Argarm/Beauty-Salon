@@ -9,16 +9,16 @@ export class ShopService {
 
   constructor() { }
   private actualDocument : string;
-  private actualCollection : number;
+  private actualCollection : string;
   private service : Service
 
-  setServiceOnEstablisment(collection : number, document : string, service : Service){
+  setServiceOnEstablisment(collection : string, document : string, service : Service){
     this.actualCollection = collection;
     this.actualDocument = document;
     this.service = service
   }
 
-  setActualEstablisment(collection : number, document : string){
+  setActualEstablisment(collection : string, document : string){
     this.actualCollection = collection;
     this.actualDocument = document;
   }

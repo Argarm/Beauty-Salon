@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Establishments } from 'src/app/helpers/models/service.model';
 import { AccountService } from 'src/app/helpers/services/account.service';
+import { ShopService } from 'src/app/helpers/services/shop.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -12,7 +13,7 @@ import { environment } from 'src/environments/environment';
 export class FavoritesComponent implements OnInit {
   establishments = [];
   services = environment.services
-  constructor(private accountService : AccountService, private router: Router ) { 
+  constructor(private accountService : AccountService, private router: Router, private shopService : ShopService ) { 
     this.accountService.userSubject.subscribe(userValue =>{
       var userFavEstablismentsName = userValue.favorites.split("/n ")
       userFavEstablismentsName.forEach(data => {
@@ -30,10 +31,15 @@ export class FavoritesComponent implements OnInit {
     })
   }
 
-  navigateTo(establishment){
-    console.log(this.establishments)
-    //this.router.navigate([`${}`])
+  navigateTo(mainService,establishmentName){
+    if(mainService && establishmentName){
+      var service = this.formatData(mainService)
+      var favEstablishment = this.formatData(establishmentName)
+      this.shopService.setActualEstablisment(this.removeAccents(service),favEstablishment)
+      this.router.navigate([`/servicios/${service}/${favEstablishment}`])
+    }
   }
+
   private formatData(data: string) {
     return data.toLowerCase().replace(" ","_")
   }

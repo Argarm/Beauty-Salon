@@ -1,10 +1,10 @@
-<h3 (click)="navigateTo('a')">Mis favoritos</h3>
+<h3>Mis favoritos</h3>
 
 <tabset>
     <tab [heading]="service" *ngFor="let service of services">
         <div *ngFor="let establishment of filterEstablismentByService(service); let i = index" (click)=navigateTo(establisment)>
             <br>
-            <div class="card border">
+            <div class="card border"  (click)="navigateTo(service,establishment.name)">
                 <div class="card-header">
                     <h4>{{establishment.name}}</h4>
                 </div>

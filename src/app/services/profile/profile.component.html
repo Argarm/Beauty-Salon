@@ -33,24 +33,18 @@
                     <div class="row justify-content-left">
                         <tabset>
                             <tab [heading]="category.key" *ngFor="let category of categorys | keyvalue;">
-                                <div *ngFor="let service of category.value" class="card-border">
-                                    <div class="row">
-                                        <div class="col-10">
-                                            <div class="card-header">
-                                                <p>{{service.name}}</p>
-                                            </div>
-                                            <div class="card-body">
-                                                <p>{{service.price}}</p>
-                                                <p>{{service.time}}</p>
-                                                <button class="btn btn-primary" (click)="book(service)">Reservar</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <accordion [isAnimated]="true">
+                                    <accordion-group *ngFor="let service of category.value">
+                                      <button class="btn btn-link btn-block clearfix" accordion-heading type="button">
+                                        <div class="pull-left float-left">{{service.name}}</div>
+                                        <button class="btn btn-primary float-right" (click)="book(service)">Reservar</button>
+                                      </button>
+                                      <p>Precio: {{service.price}}</p>
+                                      <p>Duración aprox: {{service.time}}</p>
+                                    </accordion-group>
+                                  </accordion>
                             </tab>
                         </tabset>
-                        <div *ngFor="let service of actualEstablisment.services">
-                        </div>
                     </div>
                 </div>
                 <div class="float-right ">
@@ -59,6 +53,15 @@
                     </ul>
                 </div>
             </div>
+        </div>
+    </div>
+    <p></p>
+    <div>
+        <h4 for="coments" class="text-center">Déjanos tus comentarios</h4>
+        <p></p>
+        <div class="align-baseline">
+            <input type="text" style="font-size:14pt; width: 92%;">
+            <button class="btn btn-primary" style="margin-left: 15px;">Enviar</button>
         </div>
     </div>
 </div>

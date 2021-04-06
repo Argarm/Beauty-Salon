@@ -36,7 +36,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BookingsComponent } from './user-profile/bookings/bookings.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ModalConfirmationOfDeleteBookComponent } from './helpers/modal-confirmation-of-delete-book/modal-confirmation-of-delete-book.component';
-
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 
 registerLocaleData(localeEs);
 
@@ -69,6 +69,7 @@ registerLocaleData(localeEs);
     TabsModule.forRoot(),
     BrowserAnimationsModule,
     BrowserModule,
+    AccordionModule.forRoot(),
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,

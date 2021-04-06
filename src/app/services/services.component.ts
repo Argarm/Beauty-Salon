@@ -20,8 +20,7 @@ export class ServicesComponent implements OnInit {
     "Nombre",
     "Mejor valorados",
     "Abierto ahora",
-    "Para ella",
-    "Para él",
+    "Favoritos",
   ]
   actualFilter = this.filters[0];
   notFavIcon = "../../assets/rest.png"
@@ -48,6 +47,8 @@ export class ServicesComponent implements OnInit {
 
     })
   }
+
+  
   preprocessData(rawData: any): Establishments {
     var processedData = rawData;
     if(this.accountService.userValue){
@@ -94,20 +95,17 @@ export class ServicesComponent implements OnInit {
         this.openNow();
         break;
         case 3:
-        this.gender();
-        break;
-        case 4:
-        this.gender();
+        this.getFavorites();
         break;
     }
   }
 
   private openNow() {
-
+    console.log("abierto ahora")
   }
 
-  private gender() {
-
+  private getFavorites() {
+    this.establishments = this.establishments.filter(element => element.isUserFavorite)
   }
 
   ngOnInit(): void {

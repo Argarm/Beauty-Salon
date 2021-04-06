@@ -15,8 +15,8 @@
       <li class="nav-item" ><a class="nav-link" routerLink="iniciar_sesion">Iniciar Sesión</a></li>
     </ul>
     <ul class="navbar-nav navbar-right" *ngIf="userLogged">
-      <li ><a class="nav-link" routerLink=""><img [src]="cartImgUrl" alt=""></a></li>
-      <li ><a class="nav-link" routerLink=""><img [src]="chatImgUrl" alt=""></a></li>
+      <li ><a class="nav-link" routerLink="perfil/compras"><img [src]="cartImgUrl" alt=""></a></li>
+      <li ><a class="nav-link" routerLink="perfil/reseñas"><img [src]="chatImgUrl" alt=""></a></li>
       <li ><a class="nav-link" routerLink="perfil/favoritos"><img [src]="heartImgUrl" alt=""></a></li>
       <li ><a class="nav-link" routerLink="perfil"><img src="{{userImgUrl}}" alt=""></a></li>
     </ul>

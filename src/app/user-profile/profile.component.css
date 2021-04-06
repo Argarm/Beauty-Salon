@@ -8,8 +8,3 @@ li {
     width: 300px;
     border: 1px solid black;
 }
-
-.inner-border{
-    max-width: 100%;
-    border: 1px solid red;
-}

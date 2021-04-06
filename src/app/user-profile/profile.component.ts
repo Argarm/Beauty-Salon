@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActionSequence } from 'protractor';
 import { User } from '../helpers/models/user.model';
 import { AccountService } from '../helpers/services/account.service';
 
@@ -13,26 +14,36 @@ export class ProfileComponent implements OnInit {
   userProfilePicture ;
 
   options = [
-    {name : 'Reservas', router: "/perfil"},
-    {name: 'Reseñas', router: "/perfil/reseñas"},
-    {name:'Compras', router: "/perfil/compras"},
-    {name: 'Favoritos', router: "/perfil/favoritos"}
+    {name: 'Reservas', router: "/perfil", active : false},
+    {name: 'Favoritos', router: "/perfil/favoritos", active : false},
+    {name: 'Compras', router: "/perfil/compras", active : false},
+    {name: 'Reseñas', router: "/perfil/reseñas", active : false}
   ]
-  constructor(private accountService : AccountService,private router : Router) { 
+
+  constructor(private accountService : AccountService,private router : Router , private route : ActivatedRoute) { 
     this.user = this.accountService.userValue
     this.userProfilePicture = this.accountService.userImage
+    this.router.events.subscribe((val)=>{
+      if(val instanceof NavigationEnd){
+        this.options.forEach(option => {
+          if(option.router == val.url.replace("rese%C3%B1as","reseñas"))option.active = true
+          else option.active = false;
+        })
+      }
+
+    })
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
   
-  isThisTabSelected(){
-    console.log("no")
-  }
+  
+
   navigate($event){
-    console.log($event)
-    this.router.navigate([])
+    var routing = $event.heading.toLowerCase()
+    if(routing == 'reservas')routing=''
+    this.router.navigate([`perfil/${routing}`])
   }
+
   logout(){
     this.accountService.logout()
   }

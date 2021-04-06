@@ -12,9 +12,9 @@
                     </div>
                     <div class="mt-3">
                         <tabset [vertical]="true" type="pills">
-                            <tab class="inner-border" [heading]="option.name" (selectTab)="navigate($event)" (selectTab)="isThisTabSelected(option.name)" *ngFor="let option of options"></tab>
+                            <tab [heading]="option.name" (selectTab)="navigate($event)" [active]="option.active" *ngFor="let option of options"></tab>
                         </tabset>
-                        <button (click)="logout()">Cerrar Sesion</button>
+                        <button class="btn btn-danger" (click)="logout()">Cerrar Sesion</button>
                     </div>
                 </div>
             </div>

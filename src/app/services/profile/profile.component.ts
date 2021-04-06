@@ -51,8 +51,13 @@ export class ServiceProfileComponent implements OnInit {
     const acentos = { 'á': 'a', 'é': 'e', 'í': 'i', 'ó': 'o', 'ú': 'u', 'Á': 'A', 'É': 'E', 'Í': 'I', 'Ó': 'O', 'Ú': 'U' };
     return cadena.split('').map(letra => acentos[letra] || letra).join('').toString();
   }
+
   ngOnInit(): void {
 
+  }
+
+  hola(){
+    console.log("aquí")
   }
 
   book(service: Service) {
@@ -61,7 +66,6 @@ export class ServiceProfileComponent implements OnInit {
     this.shopService.setServiceOnEstablisment(serviceNormalized, establishmentName,service)
     this.router.navigate([`reservar`], { relativeTo: this.route })
   }
-
 
   private normaliceName(name: string) {
     var result = name.toLowerCase()
@@ -73,6 +77,7 @@ export class ServiceProfileComponent implements OnInit {
     processedData.schedule = processedData.schedule.split('/')
     return processedData;
   }
+
   private getServiceCategorys(services : any) {
     var group = services.reduce(function(rv, x) {
       (rv[x["category"]] = rv[x["category"]] || []).push(x);

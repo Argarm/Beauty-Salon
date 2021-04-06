@@ -1,5 +1,5 @@
 <h3>Mis favoritos</h3>
-<div *ngFor="let establisment of establisments; let i = index">
+<div *ngFor="let establisment of establisments; let i = index" (click)=navigateTo(establisment)>
     <br>
     <div class="card border">
         <div class="card-header">

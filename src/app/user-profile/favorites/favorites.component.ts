@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Establishments } from 'src/app/helpers/models/service.model';
 import { AccountService } from 'src/app/helpers/services/account.service';
-import { ShopService } from 'src/app/helpers/services/shop.service';
 
 @Component({
   selector: 'app-favorites',
@@ -10,7 +10,7 @@ import { ShopService } from 'src/app/helpers/services/shop.service';
 })
 export class FavoritesComponent implements OnInit {
   establisments : Establishments[] = [];
-  constructor(private accountService : AccountService, private shopService : ShopService) { 
+  constructor(private accountService : AccountService, private router: Router ) { 
     this.accountService.userSubject.subscribe(userValue =>{
       var userFavEstablismentsName = userValue.favorites.split("/n ")
       userFavEstablismentsName.forEach(data => {
@@ -19,21 +19,25 @@ export class FavoritesComponent implements OnInit {
           var establishmentName = this.formatData(data.split("-")[1])
           serviceMainName = this.removeAccents(serviceMainName)
           this.accountService.getEstablishment(serviceMainName,establishmentName).subscribe((actualEstablisment : any) => {
-            this.establisments.push(actualEstablisment.data())
-            console.log(this.establisments)
-            
+            var establisment = actualEstablisment.data()
+            establisment.serviceMainName = data.split("-")[0]
+            console.log(establisment)
+            this.establisments.push(establisment)
           })
         }
-        console.log(this.establisments)
       })
     })
   }
 
-  formatData(data: string) {
+  navigateTo(establishment){
+    console.log(establishment)
+    //this.router.navigate([`${}`])
+  }
+  private formatData(data: string) {
     return data.toLowerCase().replace(" ","_")
   }
 
-  removeAccents(cadena) {
+  private removeAccents(cadena) {
     const acentos = { 'á': 'a', 'é': 'e', 'í': 'i', 'ó': 'o', 'ú': 'u', 'Á': 'A', 'É': 'E', 'Í': 'I', 'Ó': 'O', 'Ú': 'U' };
     return cadena.split('').map(letra => acentos[letra] || letra).join('').toString();
   }

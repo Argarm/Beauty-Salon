@@ -97,6 +97,8 @@ export class AccountService {
         return this.firestore.collection(service).doc(`${document}`).collection('servicios').snapshotChanges()
     }
     getEstablishment(id,document){
+        console.log(id)
+        console.log(document)
         var service = id.toLowerCase()
         return this.firestore.collection(service).doc(`${document}`).get()
     }

@@ -1,12 +1,18 @@
-<h3>Mis favoritos</h3>
-<div *ngFor="let establisment of establisments; let i = index" (click)=navigateTo(establisment)>
-    <br>
-    <div class="card border">
-        <div class="card-header">
-            <h4>{{establisment.name}}</h4>
+<h3 (click)="navigateTo('a')">Mis favoritos</h3>
+
+<tabset>
+    <tab [heading]="service" *ngFor="let service of services">
+        <div *ngFor="let establishment of filterEstablismentByService(service); let i = index" (click)=navigateTo(establisment)>
+            <br>
+            <div class="card border">
+                <div class="card-header">
+                    <h4>{{establishment.name}}</h4>
+                </div>
+                <div class="card-body">
+                    <p>El dia: {{establishment.street}}</p>
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-            <p>El dia: {{establisment.street}}</p>
-        </div>
-    </div>
-</div>
+    </tab>
+</tabset>
+

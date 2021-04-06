@@ -74,7 +74,6 @@ export class ServiceProfileComponent implements OnInit {
     return processedData;
   }
   private getServiceCategorys(services : any) {
-    console.log(services)
     var group = services.reduce(function(rv, x) {
       (rv[x["category"]] = rv[x["category"]] || []).push(x);
       return rv;

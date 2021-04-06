@@ -1,6 +1,6 @@
 <h3>Mis favoritos</h3>
 
-<tabset>
+<tabset  [justified]="true">
     <tab [heading]="service" *ngFor="let service of services">
         <div *ngFor="let establishment of filterEstablismentByService(service); let i = index" (click)=navigateTo(establisment)>
             <br>

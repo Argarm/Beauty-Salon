@@ -137,7 +137,6 @@ export class BookComponent {
 
   checkValidEvent(event: any, duration: number) {
     var estimateEndOfEvent = addMinutes(event.date, duration)
-
     if (event.date < new Date() || estimateEndOfEvent.getHours() > this.todaySchedule.dayEnd) {
       alert("No vamos a poder atenderle a esa hora")
       return false
@@ -151,6 +150,7 @@ export class BookComponent {
       var minutes = +time.split(" ")[2]
       return hours * 60 + minutes
     } else {
+      if(time.split(" ")[1].indexOf("ho")!= -1)return 60*+time.split(" ")[0]
       return +time.split(" ")[0]
     }
   }
@@ -180,6 +180,8 @@ export class BookComponent {
   }
 
   private canMoveEvent(newStart: Date, newEnd: Date) {
+    console.log(newStart)
+    console.log(newEnd)
     return this.events.every((event) => {
       newStart < event.start && newEnd > event.start
     })

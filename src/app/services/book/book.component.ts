@@ -180,11 +180,8 @@ export class BookComponent {
   }
 
   private canMoveEvent(newStart: Date, newEnd: Date) {
-    console.log(newStart)
-    console.log(newEnd)
-    return this.events.every((event) => {
-      newStart < event.start && newEnd > event.start
-    })
+    var nextEvents = this.events.filter(element => element.start > new Date())
+    return nextEvents.every((event) => newStart < event.start && newEnd < event.start)
   }
 
   openModal() {

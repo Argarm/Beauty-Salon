@@ -60,18 +60,20 @@ export class ServiceProfileComponent implements OnInit {
   push(){
     console.log(this.accountService.userImage)
     var actualHour = new Date()
-    var reservationDay = this.getDay(actualHour)
-    var reservationHour = this.getHour(actualHour)
+    var commentDay = this.getDay(actualHour)
+    var commentHour = this.getHour(actualHour)
+    var commentDate = `${commentDay}-${commentHour}`
     var commentary = {
-      id :`${this.accountService.userValue.email}-${reservationDay}-${reservationHour}`,
       userName: this.accountService.userValue.name,
       userSurname: this.accountService.userValue.surname,
+      userEmail : this.accountService.userValue.email,
       comment : this.commentText,
       image : this.accountService.userImage,
-      date: new Date()
+      date: commentDate
     }
     this.comments.push(commentary)
     this.shopService.setCommentsForEstablisment(this.comments)
+    this.shopService.setCommentForUser(commentary)
     this.commentText =""
   }
 

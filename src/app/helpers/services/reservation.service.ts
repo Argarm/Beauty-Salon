@@ -14,7 +14,6 @@ export class ReservationService {
   storeNewReservation(user : User, globalService : string, establisment : string, reservationDay : string ,reservationHour : string, service : Service){
     this.storeReservationOnUserProfile(user, globalService, establisment, reservationDay ,reservationHour, service)
     this.storeReservationOnEstablismentProfile(user,globalService,establisment,reservationDay ,reservationHour,service)
-    
   }
 
   removeReservation(reservation : any, userEmail : string) {

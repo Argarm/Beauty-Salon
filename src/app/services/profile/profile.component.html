@@ -57,11 +57,14 @@
     </div>
     <p></p>
     <div>
-        <h4 for="coments" class="text-center">Déjanos tus comentarios</h4>
+        <h4 for="comments" class="text-center">Déjanos tus comentarios</h4>
         <p></p>
         <div class="align-baseline">
-            <input type="text" style="font-size:14pt; width: 92%;">
-            <button class="btn btn-primary" style="margin-left: 15px;">Enviar</button>
+            <input type="text" [(ngModel)]="commentText" style="font-size:14pt; width: 92%;">
+            <button class="btn btn-primary" style="margin-left: 15px;" (click)="push()">Enviar</button>
+        </div>
+        <div *ngFor="let comment of comments">
+            <p>{{comment}}</p>
         </div>
     </div>
 </div>

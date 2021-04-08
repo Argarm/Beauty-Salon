@@ -4,8 +4,6 @@ import { AccountService } from 'src/app/helpers/services/account.service';
 import { ShopService } from 'src/app/helpers/services/shop.service';
 import { Establishments, Service } from 'src/app/helpers/models/service.model';
 import { FirebaseStorageService } from 'src/app/helpers/services/firebase-storage.service';
-import { flattenDiagnosticMessageText } from 'typescript';
-
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -25,6 +23,9 @@ export class ServiceProfileComponent implements OnInit {
   };
   categorys : [];
   images : string [] = [];
+  comments : any[] = []
+  commentText : string;
+
   constructor(private route: ActivatedRoute, private shopService: ShopService, private accountService: AccountService, private router: Router,private firebaseStorage : FirebaseStorageService) {
     this.route.params.subscribe(_ => {
       var doc = this.shopService.getDocument()
@@ -56,8 +57,43 @@ export class ServiceProfileComponent implements OnInit {
 
   }
 
-  hola(){
-    console.log("aquí")
+  push(){
+    console.log(this.accountService.userImage)
+    var actualHour = new Date()
+    var reservationDay = this.getDay(actualHour)
+    var reservationHour = this.getHour(actualHour)
+    var commentary = {
+      id :`${this.accountService.userValue.email}-${reservationDay}-${reservationHour}`,
+      userName: this.accountService.userValue.name,
+      userSurname: this.accountService.userValue.surname,
+      comment : this.commentText,
+      image : this.accountService.userImage,
+      date: new Date()
+    }
+    this.comments.push(commentary)
+    this.shopService.setCommentsForEstablisment(this.comments)
+    this.commentText =""
+  }
+
+  getHour(date: Date): string {
+    let hour = this.checkTime(date.getHours())
+    let minutes = this.checkTime(date.getMinutes())
+    let seconds = this.checkTime(date.getSeconds())
+    var fullHour =`${hour}:${minutes}:${seconds}`
+    return fullHour; 
+  }
+  
+  
+  getDay(date: Date): string {
+    let day = this.checkTime(date.getDate())
+    let month = this.checkTime(date.getMonth() + 1)
+    let year = date.getFullYear()
+    var fullDate =`${day}-${month}-${year}` 
+    return fullDate
+  }
+
+  checkTime(i: number) {
+    return (i < 10) ? "0" + i : i;
   }
 
   book(service: Service) {

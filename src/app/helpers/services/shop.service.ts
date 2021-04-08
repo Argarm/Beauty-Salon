@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Service } from 'src/app/helpers/models/service.model';
-
+import { AngularFirestore } from '@angular/fire/firestore';
 @Injectable({
   providedIn: 'root'
 })
 export class ShopService {
 
-  constructor() { }
+  constructor(private firestore : AngularFirestore) { }
   private actualDocument : string;
   private actualCollection : string;
   private service : Service
@@ -23,6 +23,11 @@ export class ShopService {
     this.actualDocument = document;
   }
 
+  setCommentsForEstablisment(comments: any []){
+    comments.forEach(comment =>{
+      this.firestore.collection(this.actualCollection).doc(this.actualDocument).collection("reseñas").doc(comment.id).set(comment)
+    })
+  }
   getDocument(){
     return this.actualDocument;
   }

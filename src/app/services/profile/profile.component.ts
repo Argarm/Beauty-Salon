@@ -45,6 +45,11 @@ export class ServiceProfileComponent implements OnInit {
         })
         
       })
+      this.shopService.getAllCommentsForEstablisment().subscribe(establishmentComments =>{
+        establishmentComments.forEach(comment => {
+          this.comments.push(comment.payload.doc.data())
+        })
+      })
     })
   }
 

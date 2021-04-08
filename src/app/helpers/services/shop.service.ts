@@ -23,6 +23,10 @@ export class ShopService {
     this.actualDocument = document;
   }
 
+  getAllCommentsForEstablisment() {
+    return this.firestore.collection(this.actualCollection).doc(this.actualDocument).collection("reseñas").snapshotChanges()
+  }
+
   setCommentsForEstablisment(comments: any []){
     comments.forEach(comment =>{
       this.firestore.collection(this.actualCollection).doc(this.actualDocument).collection("reseñas").doc(`${comment.userEmail}-${comment.date}`).set(comment)

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AccountService } from 'src/app/helpers/services/account.service';
 
 @Component({
   selector: 'app-review',
@@ -6,10 +8,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./review.component.css']
 })
 export class ReviewComponent implements OnInit {
+  myComments : any[] = [];
 
-  constructor() { }
+  constructor(private accountService : AccountService,private route : Router) {
+    this.accountService.getUserReview(this.accountService.userValue.email).subscribe((reviews) =>{
+      reviews.forEach((review) =>{
+        this.myComments.push(review.payload.doc.data())
+      })
+    })
+   }
 
   ngOnInit(): void {
   }
 
+  navigate(comment : any){
+    console.log("aqui")
+    var establishment = comment.establishment.replace(" ","_").toLowerCase()
+    console.log(`/servicios/${comment.mainService}/${establishment}`)
+    this.route.navigate([`/servicios/${comment.mainService}/${establishment}`])
+  }
 }

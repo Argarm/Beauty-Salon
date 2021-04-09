@@ -16,6 +16,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 @Injectable({ providedIn: 'root' })
 export class AccountService {
 
+
     public userSubject: BehaviorSubject<User>;
     public user: Observable<User>;
     public userImage = "../assets/user.png";
@@ -108,6 +109,10 @@ export class AccountService {
 
     getUserBookings() {
         return this.firestore.collection("users").doc(this.userValue.email).collection("reservas").get()
+    }
+
+    getUserReview(email: string) {
+        return this.firestore.collection("users").doc(email).collection("reseñas").snapshotChanges()
     }
 
     private fillUserInformation(body){

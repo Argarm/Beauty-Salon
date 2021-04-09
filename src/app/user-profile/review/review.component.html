@@ -1,1 +1,13 @@
-<p>review works!</p>
+<h3>Reseñas</h3>
+<div *ngFor="let comment of myComments">
+    <br>
+    <div class="card border" (click)="navigate(comment)">
+        <div class="card-header">
+            <h4>{{comment.establishment}}</h4>
+        </div>
+        <div class="card-body">
+            {{comment.comment}}
+        </div>
+    </div>
+    <br>
+</div>

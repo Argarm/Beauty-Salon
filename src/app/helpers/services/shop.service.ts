@@ -24,7 +24,7 @@ export class ShopService {
   }
 
   getAllCommentsForEstablisment() {
-    return this.firestore.collection(this.actualCollection).doc(this.actualDocument).collection("reseñas").snapshotChanges()
+    return this.firestore.collection(this.actualCollection).doc(this.actualDocument).collection("reseñas").get()
   }
 
   setCommentsForEstablisment(comments: any []){

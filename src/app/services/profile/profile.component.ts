@@ -47,7 +47,8 @@ export class ServiceProfileComponent implements OnInit {
       })
       this.shopService.getAllCommentsForEstablisment().subscribe(establishmentComments =>{
         establishmentComments.forEach(comment => {
-          this.comments.push(comment.payload.doc.data())
+          this.comments.push(comment.data())
+          console.log("pasamos por aquí")
         })
       })
     })
@@ -63,12 +64,13 @@ export class ServiceProfileComponent implements OnInit {
   }
 
   push(){
-    console.log(this.accountService.userImage)
     var actualHour = new Date()
     var commentDay = this.getDay(actualHour)
     var commentHour = this.getHour(actualHour)
     var commentDate = `${commentDay}-${commentHour}`
     var commentary = {
+      mainService :  this.route.snapshot.params.servicio,
+      establishment : this.actualEstablisment.name,
       userName: this.accountService.userValue.name,
       userSurname: this.accountService.userValue.surname,
       userEmail : this.accountService.userValue.email,

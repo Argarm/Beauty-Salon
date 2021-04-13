@@ -181,7 +181,16 @@ export class BookComponent {
 
   private canMoveEvent(newStart: Date, newEnd: Date) {
     var nextEvents = this.events.filter(element => element.start > new Date())
-    return nextEvents.every((event) => newStart < event.start && newEnd < event.start)
+    nextEvents.pop()
+    if(newStart.getTime() > new Date().getTime()){
+      if(nextEvents.length == 0)return true
+      console.log(nextEvents)
+      return nextEvents.every(event => {
+        return !(( newStart.getTime() >= event.start.getTime() && newStart.getTime() <= event.end.getTime() ) || (newEnd.getTime() >= event.start.getTime() && newEnd.getTime() <= event.end.getTime()))
+      })
+    }else{
+      return false
+    } 
   }
 
   openModal() {

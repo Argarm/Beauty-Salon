@@ -99,9 +99,6 @@ export class AccountService {
     }
     getEstablishment(id,document){
         var service = id.toLowerCase()
-        console.log(">>>>>> Estamos en getEstablisment <<<<<<")
-        console.log(id)
-        console.log(document)
         return this.firestore.collection(service).doc(`${document}`).get()
     }
 

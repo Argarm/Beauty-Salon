@@ -48,7 +48,6 @@ export class ServiceProfileComponent implements OnInit {
       this.shopService.getAllCommentsForEstablisment().subscribe(establishmentComments =>{
         establishmentComments.forEach(comment => {
           this.comments.push(comment.data())
-          console.log("pasamos por aquí")
         })
       })
     })

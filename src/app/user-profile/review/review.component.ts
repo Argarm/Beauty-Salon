@@ -22,9 +22,7 @@ export class ReviewComponent implements OnInit {
   }
 
   navigate(comment : any){
-    console.log("aqui")
     var establishment = comment.establishment.replace(" ","_").toLowerCase()
-    console.log(`/servicios/${comment.mainService}/${establishment}`)
     this.route.navigate([`/servicios/${comment.mainService}/${establishment}`])
   }
 }

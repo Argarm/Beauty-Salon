@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuardBookGuard } from './helpers/auth-guard-book.guard';
 import { AuthGuard } from './helpers/auth.guard';
-import { LoginComponent } from './login/login.component';
-import { MainViewComponent } from './main-view/main-view.component';
+import { LoginComponent } from './common/login/login.component';
+import { MainViewComponent } from './common/main-view/main-view.component';
 import { FavoritesComponent } from './user-profile/favorites/favorites.component';
 import { ProfileComponent } from './user-profile/profile.component';
 import { PurchasesComponent } from './user-profile/purchases/purchases.component';
@@ -11,7 +11,7 @@ import { ReviewComponent } from './user-profile/review/review.component';
 import { BookComponent } from './services/book/book.component';
 import { ServiceProfileComponent } from './services/profile/profile.component';
 import { ServicesComponent } from './services/services.component';
-import { SignupComponent } from './signup/signup.component';
+import { SignupComponent } from './common/signup/signup.component';
 import { BookingsComponent } from './user-profile/bookings/bookings.component';
 
 const routes: Routes = [

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AccountService } from '../helpers/services/account.service';
+import { AccountService } from '../../helpers/services/account.service';
 
 @Component({
   selector: 'app-signup',
@@ -20,12 +20,12 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      name : ['prueba', Validators.required],
-      surname: ['texto de prueba', Validators.required],
-      tlf : ['123412341', [Validators.required,Validators.minLength(9),Validators.maxLength(9)]],
-      email: ['jj@jj.com', [Validators.required,Validators.email]],
-      password: ['12341234',[Validators.required,Validators.minLength(8)]],
-      repassword: ['12341234',[Validators.required,Validators.minLength(8)]]
+      name : ['', Validators.required],
+      surname: ['', Validators.required],
+      tlf : ['', [Validators.required,Validators.minLength(9),Validators.maxLength(9)]],
+      email: ['', [Validators.required,Validators.email]],
+      password: ['',[Validators.required,Validators.minLength(8)]],
+      repassword: ['',[Validators.required,Validators.minLength(8)]]
     },{validators : this.checkPasswordConfirmation})
   }
 

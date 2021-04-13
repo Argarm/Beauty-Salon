@@ -74,7 +74,7 @@ export class ServiceProfileComponent implements OnInit {
       userSurname: this.accountService.userValue.surname,
       userEmail : this.accountService.userValue.email,
       comment : this.commentText,
-      image : this.accountService.userImage,
+      image : this.accountService.userValue.image,
       date: commentDate
     }
     this.comments.push(commentary)

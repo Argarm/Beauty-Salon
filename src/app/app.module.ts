@@ -38,6 +38,14 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ModalConfirmationOfDeleteBookComponent } from './helpers/modal-confirmation-of-delete-book/modal-confirmation-of-delete-book.component';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { UserLoginComponent } from './User/user-login/user-login.component';
+import { UserSignupComponent } from './User/user-signup/user-signup.component';
+import { EstablishmentLoginComponent } from './Establishment/establishment-login/establishment-login.component';
+import { EstablishmentSignupComponent } from './Establishment/establishment-signup/establishment-signup.component';
+import { EstablishmentProfileComponent } from './Establishment/establishment-profile/establishment-profile.component';
+import { BooksComponent } from './Establishment/establishment-profile/books/books.component';
+import { ServicesAndProductsComponent } from './Establishment/establishment-profile/services-and-products/services-and-products.component';
+import { EmployeesComponent } from './Establishment/establishment-profile/employees/employees.component';
+import { StatisticsComponent } from './Establishment/establishment-profile/statistics/statistics.component';
 
 registerLocaleData(localeEs);
 
@@ -62,7 +70,15 @@ registerLocaleData(localeEs);
     ModalConfirmationOfBookComponent,
     BookingsComponent,
     ModalConfirmationOfDeleteBookComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    UserSignupComponent,
+    EstablishmentLoginComponent,
+    EstablishmentSignupComponent,
+    EstablishmentProfileComponent,
+    BooksComponent,
+    ServicesAndProductsComponent,
+    EmployeesComponent,
+    StatisticsComponent
   ],
   imports: [
     CarouselModule.forRoot(),

@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(private accountService : AccountService,private router : Router , private route : ActivatedRoute) { 
     this.user = this.accountService.userValue
-    this.userProfilePicture = this.accountService.userImage
+    this.userProfilePicture = this.accountService.userValue.image
     this.router.events.subscribe((val)=>{
       if(val instanceof NavigationEnd){
         this.options.forEach(option => {

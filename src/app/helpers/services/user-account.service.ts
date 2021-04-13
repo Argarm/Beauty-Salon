@@ -51,11 +51,11 @@ export class AccountService {
                 this.firebaseStorage.uploadUserImage(image,user.email).pipe(
                     finalize(()=>{
                       imageRef.getDownloadURL().subscribe((url) =>{
-                        this.userImage = url
+                        userFilled.image = url
                       })
                     })
                   ).subscribe()
-                
+                localStorage.setItem('user', JSON.stringify(userFilled));
                 this.userSubject.next(user);
                 this.router.navigate(['../'])
             }else{
@@ -71,8 +71,9 @@ export class AccountService {
                 var user = data.data() as User
                 if(user.password === userPassword){
                     this.firebaseStorage.getUrlPath(`users/${userEmail}`).subscribe(image => {
-                        this.userImage = image
+                        user.image = image
                       })
+                    localStorage.setItem('user', JSON.stringify(user));
                     this.userSubject.next(user);
                     this.router.navigate(['../'])
                 }else{
@@ -115,7 +116,7 @@ export class AccountService {
     private fillUserInformation(body){
         let user = {
             email: body.email,
-            image : "",
+            image : body.image,
             name : body.name,
             password : body.password,
             surname: body.surname,

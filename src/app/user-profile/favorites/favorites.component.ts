@@ -41,7 +41,8 @@ export class FavoritesComponent implements OnInit {
   }
 
   private formatData(data: string) {
-    return data.toLowerCase().replace(" ","_")
+    return data.toLowerCase().replace(/\s/g,"_")
+    
   }
 
   filterEstablismentByService(service : string ){

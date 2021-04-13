@@ -4,15 +4,15 @@ import { AuthGuardBookGuard } from './helpers/guards/book.guard';
 import { AuthGuard } from './helpers/guards/user-auth.guard';
 import { LoginComponent } from './common/login/login.component';
 import { MainViewComponent } from './common/main-view/main-view.component';
-import { FavoritesComponent } from './user-profile/favorites/favorites.component';
-import { ProfileComponent } from './user-profile/profile.component';
-import { PurchasesComponent } from './user-profile/purchases/purchases.component';
-import { ReviewComponent } from './user-profile/review/review.component';
+import { FavoritesComponent } from './User/user-profile/favorites/favorites.component';
+import { ProfileComponent } from './User/user-profile/profile.component';
+import { PurchasesComponent } from './User/user-profile/purchases/purchases.component';
+import { ReviewComponent } from './User/user-profile/review/review.component';
 import { BookComponent } from './services/book/book.component';
 import { ServiceProfileComponent } from './common/public-establishment-profile/profile.component';
 import { ServicesComponent } from './services/services.component';
 import { SignupComponent } from './common/signup/signup.component';
-import { BookingsComponent } from './user-profile/bookings/bookings.component';
+import { BookingsComponent } from './User/user-profile/bookings/bookings.component';
 
 const routes: Routes = [
   {path: "iniciar_sesion", component: LoginComponent},

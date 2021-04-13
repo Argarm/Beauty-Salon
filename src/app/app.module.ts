@@ -14,10 +14,10 @@ import { LoginComponent } from './common/login/login.component';
 import { SignupComponent } from './common/signup/signup.component';
 import { MainViewComponent } from './common/main-view/main-view.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ProfileComponent } from './user-profile/profile.component';
-import { ReviewComponent } from './user-profile/review/review.component';
-import { PurchasesComponent } from './user-profile/purchases/purchases.component';
-import { FavoritesComponent } from './user-profile/favorites/favorites.component';
+import { ProfileComponent } from './User/user-profile/profile.component';
+import { ReviewComponent } from './User/user-profile/review/review.component';
+import { PurchasesComponent } from './User/user-profile/purchases/purchases.component';
+import { FavoritesComponent } from './User/user-profile/favorites/favorites.component';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
@@ -33,10 +33,11 @@ import { FilterPipe } from './helpers/filterPipe';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { RatingModule } from 'ngx-bootstrap/rating';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { BookingsComponent } from './user-profile/bookings/bookings.component';
+import { BookingsComponent } from './User/user-profile/bookings/bookings.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ModalConfirmationOfDeleteBookComponent } from './helpers/modal-confirmation-of-delete-book/modal-confirmation-of-delete-book.component';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { UserLoginComponent } from './User/user-login/user-login.component';
 
 registerLocaleData(localeEs);
 
@@ -60,7 +61,8 @@ registerLocaleData(localeEs);
     HeaderBookCalendarComponent,
     ModalConfirmationOfBookComponent,
     BookingsComponent,
-    ModalConfirmationOfDeleteBookComponent
+    ModalConfirmationOfDeleteBookComponent,
+    UserLoginComponent
   ],
   imports: [
     CarouselModule.forRoot(),

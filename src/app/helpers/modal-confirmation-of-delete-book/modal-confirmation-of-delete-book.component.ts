@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
 import { BookingsComponent } from 'src/app/user-profile/bookings/bookings.component';
-import { AccountService } from '../services/account.service';
+import { AccountService } from '../services/user-account.service';
 import { ReservationService } from '../services/reservation.service';
 
 @Component({

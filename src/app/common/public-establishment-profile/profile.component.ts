@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AccountService } from 'src/app/helpers/services/account.service';
+import { AccountService } from 'src/app/helpers/services/user-account.service';
 import { ShopService } from 'src/app/helpers/services/shop.service';
 import { Establishments, Service } from 'src/app/helpers/models/service.model';
 import { FirebaseStorageService } from 'src/app/helpers/services/firebase-storage.service';

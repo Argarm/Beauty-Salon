@@ -3,7 +3,7 @@ import firebase from 'firebase';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ModalConfirmationOfDeleteBookComponent } from 'src/app/helpers/modal-confirmation-of-delete-book/modal-confirmation-of-delete-book.component';
 import { Establishments, Service } from 'src/app/helpers/models/service.model';
-import { AccountService } from 'src/app/helpers/services/account.service';
+import { AccountService } from 'src/app/helpers/services/user-account.service';
 import { ReservationService } from 'src/app/helpers/services/reservation.service';
 
 @Component({

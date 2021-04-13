@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Establishments } from 'src/app/helpers/models/service.model';
-import { AccountService } from 'src/app/helpers/services/account.service';
+import { AccountService } from 'src/app/helpers/services/user-account.service';
 import { ShopService } from 'src/app/helpers/services/shop.service';
 import { environment } from 'src/environments/environment';
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AccountService } from 'src/app/helpers/services/account.service';
+import { AccountService } from 'src/app/helpers/services/user-account.service';
 
 @Component({
   selector: 'app-review',

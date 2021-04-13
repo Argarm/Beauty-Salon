@@ -3,7 +3,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ModalConfirmationOfBookComponent } from '../../helpers/modal-confirmation-of-book/modal-confirmation-of-book.component';
 import { Service } from '../../helpers/models/service.model';
 import { User } from '../../helpers/models/user.model';
-import { AccountService } from '../../helpers/services/account.service';
+import { AccountService } from '../../helpers/services/user-account.service';
 
 @Component({
   selector: 'app-main-view',

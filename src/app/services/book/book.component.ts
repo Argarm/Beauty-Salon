@@ -4,7 +4,7 @@ import { differenceInMinutes, startOfDay, startOfHour, addMinutes } from 'date-f
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal'
 import { CustomDateFormatter } from 'src/app/helpers/cutomDateFormatter';
 import { ModalConfirmationOfBookComponent } from 'src/app/helpers/modal-confirmation-of-book/modal-confirmation-of-book.component';
-import { AccountService } from 'src/app/helpers/services/account.service';
+import { AccountService } from 'src/app/helpers/services/user-account.service';
 import { ShopService } from 'src/app/helpers/services/shop.service';
 import { Establishments, Service } from 'src/app/helpers/models/service.model';
 import { User } from 'src/app/helpers/models/user.model';

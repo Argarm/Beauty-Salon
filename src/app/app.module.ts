@@ -23,7 +23,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { ServicesComponent } from './services/services.component';
 import { BookComponent } from './services/book/book.component';
-import { ServiceProfileComponent } from './services/profile/profile.component';
+import { ServiceProfileComponent } from './common/public-establishment-profile/profile.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { HeaderBookCalendarComponent } from './helpers/header-book-calendar/header-book-calendar.component';

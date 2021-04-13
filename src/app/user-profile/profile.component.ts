@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ActionSequence } from 'protractor';
 import { User } from '../helpers/models/user.model';
-import { AccountService } from '../helpers/services/account.service';
+import { AccountService } from '../helpers/services/user-account.service';
 
 @Component({
   selector: 'app-profile',

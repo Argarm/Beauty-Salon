@@ -2,7 +2,7 @@ import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from '../../helpers/models/user.model';
-import { AccountService } from '../../helpers/services/account.service';
+import { AccountService } from '../../helpers/services/user-account.service';
 import { environment } from 'src/environments/environment';
 
 const usersKey = 'beauty-salon-user-example';

@@ -2,13 +2,11 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { finalize, map } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 
-import { environment } from '../../../environments/environment';
 import { User } from '../models/user.model';
 import { FirebaseStorageService } from './firebase-storage.service';
-import { HeaderComponent } from 'src/app/common/header/header.component';
 import { AngularFireStorage } from '@angular/fire/storage';
 
 
@@ -22,7 +20,6 @@ export class AccountService {
     public userImage = "../assets/user.png";
     constructor(
         private router: Router,
-        private http: HttpClient,
         private firestore : AngularFirestore,
         private firebaseStorage : FirebaseStorageService,
         private angularFireStore : AngularFireStorage

@@ -55,6 +55,6 @@ export class ModalConfirmationOfBookComponent implements OnInit {
   confirmar(){
     this.reservationService.storeNewReservation(this.user,this.globalService,this.establismentName,this.reservationDay,this.reservationHour,this.service)
     this.modalService.hide()
-    this.router.navigate([""])
+    this.router.navigate([`/servicios/${this.globalService}/${this.establismentName}`])
   }
 }

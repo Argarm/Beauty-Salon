@@ -1,5 +1,5 @@
 .scroll-container {
-    height: calc(100vh - 320px);
+    height: calc(100vh - 450px);
     overflow-y: auto;
 }
 

@@ -43,9 +43,4 @@ export class ProfileComponent implements OnInit {
     if(routing == 'reservas')routing=''
     this.router.navigate([`perfil/${routing}`])
   }
-
-  logout(){
-    this.accountService.logout()
-  }
-
 }

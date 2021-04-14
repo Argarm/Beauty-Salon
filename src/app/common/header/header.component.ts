@@ -22,6 +22,7 @@ export class HeaderComponent implements OnInit {
   private chatImgUrl = "../assets/chat-bubble.png";
   private heartImgUrl = "../assets/heart.png";
   private userImgUrl = "../assets/user.png";
+  private logoutImgUrl = "../assets/log-out.png";
   
   constructor(private router : Router,private accountService : AccountService) { 
     this.userLogged = false
@@ -38,8 +39,8 @@ export class HeaderComponent implements OnInit {
         
   }
 
-  clearAll(){
-  
+  logout(){
+    this.accountService.logout()
   }
 
   goToService(servicio : string){

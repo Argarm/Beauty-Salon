@@ -9,7 +9,7 @@
                         <h4>{{booking.serviceName}}</h4>
                     </div>
                     <div class="card-body">
-                        <p>En : {{booking.establisment}}</p>
+                        <p (click)="navigate(booking)">En : {{booking.establisment}}</p>
                         <p>El dia: {{booking.reservationDate}}</p>
 
                     </div>
@@ -26,7 +26,7 @@
                         <h4>{{booking.serviceName}}</h4>
                     </div>
                     <div class="card-body">
-                        <p>En : {{booking.establisment}}</p>
+                        <p (click)="navigate(booking)">En : {{booking.establisment}}</p>
                         <p>El dia: {{booking.reservationDate}}</p>
                     </div>
                 </div>

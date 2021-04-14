@@ -5,6 +5,8 @@ import { ModalConfirmationOfDeleteBookComponent } from 'src/app/helpers/modal-co
 import { Establishments, Service } from 'src/app/helpers/models/service.model';
 import { AccountService } from 'src/app/helpers/services/user-account.service';
 import { ReservationService } from 'src/app/helpers/services/reservation.service';
+import { Router } from '@angular/router';
+import { ShopService } from 'src/app/helpers/services/shop.service';
 
 @Component({
   selector: 'app-bookings',
@@ -18,7 +20,7 @@ export class BookingsComponent implements OnInit {
   modalRef: BsModalRef;
   
 
-  constructor(private accounntService : AccountService, private reservationService : ReservationService, private modalService: BsModalService) { 
+  constructor(private accounntService : AccountService, private reservationService : ReservationService, private modalService: BsModalService, private router : Router,private shopService : ShopService) { 
     this.accounntService.getUserBookings().subscribe((userBookings) =>{
       userBookings.docs.forEach(userBookingData =>{
         this.preProcessData(userBookingData.data())
@@ -58,5 +60,11 @@ export class BookingsComponent implements OnInit {
     var hour = time.split(":")[0];
     var minutes = time.split(":")[1];
     return new Date(year,month,day,hour,minutes)
+  }
+
+  navigate(booking){
+    var establishmentName = booking.establisment.toLowerCase().replace(/\s/g,"_")
+    this.shopService.setActualEstablisment(booking.globalService,establishmentName)
+    this.router.navigate([`servicios/${booking.globalService}/${establishmentName}`])
   }
 }

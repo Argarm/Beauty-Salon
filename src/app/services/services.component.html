@@ -13,12 +13,12 @@
     <p></p>
     <div *ngFor="let establishment of establishments | myfilter: searchText">
         <div class="card border">
-            <div class="card-header">
+            <div class="card-header" (click)="navigate(establishment.name)">
                 <h4>
-                    <a (click)="navigate(establishment.name)">
+                    <a>
                         {{establishment.name}}
                     </a>
-                    <div class="float-right" (click)="toggle(establishment)" >
+                    <div class="float-right" (click)="$event.stopPropagation();toggle(establishment)" >
                         <p class="icon" *ngIf="!establishment.isUserFavorite" >&#9825;</p>
                         <p class="icon" *ngIf="establishment.isUserFavorite" >&#9829;</p>
                     </div>
@@ -28,7 +28,7 @@
                 <div class="row">
                     <div class="col-10">
                         <div class="row">
-                            <img [src]="establishment.image" class="space">
+                            <img [src]="establishment.image" class="space" (click)="navigate(establishment.name)">
                             <div class="float-right space">
                                 <p>{{establishment.street}}</p>
                                 <p class="card-text">{{establishment.tlf}}</p>

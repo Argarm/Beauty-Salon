@@ -71,7 +71,12 @@
                 <img [src]="comment.image" class="rounded-circle comp1">
                 <div class="card-boder col-10">
                     <div class="card-header">
-                        <h2>{{comment.userName}} {{comment.userSurname}} {{comment.date}}</h2>
+                        <h2>{{comment.userName}} {{comment.userSurname}} 
+                            
+                        <div class="float-right" >
+                            {{comment.date}}
+                        </div>
+                    </h2>
                         
                     </div>
                     <div class="card-body">

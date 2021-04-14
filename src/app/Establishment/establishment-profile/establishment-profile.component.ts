@@ -29,10 +29,6 @@ export class EstablishmentProfileComponent implements OnInit {
     this.router.navigate([`perfil-establecimiento/${routing}`])
   }
 
-  logout(){
-    console.log("salimos")
-  }
-
   removeAccents(cadena) {
     const acentos = { 'á': 'a', 'é': 'e', 'í': 'i', 'ó': 'o', 'ú': 'u', 'Á': 'A', 'É': 'E', 'Í': 'I', 'Ó': 'O', 'Ú': 'U' };
     return cadena.split('').map(letra => acentos[letra] || letra).join('').toString();

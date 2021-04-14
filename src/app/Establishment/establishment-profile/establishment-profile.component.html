@@ -13,7 +13,6 @@
                         <tabset [vertical]="true" type="pills">
                             <tab [heading]="option.name" (selectTab)="navigate($event)" [active]="option.active" *ngFor="let option of options"></tab>
                         </tabset>
-                        <button class="btn btn-danger" (click)="logout()" style="width: 100%;">Cerrar Sesion</button>
                     </div>
                 </div>
             </div>

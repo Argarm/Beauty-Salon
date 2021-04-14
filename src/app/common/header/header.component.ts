@@ -23,7 +23,8 @@ export class HeaderComponent implements OnInit {
   private heartImgUrl = "../assets/heart.png";
   private userImgUrl = "../assets/user.png";
   private logoutImgUrl = "../assets/log-out.png";
-  
+  private viewImgUrl = "../assets/eye-strikethrough.png";
+  private viewMode = "admin"
   constructor(private router : Router,private accountService : AccountService) { 
     this.userLogged = false
   }
@@ -34,6 +35,9 @@ export class HeaderComponent implements OnInit {
     this.servicios = environment.services
     this.user = this.accountService.userSubject.subscribe((user : User) => {
       this.userLogged = user ? true : false;
+      if(!this.userLogged){
+        this.viewMode = "../assets/eye.png"
+      }
     })
 
         
@@ -45,6 +49,17 @@ export class HeaderComponent implements OnInit {
 
   goToService(servicio : string){
     this.router.navigate(['servicios',servicio.toLowerCase()])
+  }
+
+  changeView(){
+    if(this.viewMode == "admin"){
+      this.viewImgUrl = "../assets/eye-strikethrough.png";
+      this.viewMode = "user"
+    }else{
+      this.viewImgUrl ="../assets/eye.png";
+      this.viewMode = "admin"
+    } 
+    
   }
 
 }

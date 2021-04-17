@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService } from '../helpers/services/user-account.service';
 import { ShopService } from '../helpers/services/shop.service';
 import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
-import { Establishments, Service } from '../helpers/models/service.model';
+import { Establishment, Service } from '../helpers/models/establishment.model';
 import { FirebaseStorageService } from '../helpers/services/firebase-storage.service';
 
 @Component({
@@ -15,7 +15,7 @@ import { FirebaseStorageService } from '../helpers/services/firebase-storage.ser
 export class ServicesComponent implements OnInit {
   serviceMainName: string;
   searchText
-  establishments: Establishments[] = []
+  establishments: Establishment[] = []
   filters = [
     "Nombre",
     "Mejor valorados",
@@ -33,7 +33,7 @@ export class ServicesComponent implements OnInit {
       this.accountService.getEstablishments(servicio).subscribe((establismentSnapshot) => {
         this.establishments = []
         establismentSnapshot.forEach((service: any) => {
-          var actualEstablisment: Establishments = this.preprocessData(service.payload.doc.data())
+          var actualEstablisment: Establishment = this.preprocessData(service.payload.doc.data())
           firebaseStorage.getUrlPath(`${servicio}/${service.payload.doc.id}/showcase.jpg`).subscribe(image => {
             actualEstablisment.image = image
           })
@@ -49,7 +49,7 @@ export class ServicesComponent implements OnInit {
   }
 
   
-  preprocessData(rawData: any): Establishments {
+  preprocessData(rawData: any): Establishment {
     var processedData = rawData;
     if(this.accountService.userValue){
       if(this.accountService.userValue.favorites.indexOf(processedData.name)!= -1)processedData.isUserFavorite = true;

@@ -44,21 +44,21 @@
                         </div>
 
                         <br>
-                        <div class="row justify-content-center">
-                            <div *ngFor="let service of establishment.services; let i = index">
-                                <div *ngIf="i<3" class="col-sm">
-                                    <div class="w-100 center">
-                                        <label>{{service.name}}</label>
+                        <div class="row">
+                            <div *ngFor="let service of establishment.services | slice:0:3; let i = index" class="px-3 service-card-container">
+                                <div class="service-card">
+                                    <div class="service-name">
+                                        {{service.name}}
                                     </div>
-                                    <div class="w-100 center">
-                                        <label>{{service.time}}</label>
+                                    <div class="service-info">
+                                        <div>
+                                            <b>Duración :</b>{{service.time}}
+                                        </div>
+                                        <div>
+                                            <b>Precio :</b>{{service.price}}
+                                        </div>
                                     </div>
-                                    <div class="w-100 center">
-                                        <label>{{service.price}}</label>
-                                    </div>
-                                    <div class="w-100 center">
-                                        <button class="btn btn-primary" (click)="book(establishment.name,service)">Reservar</button>
-                                    </div>
+                                    <button class="btn btn-primary book-service-btn" (click)="book(establishment.name,service)">Reservar</button>
                                 </div>
                             </div>
                         </div>

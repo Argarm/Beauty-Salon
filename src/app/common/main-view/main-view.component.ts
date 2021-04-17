@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ModalConfirmationOfBookComponent } from '../../helpers/modal-confirmation-of-book/modal-confirmation-of-book.component';
-import { Service } from '../../helpers/models/service.model';
+import { Service } from '../../helpers/models/establishment.model';
 import { User } from '../../helpers/models/user.model';
 import { AccountService } from '../../helpers/services/user-account.service';
 

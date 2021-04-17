@@ -6,10 +6,9 @@ import { CustomDateFormatter } from 'src/app/helpers/cutomDateFormatter';
 import { ModalConfirmationOfBookComponent } from 'src/app/helpers/modal-confirmation-of-book/modal-confirmation-of-book.component';
 import { AccountService } from 'src/app/helpers/services/user-account.service';
 import { ShopService } from 'src/app/helpers/services/shop.service';
-import { Establishments, Service } from 'src/app/helpers/models/service.model';
+import { Establishment, Service } from 'src/app/helpers/models/establishment.model';
 import { User } from 'src/app/helpers/models/user.model';
 import { environment } from 'src/environments/environment';
-import { tr } from 'date-fns/locale';
 
 @Component({
   selector: 'app-book',
@@ -44,7 +43,7 @@ export class BookComponent {
     dayStart: 0,
     dayEnd: 0
   };
-  actualEstablisment: Establishments;
+  actualEstablisment: Establishment;
   serviceStart: Date;
 
   constructor(private cdr: ChangeDetectorRef, private accountService: AccountService, private shopService: ShopService, private modalService: BsModalService) { }
@@ -220,7 +219,7 @@ export class BookComponent {
     }
   }
 
-  private fillInformation(establishment: Establishments) {
+  private fillInformation(establishment: Establishment) {
     var schedule = establishment.schedule.map(function (item) {
       item = item.trim()
       var day = {
@@ -245,7 +244,7 @@ export class BookComponent {
     this.setTodaySchedule(schedule, today)
   }
 
-  preprocessData(rawData: any): Establishments {
+  preprocessData(rawData: any): Establishment {
     var processedData = rawData;
     processedData.schedule = processedData.schedule.split('/')
     return processedData;

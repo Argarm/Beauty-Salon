@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService } from 'src/app/helpers/services/user-account.service';
 import { ShopService } from 'src/app/helpers/services/shop.service';
-import { Establishments, Service } from 'src/app/helpers/models/service.model';
+import { Establishment, Service } from 'src/app/helpers/models/establishment.model';
 import { FirebaseStorageService } from 'src/app/helpers/services/firebase-storage.service';
 @Component({
   selector: 'app-profile',
@@ -11,15 +11,16 @@ import { FirebaseStorageService } from 'src/app/helpers/services/firebase-storag
 })
 export class ServiceProfileComponent implements OnInit {
 
-  actualEstablisment: Establishments = {
+  actualEstablisment: Establishment = {
     name: "",
     rating: "",
     schedule: [],
     street: "",
     tlf: "",
-    image: "",
+    image: [],
     isUserFavorite: false,
-    services: []
+    services: [],
+    bookings: []
   };
   categorys : [];
   images : string [] = [];
@@ -116,7 +117,7 @@ export class ServiceProfileComponent implements OnInit {
     return result.replace(/\s/g, '_').trim()
   }
 
-  private preprocessData(rawData: any): Establishments {
+  private preprocessData(rawData: any): Establishment {
     var processedData = rawData;
     processedData.schedule = processedData.schedule.split('/')
     return processedData;

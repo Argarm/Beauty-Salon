@@ -7,7 +7,7 @@ export class User{
     password: string;
     image: string;
     favorites: string;
-
+    establishmentManager : string;
     constructor(name,surname,tlf,email,password,image) {
         this.name = name;
         this.surname = surname;

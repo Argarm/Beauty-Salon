@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { Service } from 'src/app/helpers/models/service.model';
+import { Service } from 'src/app/helpers/models/establishment.model';
 import { User } from 'src/app/helpers/models/user.model';
 import { ReservationService } from '../services/reservation.service';
 

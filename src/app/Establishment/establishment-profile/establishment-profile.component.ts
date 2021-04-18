@@ -1,8 +1,6 @@
 import { Component, MissingTranslationStrategy, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Router } from '@angular/router';
-import { removeAccents } from '@ng-bootstrap/ng-bootstrap/util/util';
-import { empty } from 'rxjs';
+import { Router, NavigationEnd } from '@angular/router';
 import { EstablishmentAccountService } from 'src/app/helpers/services/establishment-account.service';
 import { FirebaseStorageService } from 'src/app/helpers/services/firebase-storage.service';
 import { AccountService } from 'src/app/helpers/services/user-account.service';
@@ -18,10 +16,10 @@ export class EstablishmentProfileComponent implements OnInit {
   establishment;
   manager;
   options = [
-    {name: 'Citas', active : false},
-    {name: 'Empleados', active : false},
-    {name: 'Servicios y productos',  active : false},
-    {name: 'Estadísticas', active : false}
+    {name: 'Citas',router : "/perfil-establecimiento", active : false},
+    {name: 'Empleados', router : "/perfil-establecimiento/empleados",active : false},
+    {name: 'Servicios y productos', router : "/perfil-establecimiento/servicios-y-productos" ,active : false},
+    {name: 'Estadísticas', router : "/perfil-establecimiento/estadísticas",active : false}
   ]
 
   constructor(
@@ -49,6 +47,15 @@ export class EstablishmentProfileComponent implements OnInit {
         })
       });
     })
+    this.router.events.subscribe((val)=>{
+      if(val instanceof NavigationEnd){
+        this.options.forEach((option:any) => {
+          if(option.router == val.url)option.active = true
+          else option.active = false;
+        })
+      }
+
+    })
    }
 
 
@@ -57,9 +64,7 @@ export class EstablishmentProfileComponent implements OnInit {
 
   navigate($event){
     var routing = $event.heading.toLowerCase().replace(/\s/g,"-")
-
     if(routing == 'citas')routing=''
-    
     this.router.navigate([`perfil-establecimiento/${routing}`])
   }
 

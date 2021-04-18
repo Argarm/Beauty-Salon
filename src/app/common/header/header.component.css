@@ -8,11 +8,22 @@ img {
 .navbar{
     margin-bottom: 0px;
 }
+
 a{
     font-size: 20px;
     margin-right: 10px;
+    cursor: pointer;
 }
 
 .navbar{
     width: 100%;
+}
+
+.nav-left-panel > ul{ 
+    display: flex;
+    flex-direction: row;    
+}
+
+.bi-white {
+    fill: rgba(255,255,255,.5);
 }

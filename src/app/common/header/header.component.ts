@@ -24,7 +24,6 @@ export class HeaderComponent implements OnInit {
   private cartImgUrl = "../assets/shopping-cart.png";
   private chatImgUrl = "../assets/chat-bubble.png";
   private heartImgUrl = "../assets/heart.png";
-  private userImgUrl = "../assets/user.png";
   private logoutImgUrl = "../assets/log-out.png";
   private viewImgUrl = "../assets/eye-strikethrough.png";
   constructor(private router : Router,private accountService : AccountService, private establishmentService : EstablishmentAccountService) { 
@@ -40,11 +39,13 @@ export class HeaderComponent implements OnInit {
     })
     this.establishment = this.establishmentService.establishmentSubject.subscribe((establishment : Establishment) => {
       if(establishment != undefined){
+        this.managerMode = true;
         this.viewImgUrl = "../assets/eye-strikethrough.png";
         this.router.navigate(['/perfil-establecimiento'])
       }else{
+        this.managerMode = false;
         this.viewImgUrl = "../assets/eye.png"
-        this.router.navigate([''])
+        //this.router.navigate([''])
       }
     })
 

@@ -1,14 +1,20 @@
 <div class="services">
 
     <h3>{{serviceMainName}}</h3>
-    <input type="text" placeholder="Nombre" [(ngModel)]="searchText">
-    <label class="space">Filtrar: </label>
-    <button class="btn btn-primary dropdown-toggle short-button" type="button" id="dropdownMenuButton"
-        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        {{actualFilter}}
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" (click)="setFilter(i)" *ngFor="let filter of filters; let i = index">{{filter}}</a>
+    <div class="search-filter">
+        <input type="text" placeholder="Nombre" [(ngModel)]="searchText">
+        <div class="filter-actions">
+            <label class="space">Filtrar: </label>
+           
+                <button class="btn btn-sm btn-primary dropdown-toggle short-button" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="min-width: 150px;">
+                    {{actualFilter}}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" (click)="setFilter(i)" *ngFor="let filter of filters; let i = index">{{filter}}</a>
+                </div>       
+           
+        </div>
     </div>
     <p></p>
     <div *ngFor="let establishment of establishments | myfilter: searchText">
@@ -26,7 +32,7 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-10">
+                    <div class="col-12 col-lg-10">
                         <div class="row">
                             <img [src]="establishment.image" class="space" (click)="navigate(establishment.name)">
                             <div class="float-right space">
@@ -44,8 +50,9 @@
                         </div>
 
                         <br>
-                        <div class="row">
-                            <div *ngFor="let service of establishment.services | slice:0:3; let i = index" class="px-3 service-card-container">
+                        
+                        <div class="services-container">
+                            <div *ngFor="let service of establishment.services | slice:0:3; let i = index" class="px-3 service-card-container py-lg-0 py-3">
                                 <div class="service-card">
                                     <div class="service-name">
                                         {{service.name}}
@@ -62,6 +69,7 @@
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
                     <div class="float-right " style="background-color: rgba(0,0,0,.03); height: 100%;">
                         <ul>

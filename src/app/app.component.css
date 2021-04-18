@@ -4,7 +4,14 @@ img{
     height: auto;
 }
 
+
 body{
     font-size: 16px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
+
+.container{
+    min-height: 90vh;
+}
+
+

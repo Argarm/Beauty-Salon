@@ -9,14 +9,15 @@
 .space{
     margin-left: 3%;
     margin-right: 11px;
+    margin-bottom: 0px
 }
 
 .form-control{
     width: 70%;
 }
 
-input[type=text], select {
-    width: 75%;
+input[type=text] {
+    width: 100%;
     padding: 5px;
     margin: 8px 0;
     margin-left: 10;
@@ -24,9 +25,6 @@ input[type=text], select {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-}
-button{
-    width: 149px;
 }
 
 ul {
@@ -71,6 +69,11 @@ p.icon{
 }
 
 
+.services-container {
+    display: flex;
+    flex-direction: row;
+}
+
 .service-card-container {
    width: 33%;
    min-height: 100%;
@@ -106,4 +109,33 @@ p.icon{
     width: 100%;
     border-radius: 0 0 10px 10px;
 
+}
+
+.search-filter{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.search-filter > input {
+    margin-right: 10px;
+}
+
+
+.filter-actions { 
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 990px) {
+    .services-container {
+        flex-direction: column;
+    }
+
+    .service-card-container {
+        width: 100%
+    }
+    
 }

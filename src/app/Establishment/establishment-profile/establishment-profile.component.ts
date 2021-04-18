@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, MissingTranslationStrategy, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { removeAccents } from '@ng-bootstrap/ng-bootstrap/util/util';
+import { empty } from 'rxjs';
+import { EstablishmentAccountService } from 'src/app/helpers/services/establishment-account.service';
+import { FirebaseStorageService } from 'src/app/helpers/services/firebase-storage.service';
+import { AccountService } from 'src/app/helpers/services/user-account.service';
 
 @Component({
   selector: 'app-establishment-profile',
@@ -8,7 +13,10 @@ import { removeAccents } from '@ng-bootstrap/ng-bootstrap/util/util';
   styleUrls: ['./establishment-profile.component.css']
 })
 export class EstablishmentProfileComponent implements OnInit {
-  establishmentProfilePicture ;
+  establishmentPictures : String[] = [];
+  establishmentProfilePicture;
+  establishment;
+  manager;
   options = [
     {name: 'Citas', active : false},
     {name: 'Empleados', active : false},
@@ -16,7 +24,33 @@ export class EstablishmentProfileComponent implements OnInit {
     {name: 'Estadísticas', active : false}
   ]
 
-  constructor(private router : Router) { }
+  constructor(
+              private router : Router,
+              private establishmentAccountService : EstablishmentAccountService,
+              private accountService : AccountService,
+              private firebaseStorage : FirebaseStorageService,
+              private firestore : AngularFirestore) {
+    this.establishmentAccountService.logingEstablishmentFromManager();
+    this.establishmentAccountService.establishmentSubject.subscribe(establishment => {
+      this.establishment = establishment
+      console.log(this.establishment)
+    })
+    this.manager = this.accountService.userValue
+    var mainService;
+    this.firestore.collection('establishmentManagement').doc(this.manager.establishmentManager).get().subscribe((category: any) => {
+      mainService = category.data().mainService
+      console.log(`${mainService}/${this.manager.establishmentManager}`)
+      this.firebaseStorage.getAllUrlPaths(`${mainService}/${this.manager.establishmentManager}`).subscribe(urls =>{
+        urls.items.forEach(url =>{
+          this.firebaseStorage.getUrlPath(url.fullPath).subscribe((image) =>{
+            if(image.includes("showcase"))this.establishmentProfilePicture = image
+            this.establishmentPictures.push(image)
+          })
+        })
+      });
+    })
+   }
+
 
   ngOnInit(): void {
   }

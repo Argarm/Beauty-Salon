@@ -19,15 +19,14 @@ let users = JSON.parse(localStorage.getItem(usersKey)) || [];
 export class HeaderComponent implements OnInit {
   user: Subscription
   userLogged : boolean
-  brandName : string;
   establishment : Subscription;
+  managerMode = false;
   private cartImgUrl = "../assets/shopping-cart.png";
   private chatImgUrl = "../assets/chat-bubble.png";
   private heartImgUrl = "../assets/heart.png";
   private userImgUrl = "../assets/user.png";
   private logoutImgUrl = "../assets/log-out.png";
   private viewImgUrl = "../assets/eye-strikethrough.png";
-  private viewMode = "user"
   constructor(private router : Router,private accountService : AccountService, private establishmentService : EstablishmentAccountService) { 
     this.userLogged = false
   }
@@ -38,13 +37,15 @@ export class HeaderComponent implements OnInit {
     this.servicios = environment.services
     this.user = this.accountService.userSubject.subscribe((user : User) => {
       this.userLogged = user ? true : false;
-      if(this.userLogged){
-        this.viewImgUrl = "../assets/eye.png"
-        this.brandName = "Brand"
-      }
     })
     this.establishment = this.establishmentService.establishmentSubject.subscribe((establishment : Establishment) => {
-      console.log(establishment)
+      if(establishment != undefined){
+        this.viewImgUrl = "../assets/eye-strikethrough.png";
+        this.router.navigate(['/perfil-establecimiento'])
+      }else{
+        this.viewImgUrl = "../assets/eye.png"
+        this.router.navigate([''])
+      }
     })
 
         
@@ -59,13 +60,15 @@ export class HeaderComponent implements OnInit {
   }
 
   changeView(){
-    if(this.viewMode == "admin"){
+    if(this.establishmentService.establishmentValue != undefined){
       this.viewImgUrl ="../assets/eye.png";
-      this.viewMode = "user"
+      this.managerMode = false
+      this.establishmentService.logoutEstablishment();
     }else{
       this.viewImgUrl = "../assets/eye-strikethrough.png";
-      this.viewMode = "admin"
+      this.managerMode = true
       this.establishmentService.logingEstablishmentFromManager();
+
     } 
     
   }

@@ -1,23 +1,25 @@
+import { debugOutputAstAsTypeScript } from '@angular/compiler';
 import { Injectable } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-
-import { AccountService } from '../services/user-account.service';
+import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Observable } from 'rxjs';
+import { EstablishmentAccountService } from '../services/establishment-account.service';
 
 @Injectable({ providedIn: 'root' })
 export class EstablishmentAuthGuard implements CanActivate {
     constructor(
         private router: Router,
-        private accountService: AccountService
+        private establishmentAccountService: EstablishmentAccountService
     ) {}
-
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        const user = this.accountService.userValue;
-        if (user) {
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+        const establishment = this.establishmentAccountService.establishmentValue;
+        if (establishment) {
             return true;
         }
 
         
-        this.router.navigate(['/iniciar_sesion'], { queryParams: { returnUrl: state.url }});
+        this.router.navigate([''], { queryParams: { returnUrl: state.url }});
         return false;
     }
+
+    
 }

@@ -19,7 +19,8 @@
       <li><a class="nav-link" routerLink="perfil/compras"><img [src]="cartImgUrl" alt=""></a></li>
       <li><a class="nav-link" routerLink="perfil/reseñas"><img [src]="chatImgUrl" alt=""></a></li>
       <li><a class="nav-link" routerLink="perfil/favoritos"><img [src]="heartImgUrl" alt=""></a></li>
-      <li><a class="nav-link" routerLink="perfil"><img src="{{userImgUrl}}" alt=""></a></li>
+      <li *ngIf="!managerMode"><a class="nav-link" routerLink="perfil"><img src="{{userImgUrl}}" alt=""></a></li>
+      <li *ngIf="managerMode"><a class="nav-link" routerLink="perfil-establecimiento"><img src="{{userImgUrl}}" alt=""></a></li>
       <li><a class="nav-link" (click)="logout()"><img [src]="logoutImgUrl" alt=""></a></li>
 
     </ul>

@@ -183,7 +183,6 @@ export class BookComponent {
     nextEvents.pop()
     if(newStart.getTime() > new Date().getTime()){
       if(nextEvents.length == 0)return true
-      console.log(nextEvents)
       return nextEvents.every(event => {
         return !(( newStart.getTime() >= event.start.getTime() && newStart.getTime() <= event.end.getTime() ) || (newEnd.getTime() >= event.start.getTime() && newEnd.getTime() <= event.end.getTime()))
       })

@@ -22,15 +22,20 @@ export class ServiceProfileComponent implements OnInit {
     services: [],
     bookings: []
   };
+  mainService ;
   categorys : [];
   images : string [] = [];
   comments : any[] = []
   commentText : string;
+  navigationPage;
 
   constructor(private route: ActivatedRoute, private shopService: ShopService, private accountService: AccountService, private router: Router,private firebaseStorage : FirebaseStorageService) {
-    this.route.params.subscribe(_ => {
+    this.route.params.subscribe(params => {
       var doc = this.shopService.getDocument()
       var collection = this.shopService.getCollection()
+      this.navigationPage = `/servicios/${collection}`
+      this.mainService = params.servicio
+      this.mainService = this.mainService.charAt(0).toUpperCase() + this.mainService.slice(1)
       this.accountService.getEstablishment(collection, doc).subscribe((serviceSnapshot) => {
         this.accountService.getServices(collection, serviceSnapshot.id).subscribe((service) =>{
           this.actualEstablisment.services = service.map(data => <Service>data.payload.doc.data())

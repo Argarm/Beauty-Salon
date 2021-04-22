@@ -9,6 +9,7 @@ import { ShopService } from 'src/app/helpers/services/shop.service';
 import { Establishment, Service } from 'src/app/helpers/models/establishment.model';
 import { User } from 'src/app/helpers/models/user.model';
 import { environment } from 'src/environments/environment';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-book',
@@ -45,8 +46,14 @@ export class BookComponent {
   };
   actualEstablisment: Establishment;
   serviceStart: Date;
-
-  constructor(private cdr: ChangeDetectorRef, private accountService: AccountService, private shopService: ShopService, private modalService: BsModalService) { }
+  mainService;
+  establishmentName;
+  constructor(private cdr: ChangeDetectorRef, private accountService: AccountService, private shopService: ShopService, private modalService: BsModalService, private route : ActivatedRoute) { 
+    this.route.params.subscribe(params => {
+      this.mainService = params.servicio
+      this.mainService = this.mainService.charAt(0).toUpperCase() + this.mainService.slice(1)
+    })
+  }
 
   ngAfterViewInit() {
     this.scrollToCurrentView();
@@ -55,6 +62,7 @@ export class BookComponent {
     this.accountService.getEstablishment(collection, document).subscribe((serviceSnapshot) => {
       this.actualEstablisment = this.preprocessData(serviceSnapshot.data())
       this.fillInformation(this.actualEstablisment)
+      this.establishmentName = this.actualEstablisment.name
     });
     this.accountService.getEstablishmentBookings(collection,document).subscribe((establishmentsBookings) => {
       establishmentsBookings.forEach((booking)=>{

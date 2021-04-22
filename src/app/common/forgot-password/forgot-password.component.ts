@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AccountService } from 'src/app/helpers/services/user-account.service';
 
 @Component({
@@ -38,7 +38,8 @@ export class ForgotPasswordComponent implements OnInit {
       }else{
         message = `El usuario ${this.f.email.value} no está registrado`;
       }
-      alert(message)
+      var aux = alert(message)
+      this.router.navigate(['../iniciar_sesion'])
     })
   }
 }

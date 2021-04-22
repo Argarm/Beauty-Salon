@@ -11,7 +11,7 @@ import { AccountService } from '../../helpers/services/user-account.service';
 })
 export class ProfileComponent implements OnInit {
   user: User
-  userProfilePicture ;
+  userProfilePicture ="../../../assets/user.png";
   ImEditing : boolean;
   options = [
     {name: 'Reservas', router: "/perfil", active : false},
@@ -22,7 +22,10 @@ export class ProfileComponent implements OnInit {
 
   constructor(private accountService : AccountService,private router : Router , private route : ActivatedRoute) { 
     this.user = this.accountService.userValue
-    this.userProfilePicture = this.accountService.userValue.image
+    this.accountService.userSubject.subscribe(data=> {
+      this.userProfilePicture = data.image
+      this.ngOnInit()
+    })
     this.router.events.subscribe((val : any)=>{
       if(val instanceof NavigationEnd){
         this.ImEditing = val.url.indexOf("editar") != -1
@@ -37,8 +40,6 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {}
   
-  
-
   navigate($event){
     var routing = $event.heading.toLowerCase()
     if(routing == 'reservas')routing=''

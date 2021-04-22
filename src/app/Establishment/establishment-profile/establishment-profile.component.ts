@@ -31,13 +31,11 @@ export class EstablishmentProfileComponent implements OnInit {
     this.establishmentAccountService.logingEstablishmentFromManager();
     this.establishmentAccountService.establishmentSubject.subscribe(establishment => {
       this.establishment = establishment
-      console.log(this.establishment)
     })
     this.manager = this.accountService.userValue
     var mainService;
     this.firestore.collection('establishmentManagement').doc(this.manager.establishmentManager).get().subscribe((category: any) => {
       mainService = category.data().mainService
-      console.log(`${mainService}/${this.manager.establishmentManager}`)
       this.firebaseStorage.getAllUrlPaths(`${mainService}/${this.manager.establishmentManager}`).subscribe(urls =>{
         urls.items.forEach(url =>{
           this.firebaseStorage.getUrlPath(url.fullPath).subscribe((image) =>{

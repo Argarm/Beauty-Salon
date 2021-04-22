@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { delay } from 'rxjs/operators';
 import { AccountService } from 'src/app/helpers/services/user-account.service';
 
 @Component({
@@ -17,7 +19,8 @@ export class EditUserInfoComponent implements OnInit {
 
   constructor(
     private formBuilder : FormBuilder,
-    private accountService : AccountService  ) { }
+    private accountService : AccountService,
+    private router : Router  ) { }
 
   ngOnInit(): void {
     var user = this.accountService.userValue
@@ -36,6 +39,7 @@ export class EditUserInfoComponent implements OnInit {
     if(this.form.errors)alert("Las contraseñas deben coincidir")
     if(this.form.invalid)return;
     this.accountService.updateUserInfo(this.form.value, this.selectedFile)
+    this.router.navigate([`perfil`])
   }
 
   onFileSelected(event){

@@ -19,9 +19,9 @@ export class AccountService {
     public userImage = "../assets/user.png";
     constructor(
         private router: Router,
-        private firestore : AngularFirestore,
-        private firebaseStorage : FirebaseStorageService,
-        private angularFireStore : AngularFireStorage
+        private firestore: AngularFirestore,
+        private firebaseStorage: FirebaseStorageService,
+        private angularFireStore: AngularFireStorage
     ) {
         this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
         this.user = this.userSubject.asObservable();
@@ -42,64 +42,84 @@ export class AccountService {
         this.router.navigate(['']);
     }
 
-    registerUser(user :User, image : File){
+    registerUser(user: User, image: File) {
         const userFilled = this.fillUserInformation(user)
-        this.firestore.collection('users').doc(userFilled.email).get().subscribe(data =>{
-            if(!data.exists){
+        this.firestore.collection('users').doc(userFilled.email).get().subscribe(data => {
+            if (!data.exists) {
                 this.firestore.collection('users').doc(userFilled.email).set(userFilled)
                 var imageRef = this.angularFireStore.ref(`users/${user.email}`)
-                this.firebaseStorage.uploadUserImage(image,user.email).pipe(
-                    finalize(()=>{
-                      imageRef.getDownloadURL().subscribe((url) =>{
-                        userFilled.image = url
-                      })
+                this.firebaseStorage.uploadUserImage(image, user.email).pipe(
+                    finalize(() => {
+                        imageRef.getDownloadURL().subscribe((url) => {
+                            userFilled.image = url
+                        })
                     })
-                  ).subscribe()
+                ).subscribe()
                 localStorage.setItem('user', JSON.stringify(userFilled));
                 this.userSubject.next(user);
                 this.router.navigate(['../'])
-            }else{
+            } else {
                 alert('El usuario "' + userFilled.email + '" ya está en uso')
             }
         })
     }
 
-    
-    logingUser(userEmail , userPassword){
+
+    logingUser(userEmail, userPassword) {
         this.firestore.collection('users').doc(userEmail).get().subscribe(data => {
-            if(data.exists){
+            if (data.exists) {
                 var user = data.data() as User
-                if(user.password === userPassword){
+                if (user.password === userPassword) {
                     this.firebaseStorage.getUrlPath(`users/${userEmail}`).subscribe(image => {
                         user.image = image
-                      })
+                    })
                     localStorage.setItem('user', JSON.stringify(user));
                     this.userSubject.next(user);
                     this.router.navigate(['../'])
-                }else{
+                } else {
                     alert("La contraseña no es correcta")
                 }
-            }else{
+            } else {
                 alert("no se ha encontrado ningun usuario con ese correo")
             }
         })
     }
 
-    updateUserInfo(value: any, selectedFile: any) {
-        console.log(value)
+    async updateUserInfo(value: any, selectedFile: any) {
+        var user = this.userValue
+        user.name = value.name
+        user.surname = value.surname
+        user.tlf = value.tlf
+        this.firestore.collection('users').doc(user.email).get().subscribe(data => {
+            this.firestore.collection('users').doc(user.email).set(user)
+            if(selectedFile){
+                var imageRef = this.angularFireStore.ref(`users/${user.email}`)
+                this.firebaseStorage.uploadUserImage(selectedFile, user.email).pipe(
+                    finalize(() => {
+                        imageRef.getDownloadURL().subscribe((url) => {
+                            user.image = url
+                        })
+                    })
+                ).subscribe()
+            }
+            localStorage.setItem('user', JSON.stringify(user));
+            console.log(user)
+            this.userSubject.next(user);
+        })
     }
 
-    getEstablishments(id : string){
+    getEstablishments(id: string) {
         var service = id.toLowerCase()
 
         return this.firestore.collection(service).snapshotChanges()
     }
 
-    getServices(collection,document){
-        var service = collection.toLowerCase()        
+    getServices(collection, document) {
+        var service = collection.toLowerCase()
         return this.firestore.collection(service).doc(`${document}`).collection('servicios').snapshotChanges()
     }
-    getEstablishment(id,document){
+
+    getEstablishment(id, document) {
         var service = id.toLowerCase()
         return this.firestore.collection(service).doc(`${document}`).get()
     }
@@ -117,12 +137,15 @@ export class AccountService {
         return this.firestore.collection("users").doc(email).collection("reseñas").snapshotChanges()
     }
 
-    private fillUserInformation(body){
+    retrievePassword(email: any) {
+        return this.firestore.collection("users").doc(email).get()
+    }
+    private fillUserInformation(body) {
         let user = {
             email: body.email,
-            image : body.image,
-            name : body.name,
-            password : body.password,
+            image: body.image,
+            name: body.name,
+            password: body.password,
             surname: body.surname,
             tlf: body.tlf
         }

@@ -47,6 +47,7 @@ import { ServicesAndProductsComponent } from './Establishment/establishment-prof
 import { EmployeesComponent } from './Establishment/establishment-profile/employees/employees.component';
 import { StatisticsComponent } from './Establishment/establishment-profile/statistics/statistics.component';
 import { EditUserInfoComponent } from './User/edit-user-info/edit-user-info.component';
+import { ForgotPasswordComponent } from './common/forgot-password/forgot-password.component';
 
 registerLocaleData(localeEs);
 
@@ -80,7 +81,8 @@ registerLocaleData(localeEs);
     ServicesAndProductsComponent,
     EmployeesComponent,
     StatisticsComponent,
-    EditUserInfoComponent
+    EditUserInfoComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     CarouselModule.forRoot(),

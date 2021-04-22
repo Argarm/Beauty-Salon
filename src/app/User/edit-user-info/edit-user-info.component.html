@@ -51,10 +51,10 @@
       <label for="Imagen">Imagen</label>
       <input type="file" (change)="onFileSelected($event)" class="form-control"> 
     </div>
+    <p>* Los cambios en la imagen pueden tardar en hacerse visibles</p>
     <div class="form-group">
       <button [disabled]="loading" class="btn btn-primary">
         Guardar
       </button>
-      <a routerLink="" class="btn btn-link">Salir</a>
     </div>
   </form>

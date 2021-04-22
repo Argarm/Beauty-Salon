@@ -1,18 +1,23 @@
-import { Directive, HostBinding, HostListener, Input } from '@angular/core';
+import { Directive, ElementRef, HostBinding, HostListener, Input } from '@angular/core';
 
 @Directive({
   selector: '[appOverDirective]'
 })
 export class OverDirectiveDirective {
   @Input('appOverDirective') class;
-  @HostBinding('class') hover : string;
-  constructor() { }
+  @HostBinding('class') hover: string;
+  
+  constructor(private el: ElementRef) { }
 
-  @HostListener('mouseenter') mouseover(eventData: Event){
-    this.hover="active"
+  @HostListener('mouseenter') onMouseEnter() {
+    this.highlight('blue');
   }
 
-  @HostListener('mouseleave') mouseleave(eventData: Event){
-    this.hover="default"
+  @HostListener('mouseleave') onMouseLeave() {
+    this.highlight("black");
+  }
+
+  private highlight(color: string) {
+    this.el.nativeElement.style.color = color;
   }
 }

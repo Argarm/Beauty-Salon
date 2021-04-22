@@ -60,9 +60,12 @@
     <div>
         <h4 for="comments" class="text-center">Déjanos tus comentarios</h4>
         <p></p>
-        <div class="align-baseline">
-            <input type="text" [(ngModel)]="commentText" style="font-size:14pt; width: 92%;">
-            <button class="btn btn-primary" style="margin-left: 15px;" (click)="push()">Enviar</button>
+        <div class="search-filter">
+            <input type="text" [(ngModel)]="commentText">
+            <div class="filter-actions">
+                    <button class="btn btn-sm btn-primary dropdown-toggle short-button" style="margin-left: 15px;" (click)="push()">Enviar
+                    </button>
+            </div>
         </div>
         <div *ngFor="let comment of comments.slice().reverse()">
             <p></p>

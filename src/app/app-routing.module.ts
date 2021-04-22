@@ -19,6 +19,7 @@ import { BooksComponent } from './Establishment/establishment-profile/books/book
 import { EmployeesComponent } from './Establishment/establishment-profile/employees/employees.component';
 import { ServicesAndProductsComponent } from './Establishment/establishment-profile/services-and-products/services-and-products.component';
 import { StatisticsComponent } from './Establishment/establishment-profile/statistics/statistics.component';
+import { EditUserInfoComponent } from './User/edit-user-info/edit-user-info.component';
 
 const routes: Routes = [
   {path: "iniciar_sesion", component: LoginComponent},
@@ -27,7 +28,8 @@ const routes: Routes = [
     {path: "", component: BookingsComponent},
     {path: "reseñas", component: ReviewComponent},
     {path: "compras", component: PurchasesComponent},
-    {path: "favoritos",component: FavoritesComponent}
+    {path: "favoritos",component: FavoritesComponent},
+    {path: "editar/informacion-usuario", component: EditUserInfoComponent}
   ]},
   {path: "perfil-establecimiento", component: EstablishmentProfileComponent, canActivate: [EstablishmentAuthGuard], children: [
     {path: "", component: BooksComponent},

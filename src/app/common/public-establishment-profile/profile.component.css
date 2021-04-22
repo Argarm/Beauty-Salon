@@ -42,3 +42,32 @@ img{
   width: 150px;
   height: 150px;
 }
+
+input[type=text] {
+  width: 100%;
+  padding: 5px;
+  margin: 8px 0;
+  margin-left: 10;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.search-filter{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.search-filter > input {
+  margin-right: 10px;
+}
+
+
+.filter-actions { 
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}

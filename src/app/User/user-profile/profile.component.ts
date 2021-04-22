@@ -12,7 +12,7 @@ import { AccountService } from '../../helpers/services/user-account.service';
 export class ProfileComponent implements OnInit {
   user: User
   userProfilePicture ;
-
+  ImEditing : boolean;
   options = [
     {name: 'Reservas', router: "/perfil", active : false},
     {name: 'Favoritos', router: "/perfil/favoritos", active : false},
@@ -23,8 +23,9 @@ export class ProfileComponent implements OnInit {
   constructor(private accountService : AccountService,private router : Router , private route : ActivatedRoute) { 
     this.user = this.accountService.userValue
     this.userProfilePicture = this.accountService.userValue.image
-    this.router.events.subscribe((val)=>{
+    this.router.events.subscribe((val : any)=>{
       if(val instanceof NavigationEnd){
+        this.ImEditing = val.url.indexOf("editar") != -1
         this.options.forEach(option => {
           if(option.router == val.url.replace("rese%C3%B1as","reseñas"))option.active = true
           else option.active = false;

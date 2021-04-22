@@ -1,0 +1,59 @@
+<p></p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Nombre</label>
+      <input 
+        type="text"
+        formControlName="name"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+      <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+        <div *ngIf="f.name.errors.required">Este campo está vacio</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="surname">Apellidos</label>
+      <input
+        type="text"
+        formControlName="surname"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.surname.errors }" />
+      <div *ngIf="submitted && f.surname.errors" class="invalid-feedback">
+        <div *ngIf="f.surname.errors.required">Este campo está vacio</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="tlf">Teléfono</label>
+      <input
+        type="text"
+        formControlName="tlf"
+        class="form-control"
+        [pattern]="mobNumberPattern"
+        [ngClass]="{ 'is-invalid': submitted && f.tlf.errors }" />
+      <div *ngIf="submitted && f.tlf.errors" class="invalid-feedback">
+        <div *ngIf="f.tlf.errors.required">Este campo está vacio</div>
+        <div *ngIf="f.tlf.errors.pattern">Introduzca un teléfono valido</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input 
+        type="email"
+        formControlName="email"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+        <div *ngIf="f.email.errors">Introduzca un email válido</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="Imagen">Imagen</label>
+      <input type="file" (change)="onFileSelected($event)" class="form-control"> 
+    </div>
+    <div class="form-group">
+      <button [disabled]="loading" class="btn btn-primary">
+        Guardar
+      </button>
+      <a routerLink="" class="btn btn-link">Salir</a>
+    </div>
+  </form>

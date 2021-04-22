@@ -15,3 +15,7 @@ li {
     flex-direction: row;
     justify-content: flex-end;
 }
+
+.bi-white {
+    fill: rgba(218, 17, 17, 0.5);
+}

@@ -46,6 +46,7 @@ import { BooksComponent } from './Establishment/establishment-profile/books/book
 import { ServicesAndProductsComponent } from './Establishment/establishment-profile/services-and-products/services-and-products.component';
 import { EmployeesComponent } from './Establishment/establishment-profile/employees/employees.component';
 import { StatisticsComponent } from './Establishment/establishment-profile/statistics/statistics.component';
+import { EditUserInfoComponent } from './User/edit-user-info/edit-user-info.component';
 
 registerLocaleData(localeEs);
 
@@ -78,7 +79,8 @@ registerLocaleData(localeEs);
     BooksComponent,
     ServicesAndProductsComponent,
     EmployeesComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    EditUserInfoComponent
   ],
   imports: [
     CarouselModule.forRoot(),

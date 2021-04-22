@@ -14,7 +14,6 @@ import { AngularFireStorage } from '@angular/fire/storage';
 @Injectable({ providedIn: 'root' })
 export class AccountService {
 
-
     public userSubject: BehaviorSubject<User>;
     public user: Observable<User>;
     public userImage = "../assets/user.png";
@@ -84,6 +83,10 @@ export class AccountService {
                 alert("no se ha encontrado ningun usuario con ese correo")
             }
         })
+    }
+
+    updateUserInfo(value: any, selectedFile: any) {
+        console.log(value)
     }
 
     getEstablishments(id : string){

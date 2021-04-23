@@ -21,6 +21,7 @@ import { ServicesAndProductsComponent } from './Establishment/establishment-prof
 import { StatisticsComponent } from './Establishment/establishment-profile/statistics/statistics.component';
 import { EditUserInfoComponent } from './User/edit-user-info/edit-user-info.component';
 import { ForgotPasswordComponent } from './common/forgot-password/forgot-password.component';
+import { EditEstablishmentProfileComponent } from './common/edit-establishment-profile/edit-establishment-profile.component';
 
 const routes: Routes = [
   {path: "iniciar_sesion", component: LoginComponent},
@@ -39,6 +40,7 @@ const routes: Routes = [
     {path: "estadísticas",component: StatisticsComponent}
   ] },
   { path: "recuperar-contraseña", component: ForgotPasswordComponent},
+  { path: "editar-establecimiento", component: EditEstablishmentProfileComponent},
   { path: "servicios/:servicio", component: ServicesComponent},
   { path: "servicios/:servicio/:nombre_servicio", component: ServiceProfileComponent, canActivate: [AuthGuardBookGuard]},
   {path: "servicios/:servicio/:nombre_servicio/reservar", component: BookComponent, canActivate: [AuthGuardBookGuard , UserAuthGuard]},

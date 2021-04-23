@@ -40,12 +40,8 @@ export class HeaderComponent implements OnInit {
     this.establishment = this.establishmentService.establishmentSubject.subscribe((establishment : Establishment) => {
       if(establishment != undefined){
         this.managerMode = true;
-        this.viewImgUrl = "../assets/eye-strikethrough.png";
-        this.router.navigate(['/perfil-establecimiento'])
       }else{
         this.managerMode = false;
-        this.viewImgUrl = "../assets/eye.png"
-        //this.router.navigate([''])
       }
     })
 
@@ -62,11 +58,9 @@ export class HeaderComponent implements OnInit {
 
   changeView(){
     if(this.establishmentService.establishmentValue != undefined){
-      this.viewImgUrl ="../assets/eye.png";
       this.managerMode = false
       this.establishmentService.logoutEstablishment();
     }else{
-      this.viewImgUrl = "../assets/eye-strikethrough.png";
       this.managerMode = true
       this.establishmentService.logingEstablishmentFromManager();
 

@@ -4,6 +4,7 @@ export class Establishment{
     schedule: string[];
     rating: string;
     street: string;
+    mainService : string;
     image : string[];
     isUserFavorite: boolean;
     services : Service [];

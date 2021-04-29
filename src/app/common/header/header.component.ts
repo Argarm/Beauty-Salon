@@ -63,7 +63,6 @@ export class HeaderComponent implements OnInit {
     }else{
       this.managerMode = true
       this.establishmentService.logingEstablishmentFromManager();
-
     } 
     
   }

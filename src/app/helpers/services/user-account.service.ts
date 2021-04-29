@@ -103,7 +103,6 @@ export class AccountService {
                 ).subscribe()
             }
             localStorage.setItem('user', JSON.stringify(user));
-            console.log(user)
             this.userSubject.next(user);
         })
     }

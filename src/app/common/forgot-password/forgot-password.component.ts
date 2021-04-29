@@ -32,7 +32,6 @@ export class ForgotPasswordComponent implements OnInit {
     if (this.form.invalid)return;
     this.accountService.retrievePassword(this.f.email.value).subscribe((data : any)=> {
       var message;
-      console.log()
       if(data.exists){
         message =`La contraseña para el ususario ${this.f.email.value} es ${data.data().password}`;
       }else{

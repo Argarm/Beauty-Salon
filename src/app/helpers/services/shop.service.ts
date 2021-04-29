@@ -27,6 +27,11 @@ export class ShopService {
     return this.firestore.collection(this.actualCollection).doc(this.actualDocument).collection("reseñas").get()
   }
 
+  getAllCommentsForEstablismentWithCollectionAndDoc(collection, doc) {
+    doc = doc.toLowerCase().replace(/\s/g,"_")
+    return this.firestore.collection(collection).doc(doc).collection("reseñas").get()
+  }
+
   setCommentsForEstablisment(comments: any []){
     comments.forEach(comment =>{
       this.firestore.collection(this.actualCollection).doc(this.actualDocument).collection("reseñas").doc(`${comment.userEmail}-${comment.date}`).set(comment)

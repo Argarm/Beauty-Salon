@@ -17,6 +17,7 @@ export class ServiceProfileComponent implements OnInit {
     schedule: [],
     street: "",
     tlf: "",
+    mainService:"",
     image: [],
     isUserFavorite: false,
     services: [],

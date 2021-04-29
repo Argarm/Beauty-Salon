@@ -21,6 +21,7 @@ export class MainViewComponent implements OnInit {
   quitar(){
     this.accountService.logingUser("aa@aa.com","12341234")
   }
+  
   ayuda(){
     console.log(this.establishmentAccountService.establishmentValue)
   }

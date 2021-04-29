@@ -8,9 +8,9 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-10">
+                <div class="col-9" style="margin-left: 15px;">
                     <div class="row">
-                        <carousel [isAnimated]="true" [showIndicators]="false" class="space">
+                        <carousel [isAnimated]="true" [showIndicators]="false">
                             <slide class="images" *ngFor="let image of establishment.image">
                                 <img [src]="image" alt="image">
                             </slide>
@@ -35,23 +35,23 @@
                             <tab [heading]="category.key" *ngFor="let category of categorys | keyvalue;">
                                 <accordion [isAnimated]="true">
                                     <accordion-group *ngFor="let service of category.value">
-                                        <button class="btn btn-link btn-block clearfix" accordion-heading type="button">
+                                        <button class="btn btn-link btn-block clearfix centered" accordion-heading type="button">
                                             <div class="pull-left float-left">{{service.name}}</div>
-                                            <button class="btn btn-primary float-right"
-                                                (click)="book(service)">Reservar</button>
+                                            <button class="btn btn-primary"
+                                                (click)="book(service)" style="margin-left: auto;">Reservar</button>
                                         </button>
                                         <p>Precio: {{service.price}}</p>
                                         <p>Duración aprox: {{service.time}}</p>
                                     </accordion-group>
                                 </accordion>
                             </tab>
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-5v5h-2v-5h-5v-2h5v-5h2v5h5v2z"/></svg>
+                            <div class="plus-sigh">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-5v5h-2v-5h-5v-2h5v-5h2v5h5v2z"/></svg>
                             </div>
                         </tabset>
                     </div>
                 </div>
-                <div class="float-right ">
+                <div class="float-right">
                     <ul class="">
                         <li *ngFor="let daySchedule of establishment.schedule">{{daySchedule}}</li>
                     </ul>

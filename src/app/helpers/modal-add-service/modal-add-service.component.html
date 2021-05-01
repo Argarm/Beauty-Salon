@@ -1,0 +1,57 @@
+<h3>Añadir nuevo servicio</h3>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label for="name">Categoría</label>
+      <select formControlName="categorys" class="form-control" (change)="onChange($event.target.value)">
+        <option *ngFor="let category of categorys" [value]="category">
+          {{category}}
+        </option>
+      </select>
+    </div>
+    <div *ngIf="newCategory" class="form-group">
+        <label for="name">Nombre de la nueva categoría</label>
+        <input type="text"
+        formControlName="name"
+        class="form-control"
+        >
+    </div>
+    <div class="form-group">
+      <label for="name">Nombre</label>
+      <input 
+        type="text"
+        formControlName="name"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+      <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+        <div *ngIf="f.name.errors.required">Este campo está vacio</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="name">Precio</label>
+      <input 
+        type="text"
+        formControlName="price"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+      <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+        <div *ngIf="f.name.errors.required">Este campo está vacio</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="name">Duración</label>
+      <input 
+        type="text"
+        formControlName="duration"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+      <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+        <div *ngIf="f.name.errors.required">Este campo está vacio</div>
+      </div>
+    </div>
+    <div class="form-group" style="display: flex;">
+        <button class="btn btn-secondary pull-left float-left" (click)="modalService.hide()">Cerrar</button>
+        <button class="btn btn-primary" style="margin-left: auto;">Confirmar</button>
+    </div>
+</form>

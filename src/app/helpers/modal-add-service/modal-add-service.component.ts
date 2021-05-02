@@ -27,20 +27,28 @@ export class ModalAddServiceComponent implements OnInit {
     var name = this.initialState.name
     var price = parseInt(this.initialState.price.replace("€",""))
     var duration = this.parseTime(this.initialState.duration)
+    console.log(duration)
     this.form = this.formBuilder.group({
       categorys: [category, Validators.required],
       name: [name, Validators.required],
       price: [price, Validators.required],
-      duration: ["00:01", [Validators.required]],
+      duration: [duration, [Validators.required]],
     })
     this.categorys = this.getCategorys()
   }
 
   private parseTime(duration: any) {
-    var hours = duration.match(/\d+/)[0]
-    var minutes = duration.match(/\d+/)[1]
-    if(minutes)
-    return ""
+    console.log("parseTime")
+    if(duration.includes("hor")){
+      console.log("alli")
+      var hours = duration.match(/\d+/g)[0]
+      var minutes = duration.match(/\d+/g)[1]
+      return `0${hours}:${minutes}`
+    }else{
+      console.log("aqui")
+      var minutes = duration.match(/\d+/)[0]
+      return `00:${minutes}`
+    }
   }
 
   getCategorys(): string[] {
@@ -59,12 +67,16 @@ export class ModalAddServiceComponent implements OnInit {
   get f() { return this.form.controls; }
 
   close(){
-    console.log("cerramos")
     this.setToUndefined=true;
     this.modalService.hide()
   }
 
   onSubmit() {
+    if(this.setToUndefined){
+      this.onClose.next(undefined)
+      this.modalService.hide()
+      return
+    }
     this.submitted = true;
     if(this.form.invalid)return;
     var dataInfo = {
@@ -74,8 +86,7 @@ export class ModalAddServiceComponent implements OnInit {
       time : this.f.duration.value,
     }
     this.establishmentService.setEstablishmentCategory(this.initialState.establishment, dataInfo)
-    if(this.setToUndefined)this.onClose.next(undefined)
-    else this.onClose.next(dataInfo);
+    this.onClose.next(dataInfo);
     this.modalService.hide()
   }
 

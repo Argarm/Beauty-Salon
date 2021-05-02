@@ -1,0 +1,13 @@
+<div class="modal-container">
+    <h2>¿Desea borrar este servicio?</h2>
+    
+    <p>Se va a proceder a borrar el servicio:</p>
+    <p>Con nombre: : {{service.name}}</p>
+    <p>Con el precio: {{service.price}}</p>
+    <p>Con una duración estimada de: {{service.time}}</p>
+    <div style="display: flex;">
+        <button class="btn btn-secondary pull-left float-left" (click)="modalService.hide()">Cerrar</button>
+        <button class="btn btn-danger" style="margin-left: auto;" (click)="delete()">Borrar</button>
+    </div>
+
+</div>

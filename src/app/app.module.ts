@@ -50,6 +50,7 @@ import { EditUserInfoComponent } from './User/edit-user-info/edit-user-info.comp
 import { ForgotPasswordComponent } from './common/forgot-password/forgot-password.component';
 import { EditEstablishmentProfileComponent } from './common/edit-establishment-profile/edit-establishment-profile.component';
 import { ModalAddServiceComponent } from './helpers/modal-add-service/modal-add-service.component';
+import { ModalDeleteServiceComponent } from './helpers/modal-delete-service/modal-delete-service.component';
 
 registerLocaleData(localeEs);
 
@@ -86,7 +87,8 @@ registerLocaleData(localeEs);
     EditUserInfoComponent,
     ForgotPasswordComponent,
     EditEstablishmentProfileComponent,
-    ModalAddServiceComponent
+    ModalAddServiceComponent,
+    ModalDeleteServiceComponent
   ],
   imports: [
     CarouselModule.forRoot(),

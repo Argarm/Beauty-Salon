@@ -9,7 +9,6 @@ import { AccountService } from './user-account.service';
 @Injectable({ providedIn: 'root' })
 export class EstablishmentAccountService {
     
-    
     public establishmentSubject: BehaviorSubject<Establishment>;
     public establishment: Observable<Establishment>;
     constructor(
@@ -95,4 +94,8 @@ export class EstablishmentAccountService {
 
     }
 
+    deleteService(establishment,name: any) {
+        var establishmentId = establishment.name.replace(/\s/g,"_").toLowerCase()
+        this.firestore.collection(establishment.mainService).doc(establishmentId).collection("servicios").doc(name).delete().then()
+    }
 }

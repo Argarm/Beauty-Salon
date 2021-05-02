@@ -3,11 +3,9 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 
-import { FirebaseStorageService } from './firebase-storage.service';
-import { AngularFireStorage } from '@angular/fire/storage';
 import { Booking, Establishment, Service } from '../models/establishment.model';
 import { AccountService } from './user-account.service';
-import { ShopService } from './shop.service';
+
 @Injectable({ providedIn: 'root' })
 export class EstablishmentAccountService {
     
@@ -17,7 +15,6 @@ export class EstablishmentAccountService {
     constructor(
         private router: Router,
         private firestore : AngularFirestore,
-        private shopService : ShopService,
         private accountService  : AccountService) {
             this.establishmentSubject = new BehaviorSubject<Establishment>(JSON.parse(localStorage.getItem('establishment')));
             this.establishment = this.establishmentSubject.asObservable();
@@ -27,7 +24,7 @@ export class EstablishmentAccountService {
             return this.establishmentSubject.value;
         }
         
-        logingEstablishment(establishmentId , establishmentPassword){
+        logingEstablishment(){
             
         }
         
@@ -70,5 +67,32 @@ export class EstablishmentAccountService {
                 })
             })
         }
+    setEstablishmentCategory(establishment, serviceData){
+        var establishmentId = establishment.name.replace(/\s/g,"_").toLowerCase()
+        serviceData.time = this.parseServiceDataTime(serviceData.time)
+        serviceData.price = this.parseServiceDataPrice(serviceData.price)
+        console.log(serviceData.time)
+        this.firestore.collection(establishment.mainService).doc(establishmentId).collection("servicios").doc(serviceData.name).set(serviceData)
+        establishment = JSON.parse(window.localStorage.getItem('establishment'))
+        establishment.services.push(serviceData)
+        localStorage.setItem('establishment', JSON.stringify(establishment));
+        this.establishmentSubject.next(establishment)
+
+    }
+
+    private parseServiceDataPrice(price: any): any {
+        return `${price} €`
+    }
+    private parseServiceDataTime(time: any): any {
+        var hours = time.split(":")[0]
+        var minutes = time.split(":")[1]
+        if(hours == "00") hours=""
+        if(hours != "01" && hours != "") hours = `${hours} horas`
+        if(hours == "01") hours = `${hours} hora`
+        if(minutes != "00")minutes = `${minutes} minutos`
+        else minutes = ""
+        return `${hours.substring(1,hours.length)} ${minutes}`.trim()
+
+    }
 
 }

@@ -4,11 +4,14 @@
 
     <div class="form-group">
       <label for="name">Categoría</label>
-      <select formControlName="categorys" class="form-control" (change)="onChange($event.target.value)">
-        <option *ngFor="let category of categorys" [value]="category">
+      <select formControlName="categorys" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.categorys.errors }" (change)="onChange($event.target.value)">
+        <option *ngFor="let category of categorys" [value]="category" >
           {{category}}
         </option>
       </select>
+      <div *ngIf="submitted && f.categorys.errors" class="invalid-feedback">
+        <div *ngIf="f.name.errors.required">Debe seleccionar una categoría</div>
+      </div>
     </div>
     <div *ngIf="newCategory" class="form-group">
         <label for="name">Nombre de la nueva categoría</label>
@@ -29,9 +32,9 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="name">Precio</label>
+      <label for="name">Precio (€)</label>
       <input 
-        type="text"
+        type="number"
         formControlName="price"
         class="form-control"
         [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
@@ -42,7 +45,7 @@
     <div class="form-group">
       <label for="name">Duración</label>
       <input 
-        type="text"
+        type="time"
         formControlName="duration"
         class="form-control"
         [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
@@ -51,7 +54,7 @@
       </div>
     </div>
     <div class="form-group" style="display: flex;">
-        <button class="btn btn-secondary pull-left float-left" (click)="modalService.hide()">Cerrar</button>
+        <button class="btn btn-secondary pull-left float-left" (click)="close()">Cerrar</button>
         <button class="btn btn-primary" style="margin-left: auto;">Confirmar</button>
     </div>
 </form>

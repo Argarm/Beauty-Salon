@@ -15,8 +15,12 @@ export class EditEstablishmentProfileComponent implements OnInit {
   categorys : [];
   comments : any[] = [];
   establishment : Establishment;
-  constructor(private firebaseStorage: FirebaseStorageService, private shopService : ShopService, private modalService: BsModalService) {
-    var establishmentPreprocessed = JSON.parse(window.localStorage.getItem('establishment'))
+  constructor(private firebaseStorage: FirebaseStorageService, private shopService : ShopService, private modalService: BsModalService,private establishmentAccount : EstablishmentAccountService) {
+    var establishmentPreprocessed;
+    this.establishmentAccount.establishment.subscribe(x => {
+      establishmentPreprocessed = x
+    })
+    console.log(establishmentPreprocessed)
     establishmentPreprocessed.schedule = establishmentPreprocessed.schedule.split('/')
     this.establishment = establishmentPreprocessed
     this.categorys = this.getServiceCategorys(this.establishment.services)
@@ -50,11 +54,45 @@ export class EditEstablishmentProfileComponent implements OnInit {
   }
 
   addService(){
-    var message="hola"
     var initialState = {
-      categorys : this.categorys
+      categorys : this.categorys,
+      establishment : this.establishment,
+      category : "",
+      name : "",
+      price : "",
+      duration : ""
     }
     this.modalRef = this.modalService.show(ModalAddServiceComponent, { initialState: { initialState }, backdrop: "static", keyboard: false });
+    this.modalRef.content.onClose.subscribe(result =>{
+      this.establishment.services.push(result)
+      this.categorys = this.getServiceCategorys(this.establishment.services) 
+    })
+  }
+  editService(servicio){
+    console.log(servicio)
+    var initialState = {
+      categorys : this.categorys,
+      establishment : this.establishment,
+      category : servicio.category,
+      name : servicio.name,
+      price : servicio.price,
+      duration : servicio.time
+    }
+     this.modalRef = this.modalService.show(ModalAddServiceComponent, { initialState: { initialState }, backdrop: "static", keyboard: false });
+    this.modalRef.content.onClose.subscribe(result =>{
+      console.log(result)
+      if(result != undefined){
+        console.log("entramos")
+        this.establishment.services.push(result)
+        this.categorys = this.getServiceCategorys(this.establishment.services) 
+      }
+
+    })
+  }
+
+  removeService(servicio){
+    console.log(servicio)
+    console.log("eliminamos el servicio")
   }
 
 }

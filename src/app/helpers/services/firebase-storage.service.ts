@@ -19,5 +19,9 @@ export class FirebaseStorageService {
   uploadUserImage(image : File,userName : string){
     return this.angularFireStore.upload(`users/${userName}`,image).snapshotChanges()
   }
+  
+  uploadEstablishmentImage(image : File,path : string){
+    return this.angularFireStore.upload(path,image).snapshotChanges()
+  }
 
 }

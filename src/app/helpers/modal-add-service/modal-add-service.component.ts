@@ -38,17 +38,19 @@ export class ModalAddServiceComponent implements OnInit {
   }
 
   private parseTime(duration: any) {
-    console.log("parseTime")
-    if(duration.includes("hor")){
-      console.log("alli")
-      var hours = duration.match(/\d+/g)[0]
-      var minutes = duration.match(/\d+/g)[1]
-      return `0${hours}:${minutes}`
+    if(duration){
+      if(duration.includes("hor")){
+        var hours = duration.match(/\d+/g)[0]
+        var minutes = duration.match(/\d+/g)[1]
+        return `0${hours}:${minutes}`
+      }else{
+        var minutes = duration.match(/\d+/)
+        return `00:${minutes}`
+      }
     }else{
-      console.log("aqui")
-      var minutes = duration.match(/\d+/)[0]
-      return `00:${minutes}`
+      return ""
     }
+    
   }
 
   getCategorys(): string[] {

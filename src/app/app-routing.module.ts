@@ -22,6 +22,7 @@ import { StatisticsComponent } from './Establishment/establishment-profile/stati
 import { EditUserInfoComponent } from './User/edit-user-info/edit-user-info.component';
 import { ForgotPasswordComponent } from './common/forgot-password/forgot-password.component';
 import { EditEstablishmentProfileComponent } from './common/edit-establishment-profile/edit-establishment-profile.component';
+import { EditEstablishmentInfoComponent } from './Establishment/edit-establishment-info/edit-establishment-info.component';
 
 const routes: Routes = [
   {path: "iniciar_sesion", component: LoginComponent},
@@ -37,7 +38,8 @@ const routes: Routes = [
     {path: "", component: BooksComponent},
     {path: "empleados", component: EmployeesComponent},
     {path: "servicios-y-productos", component: ServicesAndProductsComponent},
-    {path: "estadísticas",component: StatisticsComponent}
+    {path: "estadísticas",component: StatisticsComponent},
+    {path: "editar/informacion-establecimiento", component: EditEstablishmentInfoComponent}
   ] },
   { path: "recuperar-contraseña", component: ForgotPasswordComponent},
   { path: "editar-establecimiento", component: EditEstablishmentProfileComponent},

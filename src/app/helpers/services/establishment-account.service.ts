@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, scheduled } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 import { Booking, Establishment, Service } from '../models/establishment.model';
 import { AccountService } from './user-account.service';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { FirebaseStorageService } from './firebase-storage.service';
+import { finalize } from 'rxjs/operators';
+import { type } from 'os';
 
 @Injectable({ providedIn: 'root' })
 export class EstablishmentAccountService {
@@ -14,7 +18,9 @@ export class EstablishmentAccountService {
     constructor(
         private router: Router,
         private firestore : AngularFirestore,
-        private accountService  : AccountService) {
+        private accountService  : AccountService,
+        private firebaseStorage: FirebaseStorageService,
+        private angularFireStore: AngularFireStorage) {
             this.establishmentSubject = new BehaviorSubject<Establishment>(JSON.parse(localStorage.getItem('establishment')));
             this.establishment = this.establishmentSubject.asObservable();
         }
@@ -79,6 +85,41 @@ export class EstablishmentAccountService {
 
     }
 
+    updateEstablismentInfo(value: any, selectedFile: any) {
+        console.log(this.establishmentValue.name)
+        var establishment = {
+            name : "",
+            street: "",
+            tlf: "",
+            rating : "",
+            schedule: ""
+        };
+        establishment.name = this.establishmentValue.name
+        this.establishmentValue.street = value.street 
+        establishment.street = value.street
+        this.establishmentValue.tlf = value.tlf
+        establishment.tlf = value.tlf
+        establishment.rating = this.establishmentValue.rating
+        establishment.schedule = this.parseScheduleToString(this.establishmentValue.schedule)
+        var establishmentId = establishment.name.replace(/\s/g,"_").toLowerCase()
+        this.firestore.collection(this.establishmentValue.mainService).doc(establishmentId).get().subscribe(data => {
+            this.firestore.collection(this.establishmentValue.mainService).doc(establishmentId).set(establishment)
+            if(selectedFile){
+                this.firebaseStorage.uploadEstablishmentImage(selectedFile, `${this.establishmentValue.mainService}/${establishmentId}/showcase.jpg`).subscribe()
+            }
+            localStorage.setItem('establishment', JSON.stringify(this.establishmentValue));
+            this.establishmentSubject.next(this.establishmentValue);
+        })
+    }
+    parseScheduleToString(schedule:any): string {
+        return schedule
+    }
+
+    deleteService(establishment,name: any) {
+        var establishmentId = establishment.name.replace(/\s/g,"_").toLowerCase()
+        this.firestore.collection(establishment.mainService).doc(establishmentId).collection("servicios").doc(name).delete().then()
+    }
+
     private parseServiceDataPrice(price: any): any {
         return `${price} €`
     }
@@ -92,10 +133,5 @@ export class EstablishmentAccountService {
         else minutes = ""
         return `${hours.substring(1,hours.length)} ${minutes}`.trim()
 
-    }
-
-    deleteService(establishment,name: any) {
-        var establishmentId = establishment.name.replace(/\s/g,"_").toLowerCase()
-        this.firestore.collection(establishment.mainService).doc(establishmentId).collection("servicios").doc(name).delete().then()
     }
 }

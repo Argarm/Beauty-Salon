@@ -21,6 +21,7 @@ export class EstablishmentProfileComponent implements OnInit {
     {name: 'Servicios y productos', router : "/perfil-establecimiento/servicios-y-productos" ,active : false},
     {name: 'Estadísticas', router : "/perfil-establecimiento/estadísticas",active : false}
   ]
+  ImEditing : boolean;
 
   constructor(
               private router : Router,
@@ -47,6 +48,7 @@ export class EstablishmentProfileComponent implements OnInit {
     })
     this.router.events.subscribe((val)=>{
       if(val instanceof NavigationEnd){
+        this.ImEditing = val.url.indexOf("editar") != -1
         this.options.forEach((option:any) => {
           if(option.router == val.url)option.active = true
           else option.active = false;

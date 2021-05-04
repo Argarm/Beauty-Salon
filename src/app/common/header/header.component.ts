@@ -21,6 +21,7 @@ export class HeaderComponent implements OnInit {
   userLogged : boolean
   establishment : Subscription;
   managerMode = false;
+  isManager = false;
   private cartImgUrl = "../assets/shopping-cart.png";
   private chatImgUrl = "../assets/chat-bubble.png";
   private heartImgUrl = "../assets/heart.png";
@@ -35,8 +36,13 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.servicios = environment.services
     this.user = this.accountService.userSubject.subscribe((user : User) => {
+      console.log(`Aqui ${user}`)
       this.userLogged = user ? true : false;
+      if(user){
+        this.isManager = user.establishmentManager.length > 2
+      }
     })
+    
     this.establishment = this.establishmentService.establishmentSubject.subscribe((establishment : Establishment) => {
       if(establishment != undefined){
         this.managerMode = true;

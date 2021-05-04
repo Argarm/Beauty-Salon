@@ -23,10 +23,12 @@ import { EditUserInfoComponent } from './User/edit-user-info/edit-user-info.comp
 import { ForgotPasswordComponent } from './common/forgot-password/forgot-password.component';
 import { EditEstablishmentProfileComponent } from './common/edit-establishment-profile/edit-establishment-profile.component';
 import { EditEstablishmentInfoComponent } from './Establishment/edit-establishment-info/edit-establishment-info.component';
+import { EstablishmentSignupComponent } from './Establishment/establishment-signup/establishment-signup.component';
 
 const routes: Routes = [
   {path: "iniciar_sesion", component: LoginComponent},
   {path: "registro", component: SignupComponent},
+  {path: "registra-tu-establecimiento", component: EstablishmentSignupComponent},
   {path: "perfil", component: ProfileComponent, canActivate: [UserAuthGuard],children: [
     {path: "", component: BookingsComponent},
     {path: "reseñas", component: ReviewComponent},

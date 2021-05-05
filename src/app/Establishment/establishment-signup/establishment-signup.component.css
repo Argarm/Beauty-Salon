@@ -4,3 +4,8 @@
     margin-top: 20px;
     width: 80%;
 }
+
+.time-separator {
+    margin: 0 20px;
+    font-weight: bolder;
+}

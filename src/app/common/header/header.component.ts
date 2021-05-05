@@ -36,7 +36,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.servicios = environment.services
     this.user = this.accountService.userSubject.subscribe((user : User) => {
-      console.log(`Aqui ${user}`)
       this.userLogged = user ? true : false;
       if(user){
         this.isManager = user.establishmentManager.length > 2
@@ -56,6 +55,7 @@ export class HeaderComponent implements OnInit {
 
   logout(){
     this.accountService.logout()
+    this.establishmentService.logoutEstablishment()
   }
 
   goToService(servicio : string){

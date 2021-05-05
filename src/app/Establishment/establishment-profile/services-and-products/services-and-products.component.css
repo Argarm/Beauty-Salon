@@ -1,0 +1,25 @@
+.profile{
+    margin-top: 20px;
+  }
+.icon-separator{
+  margin-left: 15px;
+}
+  .container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .trash-can{
+    fill: rgb(219, 100, 100);
+  }
+  .plus-sigh{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .centered{
+    display: flex;
+    align-items: center;
+  }
+  

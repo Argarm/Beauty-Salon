@@ -21,7 +21,6 @@ export class EditEstablishmentProfileComponent implements OnInit {
     this.establishmentAccount.establishment.subscribe(x => {
       establishmentPreprocessed = x
     })
-    console.log(establishmentPreprocessed)
     establishmentPreprocessed.schedule = establishmentPreprocessed.schedule.split('/')
     this.establishment = establishmentPreprocessed
     this.categorys = this.getServiceCategorys(this.establishment.services)

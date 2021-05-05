@@ -30,6 +30,7 @@ export class ModalAddServiceComponent implements OnInit {
     console.log(duration)
     this.form = this.formBuilder.group({
       categorys: [category, Validators.required],
+      categoryName: [""],
       name: [name, Validators.required],
       price: [price, Validators.required],
       duration: [duration, [Validators.required]],
@@ -81,8 +82,12 @@ export class ModalAddServiceComponent implements OnInit {
     }
     this.submitted = true;
     if(this.form.invalid)return;
+    var actualCategory = this.f.categorys.value
+    if(this.newCategory){
+      actualCategory = this.form.value.categoryName
+    }
     var dataInfo = {
-      category : this.f.categorys.value,
+      category : actualCategory,
       name : this.f.name.value,
       price : this.f.price.value,
       time : this.f.duration.value,

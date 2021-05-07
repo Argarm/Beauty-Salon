@@ -17,11 +17,8 @@ export class EditEstablishmentProfileComponent implements OnInit {
   comments : any[] = [];
   establishment : Establishment;
   constructor(private firebaseStorage: FirebaseStorageService, private shopService : ShopService, private modalService: BsModalService,private establishmentAccount : EstablishmentAccountService) {
-    var establishmentPreprocessed;
-    this.establishmentAccount.establishment.subscribe(x => {
-      establishmentPreprocessed = x
-    })
-    establishmentPreprocessed.schedule = establishmentPreprocessed.schedule.split('/')
+    var establishmentPreprocessed = this.establishmentAccount.establishmentValue;
+    //establishmentPreprocessed.schedule = establishmentPreprocessed.schedule.split('/')
     this.establishment = establishmentPreprocessed
     this.categorys = this.getServiceCategorys(this.establishment.services)
     this.shopService.getAllCommentsForEstablismentWithCollectionAndDoc(this.establishment.mainService,this.establishment.name).subscribe(establishmentComments =>{
@@ -83,7 +80,7 @@ export class EditEstablishmentProfileComponent implements OnInit {
       console.log(result)
       if(result != undefined){
         var condition = this.establishment.services.filter(a =>{
-          return a.name == "Hombre - Corte en seco"
+          return a.name == result.name
         })
         if(condition.length==0){
           this.establishment.services.push(result)

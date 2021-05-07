@@ -14,7 +14,7 @@ export class ServicesAndProductsComponent implements OnInit {
   categorys : [];
   modalRef: BsModalRef;
   constructor(private establishmentService : EstablishmentAccountService,private modalService: BsModalService) { 
-    this.establishmentService.establishment.subscribe(x => this.establishment = x)
+    this.establishment = this.establishmentService.establishmentValue
     this.categorys = this.getServiceCategorys(this.establishment.services)
   }
 
@@ -61,7 +61,7 @@ export class ServicesAndProductsComponent implements OnInit {
       console.log(result)
       if(result != undefined){
         var condition = this.establishment.services.filter(a =>{
-          return a.name == "Hombre - Corte en seco"
+          return a.name == result.name
         })
         if(condition.length==0){
           this.establishment.services.push(result)

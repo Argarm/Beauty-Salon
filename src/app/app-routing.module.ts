@@ -47,8 +47,7 @@ const routes: Routes = [
   { path: "editar-establecimiento", component: EditEstablishmentProfileComponent},
   { path: "servicios/:servicio", component: ServicesComponent},
   { path: "servicios/:servicio/:nombre_servicio", component: ServiceProfileComponent, canActivate: [AuthGuardBookGuard]},
-  {path: "servicios/:servicio/:nombre_servicio/reservar", component: BookComponent, canActivate: [AuthGuardBookGuard , UserAuthGuard]},
-  {path: "", component: MainViewComponent} 
+  {path: "servicios/:servicio/:nombre_servicio/reservar", component: BookComponent, canActivate: [AuthGuardBookGuard , UserAuthGuard]}
 ];
 
 @NgModule({

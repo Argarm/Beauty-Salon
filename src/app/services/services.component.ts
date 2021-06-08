@@ -18,9 +18,7 @@ export class ServicesComponent implements OnInit {
   establishments: Establishment[] = []
   filters = [
     "Nombre",
-    "Mejor valorados",
-    "Abierto ahora",
-    "Favoritos",
+    "Mejor valorados"
   ]
   actualFilter = this.filters[0];
   notFavIcon = "../../assets/rest.png"

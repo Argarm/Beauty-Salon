@@ -47,14 +47,18 @@ export class AccountService {
         this.firestore.collection('users').doc(userFilled.email).get().subscribe(data => {
             if (!data.exists) {
                 this.firestore.collection('users').doc(userFilled.email).set(userFilled)
-                var imageRef = this.angularFireStore.ref(`users/${user.email}`)
-                this.firebaseStorage.uploadUserImage(image, user.email).pipe(
-                    finalize(() => {
-                        imageRef.getDownloadURL().subscribe((url) => {
-                            userFilled.image = url
+                if(image){
+                    var imageRef = this.angularFireStore.ref(`users/${user.email}`)
+                    this.firebaseStorage.uploadUserImage(image, user.email).pipe(
+                        finalize(() => {
+                            imageRef.getDownloadURL().subscribe((url) => {
+                                userFilled.image = url
+                            })
                         })
-                    })
-                ).subscribe()
+                    ).subscribe()
+                }
+                user.image = this.userImage
+                console.log(user)
                 localStorage.setItem('user', JSON.stringify(userFilled));
                 this.userSubject.next(user);
                 this.router.navigate(['../'])
@@ -142,7 +146,7 @@ export class AccountService {
     private fillUserInformation(body) {
         let user = {
             email: body.email,
-            image: body.image,
+            image: body.image ? body.image : "",
             name: body.name,
             password: body.password,
             surname: body.surname,

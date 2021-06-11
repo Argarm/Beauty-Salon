@@ -38,17 +38,17 @@ export class HeaderComponent implements OnInit {
     this.user = this.accountService.userSubject.subscribe((user : User) => {
       this.userLogged = user ? true : false;
       if(user){
-        this.isManager = user.establishmentManager.length > 2
+        this.isManager = user.establishmentManager != undefined
       }
+      this.establishment = this.establishmentService.establishmentSubject.subscribe((establishment : Establishment) => {
+        if(establishment != undefined){
+          this.managerMode = true;
+        }else{
+          this.managerMode = false;
+        }
+      })
     })
     
-    this.establishment = this.establishmentService.establishmentSubject.subscribe((establishment : Establishment) => {
-      if(establishment != undefined){
-        this.managerMode = true;
-      }else{
-        this.managerMode = false;
-      }
-    })
 
         
   }

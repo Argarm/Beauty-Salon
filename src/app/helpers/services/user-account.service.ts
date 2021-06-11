@@ -76,8 +76,9 @@ export class AccountService {
                 var user = data.data() as User
                 if (user.password === userPassword) {
                     this.firebaseStorage.getUrlPath(`users/${userEmail}`).subscribe(image => {
-                        user.image = image
-                    })
+                            user.image = image
+                    },
+                    (error: any) => user.image = this.userImage)
                     localStorage.setItem('user', JSON.stringify(user));
                     this.userSubject.next(user);
                     this.router.navigate(['../'])

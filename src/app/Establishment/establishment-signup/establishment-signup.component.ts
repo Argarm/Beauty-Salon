@@ -61,7 +61,7 @@ export class EstablishmentSignupComponent implements OnInit {
     if(this.form.invalid)return;
     var schedule = this.parseSchedule(this.form)
     this.establishmentAccount.addEstablishment(this.form.value, schedule, this.selectedFile)
-    this.router.navigate([`perfil-establecimiento`])
+    this.router.navigate([""])
   }
 
   checkScheduleErrors(data: any) : boolean {
@@ -98,7 +98,6 @@ export class EstablishmentSignupComponent implements OnInit {
     }else{
       schedule += `L: ${rawData.mondayFrom}-${rawData.mondayTo} / `
     }
-    console.log(schedule)
     if(rawData.tuesdayFrom ===""|| rawData.tuesdayTo === ""){
       schedule += "M: cerrado / "
     }else{

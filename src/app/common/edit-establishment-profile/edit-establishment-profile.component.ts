@@ -18,7 +18,7 @@ export class EditEstablishmentProfileComponent implements OnInit {
   establishment : Establishment;
   constructor(private firebaseStorage: FirebaseStorageService, private shopService : ShopService, private modalService: BsModalService,private establishmentAccount : EstablishmentAccountService) {
     var establishmentPreprocessed = this.establishmentAccount.establishmentValue;
-    //establishmentPreprocessed.schedule = establishmentPreprocessed.schedule.split('/')
+    establishmentPreprocessed.schedule = String(establishmentPreprocessed.schedule).split('/')
     this.establishment = establishmentPreprocessed
     this.categorys = this.getServiceCategorys(this.establishment.services)
     this.shopService.getAllCommentsForEstablismentWithCollectionAndDoc(this.establishment.mainService,this.establishment.name).subscribe(establishmentComments =>{

@@ -50,7 +50,9 @@ export class ServicesComponent implements OnInit {
   preprocessData(rawData: any): Establishment {
     var processedData = rawData;
     if(this.accountService.userValue){
-      if(this.accountService.userValue.favorites.indexOf(processedData.name)!= -1)processedData.isUserFavorite = true;
+      if(this.accountService.userValue.favorites.indexOf(processedData.name)!= -1){
+        processedData.isUserFavorite = true;
+      }
     }else{
       processedData.isUserFavorite = false;
     }

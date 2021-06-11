@@ -58,6 +58,7 @@ export class AccountService {
                     ).subscribe()
                 }
                 user.image = this.userImage
+                user.favorites = ""
                 console.log(user)
                 localStorage.setItem('user', JSON.stringify(userFilled));
                 this.userSubject.next(user);
